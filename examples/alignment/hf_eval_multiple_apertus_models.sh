@@ -13,7 +13,7 @@ declare -A MODEL_CHECKPOINTS=(
 
     # 8B pre-cooldown
     ["Apertus-8B-7.04T-swissai-tulu-3-adam-deprecate"]="/capstor/store/cscs/swissai/infra01/swiss-alignment/checkpoints/Apertus3-8B_iter_1678000-tulu3-sft/checkpoint-13446/"
-    ["Apertus-8B-7.04T-swissai-tulu-3-adam"]=""
+    ["Apertus-8B-7.04T-swissai-tulu-3-adam"]="/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/apertus-8b-sweep/token-count/Apertus8B-tokens7.04T-it1678000-swissai-tulu-3-sft-0225/checkpoints/6d5f11d2873ecb4d/checkpoint-13446"
 
 
     # Chat template ablation
