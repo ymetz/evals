@@ -160,7 +160,6 @@ fi
 
 INSTALL_CMD="pip install -v --no-cache-dir --no-build-isolation --no-deps --force-reinstall -U \
 	datasketch \
-	\"datasets<4.0.0\" \
 	sympy \
 	math_verify \
 	\"antlr4-python3-runtime==4.11\" \
