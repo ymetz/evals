@@ -36,14 +36,18 @@ def create_model_evaluation_from_results(model_name: str, eval_dir: Path, max_sa
                 continue
             
             # Identify the number of filters if present
-            task_config = res["configs"][task_name]
-            filter_list = task_config.get("filters", [])
-            metric = metric_name.split(",")[0]  # Clean metric name
-            if len(filter_list) < 2:
-                # if there are no filters or just one filter, use the metric name directly
+            task_config = res["configs"].get(task_name, {})
+            filter_list = task_config.get("filter_list", [])
+            metric_parts = metric_name.split(",")
+            metric = metric_parts[0].strip()
+            filter_name = metric_parts[1].strip() if len(metric_parts) > 1 else "none"
+            
+            if len(filter_list) == 1 or (len(filter_list) == 0 and filter_name == "none"):
+                # if there is only one filter or no filters, use the metric directly
                 task_metrics.append(Metric(name=metric, score=float(value)))
-            else:
-                # If there are multiple filters, use the full metric name
+            
+            if filter_name != "none":
+                # If there is a valid filter, add it too
                 task_metrics.append(Metric(name=metric_name, score=float(value)))
         
         # Load corresponding samples for this task using exact filename
