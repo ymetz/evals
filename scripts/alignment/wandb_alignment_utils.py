@@ -34,9 +34,17 @@ def create_model_evaluation_from_results(model_name: str, eval_dir: Path, max_sa
         for metric_name, value in metrics.items():
             if metric_name == "alias" or value in ["N/A", " ", None]:
                 continue
-
+            
+            # Identify the number of filters if present
+            task_config = res["configs"][task_name]
+            filter_list = task_config.get("filters", [])
             metric = metric_name.split(",")[0]  # Clean metric name
-            task_metrics.append(Metric(name=metric, score=float(value)))
+            if len(filter_list) < 2:
+                # if there are no filters or just one filter, use the metric name directly
+                task_metrics.append(Metric(name=metric, score=float(value)))
+            else:
+                # If there are multiple filters, use the full metric name
+                task_metrics.append(Metric(name=metric_name, score=float(value)))
         
         # Load corresponding samples for this task using exact filename
         task_samples = []
