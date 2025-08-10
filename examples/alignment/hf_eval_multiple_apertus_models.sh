@@ -55,7 +55,7 @@ declare -A MODEL_CHECKPOINTS=(
 
     # 70 fix fast mixtures
     ["Apertus-70B-15T-mixture1-fast-adam"]="/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/fix-overfit/Apertus70B-tokens15T-it1155828-apertus-sft-mixture-1-bs512-lr2e-06-epochs1-adam/checkpoints/1a5e69e74fb30840/checkpoint-1622"
-#    ["Apertus-70B-15T-mixture4-fast-adam"]=Coming soon...     @Simon
+    ["Apertus-70B-15T-mixture4-fast-adam"]="/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/mixture-fast/Apertus70B-tokens15T-it1155828-apertus-sft-mixture-4-bs512-lr2e-06-maxgnorm1-epochs1-adamw_torch/checkpoints/da28d82fb9346ca9/checkpoint-4792"
 #    ["Apertus-70B-15T-mixture4-fast-ademamix"]=Coming soon... @Alex
 
 
