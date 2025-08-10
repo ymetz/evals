@@ -1,4 +1,3 @@
-mmlu_flan_cot_zeroshot/exact_match
 mmlu_flan_cot_zeroshot/exact_match,flexible-extract
 mmlu_flan_cot_zeroshot/exact_match,strict-match
 truthfulqa_mc2/acc
