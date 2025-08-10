@@ -1,9 +1,12 @@
 mmlu_flan_cot_zeroshot
+mmlu_flan_cot_zeroshot_nosystem
+mmlu_flan_no_cot_zeroshot
 truthfulqa
 bbh
 drop
 acp_bench
 gsm8k_cot
+gsm8k_olmes_cot
 hendrycks_math
 mathqa
 humaneval_instruct
