@@ -35,7 +35,7 @@ declare -A MODEL_CHECKPOINTS=(
     ["Apertus-8B-7.2T-patched-mixture1-fast-adam"]="/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/fix-overfit/Apertus8B-tokens7.2T-it1728000-hotfix-apertus-sft-mixture-1-bs512-lr5e-06-epochs1-ademamix/checkpoints/a0db78d43b9ebd41/checkpoint-1622"
     ["Apertus-8B-7.2T-patched-mixture1-fast-ademamix"]="/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/fix-overfit/Apertus8B-tokens7.2T-it1728000-hotfix-apertus-sft-mixture-1-bs512-lr5e-06-epochs1-ademamix/checkpoints/b0e21de416cd7599/checkpoint-1622"
 
-#    ["Apertus-8B-15T-mixture4-fast-adam"]=Coming soon... @Simon
+    ["Apertus-8B-10.2T-newcooldown-mixture4-fast-adam"]="/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/mixture-fast/Apertus8B-tokens10.2T-it2059810-newcooldown-apertus-sft-mixture-4-bs512-lr5e-06-maxgnorm1.0-epochs1-adamw_torch/checkpoints/8b8a3a8c41a2697e/checkpoint-4792"
 
 
     # 70B baseline
