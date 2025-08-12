@@ -6,8 +6,8 @@ hellaswag_multilingual/acc_norm
 mlogiqa/acc_norm
 multi-if/prompt_level_loose_acc
 include_base_44/acc
-include_base_new_45/acc_norm
-blend/acc
+include_base_new_45/acc
+blend_sample/acc
 cultural_bench/acc_norm
 multijail/score
 switzerland_qa/acc
