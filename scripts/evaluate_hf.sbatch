@@ -163,10 +163,6 @@ if [[ -n ${LIMIT} ]]; then
 	COMMON_EVAL_ARGS+=(--limit $LIMIT)
 fi
 
-if [[ -n $MAX_GEN_TOKENS ]]; then
-	COMMON_EVAL_ARGS+=(--gen_kwargs max_gen_toks=$MAX_GEN_TOKENS)
-fi
-
 INSTALL_CMD="pip install -v --no-cache-dir --no-build-isolation --no-deps --force-reinstall -U \
 	datasketch \
 	sympy \
