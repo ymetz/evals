@@ -1,5 +1,5 @@
 global_mmlu
-truthfulqa_multilingual
+truthfulqa_multilingual_mc2
 mgsm_direct
 mgsm_native_cot
 hellaswag_multilingual
