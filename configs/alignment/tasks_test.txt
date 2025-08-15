@@ -1,0 +1,12 @@
+mmlu_pro
+mmlu_prox
+agieval
+arc_multilingual
+arc_challenge_chat
+arc_easy
+arc_challenge
+gpqa_main_cot_zeroshot
+gpqa_diamond_cot_zeroshot
+gpqa_extended_cot_zeroshot
+gsm8k_platinum_cot_zeroshot
+aime
