@@ -35,8 +35,14 @@ declare -A MODEL_CHECKPOINTS=(
     ["Apertus-8B-7.2T-patched-mixture1-fast-adam"]="/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/fix-overfit/Apertus8B-tokens7.2T-it1728000-hotfix-apertus-sft-mixture-1-bs512-lr5e-06-epochs1-ademamix/checkpoints/a0db78d43b9ebd41/checkpoint-1622"
     ["Apertus-8B-7.2T-patched-mixture1-fast-ademamix"]="/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/fix-overfit/Apertus8B-tokens7.2T-it1728000-hotfix-apertus-sft-mixture-1-bs512-lr5e-06-epochs1-ademamix/checkpoints/b0e21de416cd7599/checkpoint-1622"
 
-#    ["Apertus-8B-15T-mixture4-fast-adam"]=Coming soon... @Simon
-
+    ["Apertus-8B-10.2T-newcooldown-mixture1-fast-adam"]="/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/final-run/Apertus8B-tokens10.2T-it2059810-newcooldown-apertus-sft-mixture-1/checkpoints/7f2faa33edb7f13e/checkpoint-1622"
+    ["Apertus-8B-10.2T-newcooldown-mixture2-fast-adam"]="/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/final-run/Apertus8B-tokens10.2T-it2059810-newcooldown-apertus-sft-mixture-2/checkpoints/44532e711f8d5bee/checkpoint-3914"
+    ["Apertus-8B-10.2T-newcooldown-mixture3-fast-adam"]="/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/final-run/Apertus8B-tokens10.2T-it2059810-newcooldown-apertus-sft-mixture-3/checkpoints/7a61ceff935a6765/checkpoint-4577"
+    ["Apertus-8B-10.2T-newcooldown-mixture4-fast-adam"]="/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/final-run/Apertus8B-tokens10.2T-it2059810-newcooldown-apertus-sft-mixture-4/checkpoints/8b8a3a8c41a2697e/checkpoint-4792"
+    ["Apertus-8B-10.2T-newcooldown-mixture1-fast-ademamix"]="/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/final-run/Apertus8B-tokens10.2T-it2059810-newcooldown-apertus-sft-mixture-1-ademamix/checkpoints/ee969b526b1995f7/checkpoint-1622"
+    ["Apertus-8B-10.2T-newcooldown-mixture2-fast-ademamix"]="/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/final-run/Apertus8B-tokens10.2T-it2059810-newcooldown-apertus-sft-mixture-2-ademamix/checkpoints/53e2ead7db07314d/checkpoint-3914"
+    ["Apertus-8B-10.2T-newcooldown-mixture3-fast-ademamix"]="/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/final-run/Apertus8B-tokens10.2T-it2059810-newcooldown-apertus-sft-mixture-3-ademamix/checkpoints/8df0b5c9349b8015/checkpoint-4577"
+    ["Apertus-8B-10.2T-newcooldown-mixture4-fast-ademamix"]="/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/final-run/Apertus8B-tokens10.2T-it2059810-newcooldown-apertus-sft-mixture-4-ademamix/checkpoints/1ce7109f7dde7ed2/checkpoint-4792"
 
     # 70B baseline
     ["Apertus-70B-15T-swissai-tulu-3-ademamix"]="/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/apertus-70b-sweep/token-count/Apertus70B-tokens15T-it1155828-ademamix-swissai-tulu-3-sft-0225/checkpoints/c9b2910640c220b1/checkpoint-13446"
@@ -55,8 +61,9 @@ declare -A MODEL_CHECKPOINTS=(
 
     # 70 fix fast mixtures
     ["Apertus-70B-15T-mixture1-fast-adam"]="/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/fix-overfit/Apertus70B-tokens15T-it1155828-apertus-sft-mixture-1-bs512-lr2e-06-epochs1-adam/checkpoints/1a5e69e74fb30840/checkpoint-1622"
-#    ["Apertus-70B-15T-mixture4-fast-adam"]=Coming soon...     @Simon
-#    ["Apertus-70B-15T-mixture4-fast-ademamix"]=Coming soon... @Alex
+    ["Apertus-70B-15T-mixture1-fast-ademamix-fixed"]="/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/apertus-sft-mixture-1-fast-ademamix/Apertus70B-tokens15T-it1155828-apertus-sft-mixture-1-bs512-lr2e-06-maxgnorm1-epochs1-ademamix/checkpoints/4fc579918b550aac/checkpoint-1622"
+    ["Apertus-70B-15T-mixture4-fast-adam"]="/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/mixture-fast/Apertus70B-tokens15T-it1155828-apertus-sft-mixture-4-bs512-lr2e-06-maxgnorm1-epochs1-adamw_torch/checkpoints/da28d82fb9346ca9/checkpoint-4792"
+    ["Apertus-70B-15T-mixture4-fast-ademamix-fixed"]="/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/fix-ademamix-fast-noquote/Apertus70B-tokens15T-it1155828-apertus-sft-mixture-4-bs512-lr2e-06-maxgnorm1-epochs1-ademamix/checkpoints/0bc386f8352f3273/checkpoint-4792"
 
 
 )
