@@ -16,4 +16,3 @@ hellaswag
 harmbench
 toxigen
 bbq
-realtoxicitypromptsllama_small
