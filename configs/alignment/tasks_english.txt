@@ -1,6 +1,4 @@
 mmlu_flan_cot_zeroshot
-mmlu_flan_cot_zeroshot_nosystem
-mmlu_flan_no_cot_zeroshot
 truthfulqa
 bbh
 drop
