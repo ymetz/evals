@@ -23,7 +23,8 @@ echo "======================================"
 # Set default environment variables
 export SWISSAI_API_KEY="sk-rc-R-vJqSca2wRZBX5qBAGaqg"
 export WANDB_ENTITY=${WANDB_ENTITY:-apertus}
-export WANDB_PROJECT=${WANDB_PROJECT:-swissai-evals-v0.1.5}
+export WANDB_PROJECT=${WANDB_PROJECT:-swissai-evals-v0.1.8-reversed-score}
+export LIMIT=5
 
 # Configure based on mode
 case "$EVAL_MODE" in
@@ -48,10 +49,10 @@ esac
 
 # Array of evaluation scripts to run
 EVALUATION_SCRIPTS=(
-    # "examples/alignment/hf_eval_multiple_apertus_base_models.sh"
-    # "examples/alignment/hf_eval_multiple_apertus_models.sh"
-    "examples/alignment/hf_eval_multiple_other_base_models.sh"
-    "examples/alignment/hf_eval_multiple_other_models.sh"
+    #"examples/alignment/hf_eval_multiple_apertus_base_models.sh"
+#    "examples/alignment/hf_eval_multiple_apertus_models.sh"
+    #"examples/alignment/hf_eval_multiple_other_base_models.sh"
+   "examples/alignment/hf_eval_multiple_other_models.sh"
 )
 
 echo "📋 Scripts to be launched:"

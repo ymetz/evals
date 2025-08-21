@@ -7,11 +7,11 @@ declare -A MODEL_CHECKPOINTS=(
     ["EuroLLM-9B"]="utter-project/EuroLLM-9B"
     ["EuroLLM-22B-Preview"]="utter-project/EuroLLM-22B-Preview"
     
-    # OLMo models (base)
+    # # OLMo models (base)
     ["OLMo-2-1124-7B"]="allenai/OLMo-2-1124-7B"
     ["OLMo-2-0325-32B"]="allenai/OLMo-2-0325-32B"
     
-    # Qwen 2.5 models
+    # # Qwen 2.5 models
     ["Qwen2.5-7B"]="Qwen/Qwen2.5-7B"
 )
 

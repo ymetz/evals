@@ -6,8 +6,11 @@ export BOS=true
 # Define MODEL:CKPT_PATH pairs using an associative array
 declare -A MODEL_CHECKPOINTS=(    
     # Base pretrained models
-    ["Apertus8B-tokens7.04T-it1678000"]="/capstor/store/cscs/swissai/infra01/pretrain-checkpoints/apertus/Apertus8B-tokens7.04T-it1678000"
-    ["Apertus8B-tokens7.2T-it1728000"]="/capstor/store/cscs/swissai/infra01/pretrain-checkpoints/apertus/Apertus8B-tokens7.2T-it1728000"
+    # ["Apertus8B-tokens7.04T-it1678000"]="/capstor/store/cscs/swissai/infra01/pretrain-checkpoints/apertus/Apertus8B-tokens7.04T-it1678000"
+    # ["Apertus8B-tokens7.2T-it1728000"]="/capstor/store/cscs/swissai/infra01/pretrain-checkpoints/apertus/Apertus8B-tokens7.2T-it1728000"
+    # ["Apertus70B-tokens15T-it1155828"]="/capstor/store/cscs/swissai/infra01/pretrain-checkpoints/apertus/Apertus70B-tokens15T-it1155828"
+    # ["Apertus70B-tokens15T-long-context-64k"]="/capstor/store/cscs/swissai/infra01/pretrain-checkpoints/apertus/Apertus70B-tokens15T-longcontext64k"
+    ["Apertus8B-tokens10.2T-it2059810-newcooldown"]="/capstor/store/cscs/swissai/infra01/pretrain-checkpoints/apertus/Apertus8B-tokens10.2T-it2059810-newcooldown"
     ["Apertus70B-tokens15T-it1155828"]="/capstor/store/cscs/swissai/infra01/pretrain-checkpoints/apertus/Apertus70B-tokens15T-it1155828"
     ["Apertus70B-tokens15T-long-context-64k"]="/capstor/store/cscs/swissai/infra01/pretrain-checkpoints/apertus/Apertus70B-tokens15T-longcontext64k"
 )
