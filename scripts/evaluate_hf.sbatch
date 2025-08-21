@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --account=a-infra01-1
+#SBATCH --account=a-infra01
 #SBATCH --cpus-per-task=288
 #SBATCH --gres=gpu:4
 #SBATCH --job-name=evaluation
@@ -161,7 +161,7 @@ INSTALL_CMD="pip install -v --no-cache-dir --no-build-isolation --no-deps --forc
 	math_verify \
 	\"antlr4-python3-runtime==4.11\" \
 	latex2sympy2_extended \
-    \"lm-eval[vllm] @ git+https://github.com/swiss-ai/lm-evaluation-harness.git@main\""
+    \"lm-eval[vllm] @ git+https://github.com/swiss-ai/lm-evaluation-harness.git@fix-benchmarks-II\""
 
 CMD="lm_eval --model_args=$COMMON_MODEL_ARGS ${COMMON_EVAL_ARGS[@]}"
 
