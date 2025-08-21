@@ -126,11 +126,14 @@ fi
 
 # Add vLLM specific arguments.
 export OMP_NUM_THREADS=$(( 8 * $GPUS_PER_NODE ))
-export VLLM_WORKER_MULTIPROC_METHOD=spawn
-export VLLM_DISABLE_COMPILE_CACHE=1
+# export VLLM_WORKER_MULTIPROC_METHOD=spawn
+# export VLLM_DISABLE_COMPILE_CACHE=1
+# export NCCL_IB_DISABLE=1
+# export NCCL_NET="Socket"
+# export NCCL_DEBUG=WARN
 # Reduce memory fraction to avoid OOM during initialization
 VLLM_MEMORY_FRACTION=0.75
-COMMON_MODEL_ARGS="$COMMON_MODEL_ARGS,data_parallel_size=$DP,tensor_parallel_size=$MP,gpu_memory_utilization=$VLLM_MEMORY_FRACTION,max_length=$MAX_LENGTH,max_gen_toks=$MAX_NEW_TOKENS,enable_thinking=False"
+COMMON_MODEL_ARGS="$COMMON_MODEL_ARGS,data_parallel_size=$DP,tensor_parallel_size=$MP,gpu_memory_utilization=$VLLM_MEMORY_FRACTION,max_gen_toks=$MAX_NEW_TOKENS,enable_thinking=False"
 
 HARNESS_EVAL_DIR=$HARNESS_DIR/eval_$(date +%Y%m%d_%H%M%S)_$SLURM_JOBID
 
