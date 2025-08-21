@@ -11,6 +11,13 @@
 #SBATCH --exclusive
 #SBATCH --partition=normal
 #SBATCH --time=11:59:00
+#SBATCH --exclude=nid005377
+#SBATCH --exclude=nid006513
+#SBATCH --exclude=nid006518
+#SBATCH --exclude=nid006512
+#SBATCH --exclude=nid006514
+#SBATCH --exclude=nid006517
+#SBATCH --exclude=nid006518
 
 # Aux functions.
 usage() {
@@ -126,13 +133,13 @@ fi
 
 # Add vLLM specific arguments.
 export OMP_NUM_THREADS=$(( 8 * $GPUS_PER_NODE ))
-# export VLLM_WORKER_MULTIPROC_METHOD=spawn
-# export VLLM_DISABLE_COMPILE_CACHE=1
+export VLLM_WORKER_MULTIPROC_METHOD=spawn
+export VLLM_DISABLE_COMPILE_CACHE=1
 # export NCCL_IB_DISABLE=1
 # export NCCL_NET="Socket"
 # export NCCL_DEBUG=WARN
 # Reduce memory fraction to avoid OOM during initialization
-VLLM_MEMORY_FRACTION=0.75
+VLLM_MEMORY_FRACTION=0.65
 COMMON_MODEL_ARGS="$COMMON_MODEL_ARGS,data_parallel_size=$DP,tensor_parallel_size=$MP,gpu_memory_utilization=$VLLM_MEMORY_FRACTION,max_gen_toks=$MAX_NEW_TOKENS,enable_thinking=False"
 
 HARNESS_EVAL_DIR=$HARNESS_DIR/eval_$(date +%Y%m%d_%H%M%S)_$SLURM_JOBID
@@ -164,7 +171,7 @@ INSTALL_CMD="pip install -v --no-cache-dir --no-build-isolation --no-deps --forc
 	math_verify \
 	\"antlr4-python3-runtime==4.11\" \
 	latex2sympy2_extended \
-    \"lm-eval[vllm] @ git+https://github.com/swiss-ai/lm-evaluation-harness.git@fix-benchmarks-II\""
+    \"lm-eval[vllm] @ git+https://github.com/swiss-ai/lm-evaluation-harness.git@main\""
 
 CMD="lm_eval --model_args=$COMMON_MODEL_ARGS ${COMMON_EVAL_ARGS[@]}"
 

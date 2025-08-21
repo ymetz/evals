@@ -10,7 +10,7 @@ mathqa
 humaneval_instruct
 mbpp_instruct
 ifeval
-hellaswag
 harmbench
+realtoxicitypromptsllama_small
 toxigen
 bbq
