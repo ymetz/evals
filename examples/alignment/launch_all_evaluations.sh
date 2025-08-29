@@ -24,8 +24,8 @@ echo "======================================"
 # Set default environment variables
 export SWISSAI_API_KEY="sk-rc-R-vJqSca2wRZBX5qBAGaqg"
 export WANDB_ENTITY=${WANDB_ENTITY:-apertus}
-export WANDB_PROJECT=${WANDB_PROJECT:-swissai-evals-v0.1.11-debug}
-export LIMIT=50
+export WANDB_PROJECT=${WANDB_PROJECT:-swissai-evals-v0.1.11}
+#export LIMIT=50
 
 # Configure based on mode
 case "$EVAL_MODE" in
