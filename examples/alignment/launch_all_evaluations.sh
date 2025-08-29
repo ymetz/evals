@@ -4,16 +4,17 @@
 # Usage: bash examples/alignment/launch_all_evaluations.sh [english|multilingual|test]
 
 # Set default mode to english
-EVAL_MODE=${1:-english}
+EVAL_MODE=${1:-multilingual}
 
 # Validate mode
-VALID_MODES=("english" "multilingual" "test")
+VALID_MODES=("english" "multilingual" "test" "pretrain")
 if [[ ! " ${VALID_MODES[*]} " =~ " ${EVAL_MODE} " ]]; then
     echo "❌ Error: Invalid mode '$EVAL_MODE'"
     echo "Usage: bash examples/alignment/launch_all_evaluations.sh [english|multilingual|test]"
     echo "  english      - English tasks (default)"
     echo "  multilingual - Multilingual tasks" 
     echo "  test         - Test tasks"
+    echo "  pretrain     - Pretrain tasks"
     exit 1
 fi
 
@@ -23,8 +24,8 @@ echo "======================================"
 # Set default environment variables
 export SWISSAI_API_KEY="sk-rc-R-vJqSca2wRZBX5qBAGaqg"
 export WANDB_ENTITY=${WANDB_ENTITY:-apertus}
-export WANDB_PROJECT=${WANDB_PROJECT:-swissai-evals-x}
-#export LIMIT=5
+export WANDB_PROJECT=${WANDB_PROJECT:-swissai-evals-v0.1.11-debug}
+export LIMIT=50
 
 # Configure based on mode
 case "$EVAL_MODE" in
@@ -45,14 +46,20 @@ case "$EVAL_MODE" in
         export TABLE_METRICS=./configs/alignment/tasks_test_main_table.txt
         export WANDB_PROJECT="${WANDB_PROJECT}-test"
         ;;
+    "pretrain")
+        echo "🧪 Pretrain mode enabled"
+        export TASKS=./configs/alignment/tasks_pretrain.txt
+        export TABLE_METRICS=./configs/alignment/tasks_pretrain_main_table.txt
+        export WANDB_PROJECT="${WANDB_PROJECT}-pretrain"
+        ;;
 esac
 
 # Array of evaluation scripts to run
 EVALUATION_SCRIPTS=(
-    "examples/alignment/hf_eval_multiple_apertus_base_models.sh"
-    "examples/alignment/hf_eval_multiple_apertus_models.sh"
-    #"examples/alignment/hf_eval_multiple_other_base_models.sh"
-    #"examples/alignment/hf_eval_multiple_other_models.sh"
+    # "examples/alignment/hf_eval_multiple_apertus_base_models.sh"
+    # "examples/alignment/hf_eval_multiple_apertus_models.sh"
+    "examples/alignment/hf_eval_multiple_other_base_models.sh"
+    # "examples/alignment/hf_eval_multiple_other_models.sh"
 )
 
 echo "📋 Scripts to be launched:"

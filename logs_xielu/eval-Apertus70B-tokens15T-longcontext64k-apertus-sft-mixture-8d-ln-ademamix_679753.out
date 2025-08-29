@@ -1,0 +1,1904 @@
+START TIME: Wed 27 Aug 2025 12:48:31 PM CEST
+Using nodes: nid007573
+Reading task list from file: ./configs/alignment/tasks_english.txt
+Reading table metrics from file: ./configs/alignment/tasks_english_main_table.txt
+Configuration set:
+MODEL=/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/final-run/Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix/checkpoints/1f20ee760c1e2161/checkpoint-3899
+NAME=Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix
+TOKENIZER=
+BS=auto:20
+REVISION=
+SIZE=1
+LIMIT=
+BOS=false
+TASKS=mmlu_flan_cot_zeroshot,truthfulqa,bbh,drop,acp_bench,gsm8k_cot,gsm8k_olmes_cot,hendrycks_math,mathqa,humaneval_instruct,mbpp_instruct,ifeval,harmbench,realtoxicitypromptsllama_small,toxigen,bbq
+WANDB_ENTITY=apertus
+WANDB_PROJECT=swissai-evals-v0.1.10
+HF_HOME=/capstor/scratch/cscs/flubeck/hf_home
+
+Huggingface checkpoint detected!
+TOKENIZER not set, using TOKENIZER=/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/final-run/Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix/checkpoints/1f20ee760c1e2161/checkpoint-3899
+Using model size ~1B, model parallel size of 4
+Installation command: pip install -v --no-cache-dir --no-build-isolation --no-deps --force-reinstall -U 	datasketch 	sympy 	math_verify 	"antlr4-python3-runtime==4.11" 	latex2sympy2_extended     "lm-eval[vllm] @ git+https://github.com/swiss-ai/lm-evaluation-harness.git@main" 
+Final command: lm_eval --model_args=pretrained=/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/final-run/Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix/checkpoints/1f20ee760c1e2161/checkpoint-3899,tokenizer=/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/final-run/Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix/checkpoints/1f20ee760c1e2161/checkpoint-3899,dtype=bfloat16,data_parallel_size=1,tensor_parallel_size=4,gpu_memory_utilization=0.65,max_gen_toks=2048,enable_thinking=False --trust_remote_code --batch_size auto:20 --tasks mmlu_flan_cot_zeroshot,truthfulqa,bbh,drop,acp_bench,gsm8k_cot,gsm8k_olmes_cot,hendrycks_math,mathqa,humaneval_instruct,mbpp_instruct,ifeval,harmbench,realtoxicitypromptsllama_small,toxigen,bbq --output /capstor/store/cscs/swissai/infra01/eval-logs/apertus/swissai-evals-v0.1.10/Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix/harness/eval_20250827_124831_679753 --max_batch_size 32 --model vllm --log_samples --write_out --confirm_run_unsafe_code --apply_chat_template --fewshot_as_multiturn
+0: Using pip 25.0.1 from /usr/local/lib/python3.12/dist-packages/pip (python 3.12)
+0: Looking in indexes: https://pypi.org/simple, https://pypi.ngc.nvidia.com
+0: Collecting lm-eval@ git+https://github.com/swiss-ai/lm-evaluation-harness.git@main (from lm-eval[vllm]@ git+https://github.com/swiss-ai/lm-evaluation-harness.git@main)
+0:   Cloning https://github.com/swiss-ai/lm-evaluation-harness.git (to revision main) to /tmp/pip-install-fh_51mzb/lm-eval_d2cd1f383bd944ca8426d47bffbf61f7
+0:   Resolved https://github.com/swiss-ai/lm-evaluation-harness.git to commit 3facc8e2f16594e845043eef16fae4ec7abcd06a
+0:   Preparing metadata (pyproject.toml) ... [?25l[?25hdone
+0: Collecting datasketch
+0:   Obtaining dependency information for datasketch from https://files.pythonhosted.org/packages/8d/24/c8b0570c17c64e9d00485ac6f325c3a7ba19ea8b3385c73c85a26a519d77/datasketch-1.6.5-py3-none-any.whl.metadata
+0:   Downloading datasketch-1.6.5-py3-none-any.whl.metadata (5.8 kB)
+0: Collecting sympy
+0:   Obtaining dependency information for sympy from https://files.pythonhosted.org/packages/a2/09/77d55d46fd61b4a135c444fc97158ef34a095e5681d0a6c10b75bf356191/sympy-1.14.0-py3-none-any.whl.metadata
+0:   Downloading sympy-1.14.0-py3-none-any.whl.metadata (12 kB)
+0: Collecting math_verify
+0:   Obtaining dependency information for math_verify from https://files.pythonhosted.org/packages/fe/9f/59979f699b5c97334298f1295bc9fcdc9904d98d2276479bffff863d23b1/math_verify-0.8.0-py3-none-any.whl.metadata
+0:   Downloading math_verify-0.8.0-py3-none-any.whl.metadata (1.6 kB)
+0: Collecting antlr4-python3-runtime==4.11
+0:   Obtaining dependency information for antlr4-python3-runtime==4.11 from https://files.pythonhosted.org/packages/37/f3/2cab1ffe441ffcc4605bf638f524fed86db6699a25d04bbecb5bfdde372b/antlr4_python3_runtime-4.11.0-py3-none-any.whl.metadata
+0:   Downloading antlr4_python3_runtime-4.11.0-py3-none-any.whl.metadata (291 bytes)
+0: Collecting latex2sympy2_extended
+0:   Obtaining dependency information for latex2sympy2_extended from https://files.pythonhosted.org/packages/ab/60/dfbbf40e3a371388c0e03ff65b01319b7d4023e883df6d7261125772ffdc/latex2sympy2_extended-1.10.2-py3-none-any.whl.metadata
+0:   Downloading latex2sympy2_extended-1.10.2-py3-none-any.whl.metadata (5.3 kB)
+0: Downloading antlr4_python3_runtime-4.11.0-py3-none-any.whl (144 kB)
+0: Downloading datasketch-1.6.5-py3-none-any.whl (89 kB)
+0: Downloading sympy-1.14.0-py3-none-any.whl (6.3 MB)
+0: [?25l
+0:    [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.0/6.3 MB[0m [31m?[0m eta [36m-:--:--[0m
+0: [2K   [38;2;114;156;31m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m6.3/6.3 MB[0m [31m85.9 MB/s[0m eta [36m0:00:00[0m
+0: [?25h
+0: Downloading math_verify-0.8.0-py3-none-any.whl (29 kB)
+0: Downloading latex2sympy2_extended-1.10.2-py3-none-any.whl (207 kB)
+0: Building wheels for collected packages: lm-eval
+0:   Building wheel for lm-eval (pyproject.toml) ... [?25l[?25hdone
+0:   Created wheel for lm-eval: filename=lm_eval-0.4.9-py3-none-any.whl size=8217367 sha256=f2370b65859b70b1c9f552e73a96a4f3e8e6e831b5b52eccc824dc3daff36a8d
+0:   Stored in directory: /tmp/pip-ephem-wheel-cache-3l__hojm/wheels/ea/d7/dc/9b9bb9592c09809512d3cd3abfd08b25f2c92806ab3d5b1003
+0: Successfully built lm-eval
+0: Installing collected packages: datasketch, antlr4-python3-runtime, sympy, math_verify, lm-eval, latex2sympy2_extended
+0:   Attempting uninstall: antlr4-python3-runtime
+0:     Found existing installation: antlr4-python3-runtime 4.9.3
+0:     Uninstalling antlr4-python3-runtime-4.9.3:
+0:       Removing file or directory /usr/local/bin/pygrun
+0:       Removing file or directory /usr/local/lib/python3.12/dist-packages/antlr4/
+0:       Removing file or directory /usr/local/lib/python3.12/dist-packages/antlr4_python3_runtime-4.9.3.dist-info/
+0:       Successfully uninstalled antlr4-python3-runtime-4.9.3
+0:   changing mode of /usr/local/bin/pygrun to 755
+0:   Attempting uninstall: sympy
+0:     Found existing installation: sympy 1.13.3
+0:     Uninstalling sympy-1.13.3:
+0:       Removing file or directory /usr/local/bin/isympy
+0:       Removing file or directory /usr/local/lib/python3.12/dist-packages/__pycache__/isympy.cpython-312.pyc
+0:       Removing file or directory /usr/local/lib/python3.12/dist-packages/isympy.py
+0:       Removing file or directory /usr/local/lib/python3.12/dist-packages/sympy-1.13.3.dist-info/
+0:       Removing file or directory /usr/local/lib/python3.12/dist-packages/sympy/
+0:       Removing file or directory /usr/local/share/man/man1/isympy.1
+0:       Successfully uninstalled sympy-1.13.3
+0:   changing mode of /usr/local/bin/isympy to 755
+0:   Attempting uninstall: lm-eval
+0:     Found existing installation: lm_eval 0.4.9
+0:     Uninstalling lm_eval-0.4.9:
+0:       Removing file or directory /usr/local/bin/lm-eval
+0:       Removing file or directory /usr/local/bin/lm_eval
+0:       Removing file or directory /usr/local/lib/python3.12/dist-packages/lm_eval-0.4.9.dist-info/
+0:       Removing file or directory /usr/local/lib/python3.12/dist-packages/lm_eval/
+0:       Successfully uninstalled lm_eval-0.4.9
+0:   changing mode of /usr/local/bin/lm-eval to 755
+0:   changing mode of /usr/local/bin/lm_eval to 755
+0: Successfully installed antlr4-python3-runtime-4.11.0 datasketch-1.6.5 latex2sympy2_extended-1.10.2 lm-eval-0.4.9 math_verify-0.8.0 sympy-1.13.1
+0: INFO 08-27 12:50:03 [__init__.py:243] Automatically detected platform cuda.
+0: INFO 08-27 12:50:08 [__init__.py:31] Available plugins for group vllm.general_plugins:
+0: INFO 08-27 12:50:08 [__init__.py:33] - lora_filesystem_resolver -> vllm.plugins.lora_resolvers.filesystem_resolver:register_filesystem_resolver
+0: INFO 08-27 12:50:08 [__init__.py:36] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+0: INFO 08-27 12:50:17 [config.py:793] This model supports multiple tasks: {'generate', 'embed', 'classify', 'reward', 'score'}. Defaulting to 'generate'.
+0: INFO 08-27 12:50:17 [config.py:1875] Defaulting to use mp for distributed inference
+0: INFO 08-27 12:50:17 [config.py:2118] Chunked prefill is enabled with max_num_batched_tokens=16384.
+0: INFO 08-27 12:50:24 [__init__.py:243] Automatically detected platform cuda.
+0: INFO 08-27 12:50:25 [core.py:438] Waiting for init message from front-end.
+0: INFO 08-27 12:50:26 [__init__.py:31] Available plugins for group vllm.general_plugins:
+0: INFO 08-27 12:50:26 [__init__.py:33] - lora_filesystem_resolver -> vllm.plugins.lora_resolvers.filesystem_resolver:register_filesystem_resolver
+0: INFO 08-27 12:50:26 [__init__.py:36] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+0: INFO 08-27 12:50:26 [core.py:65] Initializing a V1 LLM engine (v0.9.0.2.dev0+g31d8ed802.d20250718) with config: model='/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/final-run/Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix/checkpoints/1f20ee760c1e2161/checkpoint-3899', speculative_config=None, tokenizer='/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/final-run/Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix/checkpoints/1f20ee760c1e2161/checkpoint-3899', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, override_neuron_config={}, tokenizer_revision=None, trust_remote_code=True, dtype=torch.bfloat16, max_seq_len=65536, download_dir=None, load_format=LoadFormat.AUTO, tensor_parallel_size=4, pipeline_parallel_size=1, disable_custom_all_reduce=False, quantization=None, enforce_eager=False, kv_cache_dtype=auto,  device_config=cuda, decoding_config=DecodingConfig(backend
+0: ='auto', disable_fallback=False, disable_any_whitespace=False, disable_additional_properties=False, reasoning_backend=''), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None), seed=1234, served_model_name=/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/final-run/Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix/checkpoints/1f20ee760c1e2161/checkpoint-3899, num_scheduler_steps=1, multi_step_stream_outputs=True, enable_prefix_caching=True, chunked_prefill_enabled=True, use_async_output_proc=True, pooler_config=None, compilation_config={"level": 3, "custom_ops": ["none"], "splitting_ops": ["vllm.unified_attention", "vllm.unified_attention_with_output"], "compile_sizes": [], "inductor_compile_config": {"enable_auto_functionalized_v2": false}, "use_cudagraph": true, "cudagraph_num_of_warmups": 1, "cudagraph_capture_sizes": [512, 504, 496, 488, 480, 472, 464, 456, 448, 
+0: 440, 432, 424, 416, 408, 400, 392, 384, 376, 368, 360, 352, 344, 336, 328, 320, 312, 304, 296, 288, 280, 272, 264, 256, 248, 240, 232, 224, 216, 208, 200, 192, 184, 176, 168, 160, 152, 144, 136, 128, 120, 112, 104, 96, 88, 80, 72, 64, 56, 48, 40, 32, 24, 16, 8, 4, 2, 1], "max_capture_size": 512}
+0: INFO 08-27 12:50:26 [shm_broadcast.py:250] vLLM message queue communication handle: Handle(local_reader_ranks=[0, 1, 2, 3], buffer_handle=(4, 10485760, 10, 'psm_f0a97f3e'), local_subscribe_addr='ipc:///tmp/94443ab1-1cba-4548-82be-00f7c55c8a14', remote_subscribe_addr=None, remote_addr_ipv6=False)
+0: INFO 08-27 12:50:34 [__init__.py:243] Automatically detected platform cuda.
+0: INFO 08-27 12:50:34 [__init__.py:243] Automatically detected platform cuda.
+0: INFO 08-27 12:50:34 [__init__.py:243] Automatically detected platform cuda.
+0: INFO 08-27 12:50:34 [__init__.py:243] Automatically detected platform cuda.
+0: INFO 08-27 12:50:35 [__init__.py:31] Available plugins for group vllm.general_plugins:
+0: INFO 08-27 12:50:35 [__init__.py:33] - lora_filesystem_resolver -> vllm.plugins.lora_resolvers.filesystem_resolver:register_filesystem_resolver
+0: INFO 08-27 12:50:35 [__init__.py:36] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+0: INFO 08-27 12:50:35 [__init__.py:31] Available plugins for group vllm.general_plugins:
+0: INFO 08-27 12:50:35 [__init__.py:33] - lora_filesystem_resolver -> vllm.plugins.lora_resolvers.filesystem_resolver:register_filesystem_resolver
+0: INFO 08-27 12:50:35 [__init__.py:36] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+0: INFO 08-27 12:50:36 [__init__.py:31] Available plugins for group vllm.general_plugins:
+0: INFO 08-27 12:50:36 [__init__.py:33] - lora_filesystem_resolver -> vllm.plugins.lora_resolvers.filesystem_resolver:register_filesystem_resolver
+0: INFO 08-27 12:50:36 [__init__.py:36] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+0: WARNING 08-27 12:50:36 [utils.py:2671] Methods determine_num_available_blocks,device_config,get_cache_block_size_bytes,initialize_cache not implemented in <vllm.v1.worker.gpu_worker.Worker object at 0x40048ee529c0>
+0: WARNING 08-27 12:50:36 [utils.py:2671] Methods determine_num_available_blocks,device_config,get_cache_block_size_bytes,initialize_cache not implemented in <vllm.v1.worker.gpu_worker.Worker object at 0x40047d3fe240>
+0: [1;36m(VllmWorker rank=3 pid=105080)[0;0m INFO 08-27 12:50:36 [shm_broadcast.py:250] vLLM message queue communication handle: Handle(local_reader_ranks=[0], buffer_handle=(1, 10485760, 10, 'psm_cad741a4'), local_subscribe_addr='ipc:///tmp/dbf92399-fe08-4192-b063-2ca69bebfdec', remote_subscribe_addr=None, remote_addr_ipv6=False)
+0: [1;36m(VllmWorker rank=1 pid=105078)[0;0m INFO 08-27 12:50:36 [shm_broadcast.py:250] vLLM message queue communication handle: Handle(local_reader_ranks=[0], buffer_handle=(1, 10485760, 10, 'psm_e112cb6e'), local_subscribe_addr='ipc:///tmp/71b1eef5-5f17-4562-8616-0bbe0f59224b', remote_subscribe_addr=None, remote_addr_ipv6=False)
+0: INFO 08-27 12:50:37 [__init__.py:31] Available plugins for group vllm.general_plugins:
+0: INFO 08-27 12:50:37 [__init__.py:33] - lora_filesystem_resolver -> vllm.plugins.lora_resolvers.filesystem_resolver:register_filesystem_resolver
+0: INFO 08-27 12:50:37 [__init__.py:36] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+0: WARNING 08-27 12:50:37 [utils.py:2671] Methods determine_num_available_blocks,device_config,get_cache_block_size_bytes,initialize_cache not implemented in <vllm.v1.worker.gpu_worker.Worker object at 0x400487dbc380>
+0: [1;36m(VllmWorker rank=0 pid=105077)[0;0m INFO 08-27 12:50:37 [shm_broadcast.py:250] vLLM message queue communication handle: Handle(local_reader_ranks=[0], buffer_handle=(1, 10485760, 10, 'psm_46c58e76'), local_subscribe_addr='ipc:///tmp/2ecd8f3a-7183-4fef-a8ce-7ca3f9ef1546', remote_subscribe_addr=None, remote_addr_ipv6=False)
+0: WARNING 08-27 12:50:37 [utils.py:2671] Methods determine_num_available_blocks,device_config,get_cache_block_size_bytes,initialize_cache not implemented in <vllm.v1.worker.gpu_worker.Worker object at 0x400472ee0bf0>
+0: [1;36m(VllmWorker rank=2 pid=105079)[0;0m INFO 08-27 12:50:37 [shm_broadcast.py:250] vLLM message queue communication handle: Handle(local_reader_ranks=[0], buffer_handle=(1, 10485760, 10, 'psm_4a26b3de'), local_subscribe_addr='ipc:///tmp/824ad59b-073d-401e-a3a3-9772b462a53d', remote_subscribe_addr=None, remote_addr_ipv6=False)
+0: [1;36m(VllmWorker rank=1 pid=105078)[0;0m INFO 08-27 12:50:37 [utils.py:1077] Found nccl from library libnccl.so.2
+0: [1;36m(VllmWorker rank=3 pid=105080)[0;0m INFO 08-27 12:50:37 [utils.py:1077] Found nccl from library libnccl.so.2
+0: [1;36m(VllmWorker rank=1 pid=105078)[0;0m INFO 08-27 12:50:37 [pynccl.py:69] vLLM is using nccl==2.25.1
+0: [1;36m(VllmWorker rank=3 pid=105080)[0;0m INFO 08-27 12:50:37 [pynccl.py:69] vLLM is using nccl==2.25.1
+0: [1;36m(VllmWorker rank=0 pid=105077)[0;0m INFO 08-27 12:50:37 [utils.py:1077] Found nccl from library libnccl.so.2
+0: [1;36m(VllmWorker rank=2 pid=105079)[0;0m INFO 08-27 12:50:37 [utils.py:1077] Found nccl from library libnccl.so.2
+0: [1;36m(VllmWorker rank=0 pid=105077)[0;0m INFO 08-27 12:50:37 [pynccl.py:69] vLLM is using nccl==2.25.1
+0: [1;36m(VllmWorker rank=2 pid=105079)[0;0m INFO 08-27 12:50:37 [pynccl.py:69] vLLM is using nccl==2.25.1
+0: [1;36m(VllmWorker rank=1 pid=105078)[0;0m INFO 08-27 12:50:45 [custom_all_reduce_utils.py:245] reading GPU P2P access cache from /users/flubeck/.cache/vllm/gpu_p2p_access_cache_for_0,1,2,3.json
+0: [1;36m(VllmWorker rank=3 pid=105080)[0;0m INFO 08-27 12:50:45 [custom_all_reduce_utils.py:245] reading GPU P2P access cache from /users/flubeck/.cache/vllm/gpu_p2p_access_cache_for_0,1,2,3.json
+0: [1;36m(VllmWorker rank=2 pid=105079)[0;0m INFO 08-27 12:50:45 [custom_all_reduce_utils.py:245] reading GPU P2P access cache from /users/flubeck/.cache/vllm/gpu_p2p_access_cache_for_0,1,2,3.json
+0: [1;36m(VllmWorker rank=0 pid=105077)[0;0m INFO 08-27 12:50:45 [custom_all_reduce_utils.py:245] reading GPU P2P access cache from /users/flubeck/.cache/vllm/gpu_p2p_access_cache_for_0,1,2,3.json
+0: [1;36m(VllmWorker rank=0 pid=105077)[0;0m INFO 08-27 12:50:46 [shm_broadcast.py:250] vLLM message queue communication handle: Handle(local_reader_ranks=[1, 2, 3], buffer_handle=(3, 4194304, 6, 'psm_96437a0c'), local_subscribe_addr='ipc:///tmp/23aa4ae0-a9fd-4976-92f4-f8eb939e5e3a', remote_subscribe_addr=None, remote_addr_ipv6=False)
+0: [1;36m(VllmWorker rank=0 pid=105077)[0;0m INFO 08-27 12:50:46 [parallel_state.py:1064] rank 0 in world size 4 is assigned as DP rank 0, PP rank 0, TP rank 0, EP rank 0
+0: [1;36m(VllmWorker rank=1 pid=105078)[0;0m INFO 08-27 12:50:46 [parallel_state.py:1064] rank 1 in world size 4 is assigned as DP rank 0, PP rank 0, TP rank 1, EP rank 1
+0: [1;36m(VllmWorker rank=3 pid=105080)[0;0m INFO 08-27 12:50:46 [parallel_state.py:1064] rank 3 in world size 4 is assigned as DP rank 0, PP rank 0, TP rank 3, EP rank 3
+0: [1;36m(VllmWorker rank=2 pid=105079)[0;0m INFO 08-27 12:50:46 [parallel_state.py:1064] rank 2 in world size 4 is assigned as DP rank 0, PP rank 0, TP rank 2, EP rank 2
+0: [1;36m(VllmWorker rank=1 pid=105078)[0;0m INFO 08-27 12:50:46 [topk_topp_sampler.py:48] Using FlashInfer for top-p & top-k sampling.
+0: [1;36m(VllmWorker rank=0 pid=105077)[0;0m INFO 08-27 12:50:46 [topk_topp_sampler.py:48] Using FlashInfer for top-p & top-k sampling.
+0: [1;36m(VllmWorker rank=2 pid=105079)[0;0m INFO 08-27 12:50:46 [topk_topp_sampler.py:48] Using FlashInfer for top-p & top-k sampling.
+0: [1;36m(VllmWorker rank=3 pid=105080)[0;0m INFO 08-27 12:50:46 [topk_topp_sampler.py:48] Using FlashInfer for top-p & top-k sampling.
+0: [1;36m(VllmWorker rank=1 pid=105078)[0;0m INFO 08-27 12:50:46 [gpu_model_runner.py:1531] Starting to load model /iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/final-run/Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix/checkpoints/1f20ee760c1e2161/checkpoint-3899...
+0: [1;36m(VllmWorker rank=3 pid=105080)[0;0m INFO 08-27 12:50:46 [gpu_model_runner.py:1531] Starting to load model /iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/final-run/Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix/checkpoints/1f20ee760c1e2161/checkpoint-3899...
+0: [1;36m(VllmWorker rank=2 pid=105079)[0;0m INFO 08-27 12:50:46 [gpu_model_runner.py:1531] Starting to load model /iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/final-run/Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix/checkpoints/1f20ee760c1e2161/checkpoint-3899...
+0: [1;36m(VllmWorker rank=0 pid=105077)[0;0m INFO 08-27 12:50:46 [gpu_model_runner.py:1531] Starting to load model /iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/final-run/Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix/checkpoints/1f20ee760c1e2161/checkpoint-3899...
+0: [1;36m(VllmWorker rank=1 pid=105078)[0;0m INFO 08-27 12:50:48 [cuda.py:217] Using Flash Attention backend on V1 engine.
+0: [1;36m(VllmWorker rank=0 pid=105077)[0;0m INFO 08-27 12:50:48 [cuda.py:217] Using Flash Attention backend on V1 engine.
+0: [1;36m(VllmWorker rank=2 pid=105079)[0;0m INFO 08-27 12:50:48 [cuda.py:217] Using Flash Attention backend on V1 engine.
+0: [1;36m(VllmWorker rank=3 pid=105080)[0;0m INFO 08-27 12:50:48 [cuda.py:217] Using Flash Attention backend on V1 engine.
+0: [1;36m(VllmWorker rank=1 pid=105078)[0;0m INFO 08-27 12:50:49 [backends.py:35] Using InductorAdaptor
+0: [1;36m(VllmWorker rank=0 pid=105077)[0;0m INFO 08-27 12:50:49 [backends.py:35] Using InductorAdaptor
+0: [1;36m(VllmWorker rank=3 pid=105080)[0;0m INFO 08-27 12:50:49 [backends.py:35] Using InductorAdaptor
+0: [1;36m(VllmWorker rank=2 pid=105079)[0;0m INFO 08-27 12:50:49 [backends.py:35] Using InductorAdaptor
+0: [1;36m(VllmWorker rank=1 pid=105078)[0;0m INFO 08-27 12:52:08 [default_loader.py:280] Loading weights took 79.38 seconds
+0: [1;36m(VllmWorker rank=2 pid=105079)[0;0m INFO 08-27 12:52:08 [default_loader.py:280] Loading weights took 79.38 seconds
+0: [1;36m(VllmWorker rank=3 pid=105080)[0;0m INFO 08-27 12:52:08 [default_loader.py:280] Loading weights took 79.38 seconds
+0: [1;36m(VllmWorker rank=0 pid=105077)[0;0m INFO 08-27 12:52:08 [default_loader.py:280] Loading weights took 79.41 seconds
+0: [1;36m(VllmWorker rank=1 pid=105078)[0;0m INFO 08-27 12:52:08 [gpu_model_runner.py:1549] Model loading took 32.8935 GiB and 82.509271 seconds
+0: [1;36m(VllmWorker rank=3 pid=105080)[0;0m INFO 08-27 12:52:09 [gpu_model_runner.py:1549] Model loading took 32.8935 GiB and 82.533514 seconds
+0: [1;36m(VllmWorker rank=2 pid=105079)[0;0m INFO 08-27 12:52:09 [gpu_model_runner.py:1549] Model loading took 32.8935 GiB and 82.533120 seconds
+0: [1;36m(VllmWorker rank=0 pid=105077)[0;0m INFO 08-27 12:52:09 [gpu_model_runner.py:1549] Model loading took 32.8935 GiB and 82.558450 seconds
+0: [1;36m(VllmWorker rank=0 pid=105077)[0;0m INFO 08-27 12:57:43 [backends.py:457] vLLM's torch.compile cache is disabled.
+0: [1;36m(VllmWorker rank=0 pid=105077)[0;0m INFO 08-27 12:57:43 [backends.py:469] Dynamo bytecode transform time: 334.81 s
+0: [1;36m(VllmWorker rank=1 pid=105078)[0;0m INFO 08-27 12:57:43 [backends.py:457] vLLM's torch.compile cache is disabled.
+0: [1;36m(VllmWorker rank=1 pid=105078)[0;0m INFO 08-27 12:57:43 [backends.py:469] Dynamo bytecode transform time: 334.82 s
+0: [1;36m(VllmWorker rank=3 pid=105080)[0;0m INFO 08-27 12:57:43 [backends.py:457] vLLM's torch.compile cache is disabled.
+0: [1;36m(VllmWorker rank=3 pid=105080)[0;0m INFO 08-27 12:57:43 [backends.py:469] Dynamo bytecode transform time: 334.82 s
+0: [1;36m(VllmWorker rank=2 pid=105079)[0;0m INFO 08-27 12:57:43 [backends.py:457] vLLM's torch.compile cache is disabled.
+0: [1;36m(VllmWorker rank=2 pid=105079)[0;0m INFO 08-27 12:57:43 [backends.py:469] Dynamo bytecode transform time: 334.82 s
+0: [1;36m(VllmWorker rank=1 pid=105078)[0;0m INFO 08-27 12:57:50 [backends.py:158] Cache the graph of shape None for later use
+0: [1;36m(VllmWorker rank=3 pid=105080)[0;0m INFO 08-27 12:57:50 [backends.py:158] Cache the graph of shape None for later use
+0: [1;36m(VllmWorker rank=2 pid=105079)[0;0m INFO 08-27 12:57:50 [backends.py:158] Cache the graph of shape None for later use
+0: [1;36m(VllmWorker rank=0 pid=105077)[0;0m INFO 08-27 12:57:50 [backends.py:158] Cache the graph of shape None for later use
+0: [1;36m(VllmWorker rank=1 pid=105078)[0;0m INFO 08-27 12:59:00 [backends.py:170] Compiling a graph for general shape takes 75.39 s
+0: [1;36m(VllmWorker rank=3 pid=105080)[0;0m INFO 08-27 12:59:06 [backends.py:170] Compiling a graph for general shape takes 80.87 s
+0: [1;36m(VllmWorker rank=0 pid=105077)[0;0m INFO 08-27 12:59:08 [backends.py:170] Compiling a graph for general shape takes 82.48 s
+0: [1;36m(VllmWorker rank=2 pid=105079)[0;0m INFO 08-27 12:59:11 [backends.py:170] Compiling a graph for general shape takes 85.73 s
+0: [1;36m(VllmWorker rank=3 pid=105080)[0;0m INFO 08-27 13:00:35 [monitor.py:33] torch.compile takes 415.69 s in total
+0: [1;36m(VllmWorker rank=1 pid=105078)[0;0m INFO 08-27 13:00:35 [monitor.py:33] torch.compile takes 410.21 s in total
+0: [1;36m(VllmWorker rank=0 pid=105077)[0;0m INFO 08-27 13:00:35 [monitor.py:33] torch.compile takes 417.29 s in total
+0: [1;36m(VllmWorker rank=2 pid=105079)[0;0m INFO 08-27 13:00:35 [monitor.py:33] torch.compile takes 420.55 s in total
+0: INFO 08-27 13:00:41 [kv_cache_utils.py:637] GPU KV cache size: 173,312 tokens
+0: INFO 08-27 13:00:41 [kv_cache_utils.py:640] Maximum concurrency for 65,536 tokens per request: 2.64x
+0: INFO 08-27 13:00:41 [kv_cache_utils.py:637] GPU KV cache size: 173,056 tokens
+0: INFO 08-27 13:00:41 [kv_cache_utils.py:640] Maximum concurrency for 65,536 tokens per request: 2.64x
+0: INFO 08-27 13:00:41 [kv_cache_utils.py:637] GPU KV cache size: 173,072 tokens
+0: INFO 08-27 13:00:41 [kv_cache_utils.py:640] Maximum concurrency for 65,536 tokens per request: 2.64x
+0: INFO 08-27 13:00:41 [kv_cache_utils.py:637] GPU KV cache size: 173,280 tokens
+0: INFO 08-27 13:00:41 [kv_cache_utils.py:640] Maximum concurrency for 65,536 tokens per request: 2.64x
+0: [1;36m(VllmWorker rank=1 pid=105078)[0;0m INFO 08-27 13:01:21 [custom_all_reduce.py:195] Registering 10626 cuda graph addresses
+0: [1;36m(VllmWorker rank=3 pid=105080)[0;0m INFO 08-27 13:01:38 [custom_all_reduce.py:195] Registering 10626 cuda graph addresses
+0: [1;36m(VllmWorker rank=2 pid=105079)[0;0m INFO 08-27 13:01:45 [custom_all_reduce.py:195] Registering 10626 cuda graph addresses
+0: [1;36m(VllmWorker rank=0 pid=105077)[0;0m INFO 08-27 13:01:46 [custom_all_reduce.py:195] Registering 10626 cuda graph addresses
+0: [1;36m(VllmWorker rank=1 pid=105078)[0;0m INFO 08-27 13:01:48 [gpu_model_runner.py:1933] Graph capturing finished in 66 secs, took 1.53 GiB
+0: [1;36m(VllmWorker rank=0 pid=105077)[0;0m INFO 08-27 13:01:48 [gpu_model_runner.py:1933] Graph capturing finished in 66 secs, took 1.53 GiB
+0: [1;36m(VllmWorker rank=2 pid=105079)[0;0m INFO 08-27 13:01:48 [gpu_model_runner.py:1933] Graph capturing finished in 66 secs, took 1.53 GiB
+0: [1;36m(VllmWorker rank=3 pid=105080)[0;0m INFO 08-27 13:01:48 [gpu_model_runner.py:1933] Graph capturing finished in 66 secs, took 1.53 GiB
+0: INFO 08-27 13:01:48 [core.py:167] init engine (profile, create kv cache, warmup model) took 579.08 seconds
+0: Looking in indexes: https://pypi.org/simple, https://pypi.ngc.nvidia.com
+0: Collecting en-core-web-sm==3.7.1
+0:   Downloading https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1-py3-none-any.whl (12.8 MB)
+0: [?25l
+0:      [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.0/12.8 MB[0m [31m?[0m eta [36m-:--:--[0m
+0: [2K     [38;2;114;156;31m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m12.8/12.8 MB[0m [31m81.5 MB/s[0m eta [36m0:00:00[0m
+0: [?25h
+0: Requirement already satisfied: spacy<3.8.0,>=3.7.2 in /usr/local/lib/python3.12/dist-packages (from en-core-web-sm==3.7.1) (3.7.5)
+0: Requirement already satisfied: spacy-legacy<3.1.0,>=3.0.11 in /usr/local/lib/python3.12/dist-packages (from spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (3.0.12)
+0: Requirement already satisfied: spacy-loggers<2.0.0,>=1.0.0 in /usr/local/lib/python3.12/dist-packages (from spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (1.0.5)
+0: Requirement already satisfied: murmurhash<1.1.0,>=0.28.0 in /usr/local/lib/python3.12/dist-packages (from spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (1.0.12)
+0: Requirement already satisfied: cymem<2.1.0,>=2.0.2 in /usr/local/lib/python3.12/dist-packages (from spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (2.0.11)
+0: Requirement already satisfied: preshed<3.1.0,>=3.0.2 in /usr/local/lib/python3.12/dist-packages (from spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (3.0.9)
+0: Requirement already satisfied: thinc<8.3.0,>=8.2.2 in /usr/local/lib/python3.12/dist-packages (from spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (8.2.5)
+0: Requirement already satisfied: wasabi<1.2.0,>=0.9.1 in /usr/local/lib/python3.12/dist-packages (from spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (1.1.3)
+0: Requirement already satisfied: srsly<3.0.0,>=2.4.3 in /usr/local/lib/python3.12/dist-packages (from spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (2.5.1)
+0: Requirement already satisfied: catalogue<2.1.0,>=2.0.6 in /usr/local/lib/python3.12/dist-packages (from spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (2.0.10)
+0: Requirement already satisfied: weasel<0.5.0,>=0.1.0 in /usr/local/lib/python3.12/dist-packages (from spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (0.4.1)
+0: Requirement already satisfied: typer<1.0.0,>=0.3.0 in /usr/local/lib/python3.12/dist-packages (from spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (0.15.1)
+0: Requirement already satisfied: tqdm<5.0.0,>=4.38.0 in /usr/local/lib/python3.12/dist-packages (from spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (4.67.1)
+0: Requirement already satisfied: requests<3.0.0,>=2.13.0 in /usr/local/lib/python3.12/dist-packages (from spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (2.32.3)
+0: Requirement already satisfied: pydantic!=1.8,!=1.8.1,<3.0.0,>=1.7.4 in /usr/local/lib/python3.12/dist-packages (from spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (2.10.6)
+0: Requirement already satisfied: jinja2 in /usr/local/lib/python3.12/dist-packages (from spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (3.1.6)
+0: Requirement already satisfied: setuptools in /usr/local/lib/python3.12/dist-packages (from spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (79.0.1)
+0: Requirement already satisfied: packaging>=20.0 in /usr/local/lib/python3.12/dist-packages (from spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (25.0)
+0: Requirement already satisfied: langcodes<4.0.0,>=3.2.0 in /usr/local/lib/python3.12/dist-packages (from spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (3.5.0)
+0: Requirement already satisfied: numpy>=1.19.0 in /usr/local/lib/python3.12/dist-packages (from spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (1.26.4)
+0: Requirement already satisfied: language-data>=1.2 in /usr/local/lib/python3.12/dist-packages (from langcodes<4.0.0,>=3.2.0->spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (1.3.0)
+0: Requirement already satisfied: annotated-types>=0.6.0 in /usr/local/lib/python3.12/dist-packages (from pydantic!=1.8,!=1.8.1,<3.0.0,>=1.7.4->spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (0.7.0)
+0: Requirement already satisfied: pydantic-core==2.27.2 in /usr/local/lib/python3.12/dist-packages (from pydantic!=1.8,!=1.8.1,<3.0.0,>=1.7.4->spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (2.27.2)
+0: Requirement already satisfied: typing-extensions>=4.12.2 in /usr/local/lib/python3.12/dist-packages (from pydantic!=1.8,!=1.8.1,<3.0.0,>=1.7.4->spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (4.12.2)
+0: Requirement already satisfied: charset-normalizer<4,>=2 in /usr/local/lib/python3.12/dist-packages (from requests<3.0.0,>=2.13.0->spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (3.4.1)
+0: Requirement already satisfied: idna<4,>=2.5 in /usr/local/lib/python3.12/dist-packages (from requests<3.0.0,>=2.13.0->spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (3.10)
+0: Requirement already satisfied: urllib3<3,>=1.21.1 in /usr/local/lib/python3.12/dist-packages (from requests<3.0.0,>=2.13.0->spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (2.0.7)
+0: Requirement already satisfied: certifi>=2017.4.17 in /usr/local/lib/python3.12/dist-packages (from requests<3.0.0,>=2.13.0->spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (2025.1.31)
+0: Requirement already satisfied: blis<0.8.0,>=0.7.8 in /usr/local/lib/python3.12/dist-packages (from thinc<8.3.0,>=8.2.2->spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (0.7.11)
+0: Requirement already satisfied: confection<1.0.0,>=0.0.1 in /usr/local/lib/python3.12/dist-packages (from thinc<8.3.0,>=8.2.2->spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (0.1.5)
+0: Requirement already satisfied: click>=8.0.0 in /usr/local/lib/python3.12/dist-packages (from typer<1.0.0,>=0.3.0->spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (8.1.8)
+0: Requirement already satisfied: shellingham>=1.3.0 in /usr/local/lib/python3.12/dist-packages (from typer<1.0.0,>=0.3.0->spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (1.5.4)
+0: Requirement already satisfied: rich>=10.11.0 in /usr/local/lib/python3.12/dist-packages (from typer<1.0.0,>=0.3.0->spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (13.9.4)
+0: Requirement already satisfied: cloudpathlib<1.0.0,>=0.7.0 in /usr/local/lib/python3.12/dist-packages (from weasel<0.5.0,>=0.1.0->spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (0.20.0)
+0: Requirement already satisfied: smart-open<8.0.0,>=5.2.1 in /usr/local/lib/python3.12/dist-packages (from weasel<0.5.0,>=0.1.0->spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (7.1.0)
+0: Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.12/dist-packages (from jinja2->spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (3.0.2)
+0: Requirement already satisfied: marisa-trie>=1.1.0 in /usr/local/lib/python3.12/dist-packages (from language-data>=1.2->langcodes<4.0.0,>=3.2.0->spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (1.2.1)
+0: Requirement already satisfied: markdown-it-py>=2.2.0 in /usr/local/lib/python3.12/dist-packages (from rich>=10.11.0->typer<1.0.0,>=0.3.0->spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (3.0.0)
+0: Requirement already satisfied: pygments<3.0.0,>=2.13.0 in /usr/local/lib/python3.12/dist-packages (from rich>=10.11.0->typer<1.0.0,>=0.3.0->spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (2.19.1)
+0: Requirement already satisfied: wrapt in /usr/local/lib/python3.12/dist-packages (from smart-open<8.0.0,>=5.2.1->weasel<0.5.0,>=0.1.0->spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (1.17.2)
+0: Requirement already satisfied: mdurl~=0.1 in /usr/local/lib/python3.12/dist-packages (from markdown-it-py>=2.2.0->rich>=10.11.0->typer<1.0.0,>=0.3.0->spacy<3.8.0,>=3.7.2->en-core-web-sm==3.7.1) (0.1.2)
+0: Installing collected packages: en-core-web-sm
+0: Successfully installed en-core-web-sm-3.7.1
+0: [38;5;2m✔ Download and installation successful[0m
+0: You can now load the package via spacy.load('en_core_web_sm')
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['lyrics', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['book', 'hash_check']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: Tags found: ['context']
+0: bootstrapping for stddev: nanmean
+0: bootstrapping for stddev: nanmean
+0: bootstrapping for stddev: nanmean
+0: bootstrapping for stddev: nanmean
+0: bootstrapping for stddev: nanmean
+0: bootstrapping for stddev: nanmean
+0: vllm (pretrained=/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/final-run/Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix/checkpoints/1f20ee760c1e2161/checkpoint-3899,tokenizer=/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/final-run/Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix/checkpoints/1f20ee760c1e2161/checkpoint-3899,dtype=bfloat16,data_parallel_size=1,tensor_parallel_size=4,gpu_memory_utilization=0.65,max_gen_toks=2048,enable_thinking=False,trust_remote_code=True), gen_kwargs: (None), limit: None, num_fewshot: None, batch_size: auto:20
+0: |                            Tasks                             |Version|     Filter     |n-shot|               Metric                |   | Value |   |Stderr|
+0: |--------------------------------------------------------------|-------|----------------|-----:|-------------------------------------|---|------:|---|------|
+0: |acp_bench                                                     |      1|extract-yes-no  |      |exact_match                          |↑  | 0.5544|±  |0.0158|
+0: |                                                              |       |mcq-extract     |      |exact_match                          |↑  | 0.3911|±  |0.0155|
+0: | - acp_bench_bool                                             |      1|extract-yes-no  |      |exact_match                          |↑  | 0.5544|±  |0.0158|
+0: |  - acp_app_bool                                              |      1|extract-yes-no  |     2|exact_match                          |↑  | 0.7615|±  |0.0375|
+0: |  - acp_areach_bool                                           |
+0:       1|extract-yes-no  |     2|exact_match                          |↑  | 0.5667|±  |0.0454|
+0: |  - acp_just_bool                                             |      1|extract-yes-no  |     2|exact_match                          |↑  | 0.5615|±  |0.0437|
+0: |  - acp_land_bool                                             |      1|extract-yes-no  |     2|exact_match                          |↑  | 0.2462|±  |0.0379|
+0: |  - acp_prog_bool                                             |      1|extract-yes-no  |     2|exact_match                          |↑  | 0.7154|±  |0.0397|
+0: |  - acp_reach_bool                                            |      1|extract-yes-no  |     2|exact_match                          |↑  | 0.5308|±  |0.0439|
+0: |  - acp_val_bool                                              |      1|extract-yes-no  |     2|exact_match                          |↑  | 0.5000|±  |0.0440|
+0: | - acp_bench_mcq                                              |      1|mcq-extract     |      |exact_match               
+0:            |↑  | 0.3911|±  |0.0155|
+0: |  - acp_app_mcq                                               |      1|mcq-extract     |     2|exact_match                          |↑  | 0.4769|±  |0.0440|
+0: |  - acp_areach_mcq                                            |      1|mcq-extract     |     2|exact_match                          |↑  | 0.2833|±  |0.0413|
+0: |  - acp_just_mcq                                              |      1|mcq-extract     |     2|exact_match                          |↑  | 0.3462|±  |0.0419|
+0: |  - acp_land_mcq                                              |      1|mcq-extract     |     2|exact_match                          |↑  | 0.5231|±  |0.0440|
+0: |  - acp_prog_mcq                                              |      1|mcq-extract     |     2|exact_match                          |↑  | 0.6462|±  |0.0421|
+0: |  - acp_reach_mcq                                             |      1|mcq-extract     |     2|exact_match                          |↑  | 0.2846|±  |0.0397|
+0: |  - acp_val_mcq   
+0:                                             |      1|mcq-extract     |     2|exact_match                          |↑  | 0.1692|±  |0.0330|
+0: |bbh                                                           |      3|get-answer      |      |exact_match                          |↑  | 0.6460|±  |0.0054|
+0: | - bbh_cot_fewshot_boolean_expressions                        |      4|get-answer      |     3|exact_match                          |↑  | 0.8760|±  |0.0209|
+0: | - bbh_cot_fewshot_causal_judgement                           |      4|get-answer      |     3|exact_match                          |↑  | 0.6043|±  |0.0359|
+0: | - bbh_cot_fewshot_date_understanding                         |      4|get-answer      |     3|exact_match                          |↑  | 0.7920|±  |0.0257|
+0: | - bbh_cot_fewshot_disambiguation_qa                          |      4|get-answer      |     3|exact_match                          |↑  | 0.7120|±  |0.0287|
+0: | - bbh_cot_fewshot_dyck_languages                             |      4|get-
+0: answer      |     3|exact_match                          |↑  | 0.0800|±  |0.0172|
+0: | - bbh_cot_fewshot_formal_fallacies                           |      4|get-answer      |     3|exact_match                          |↑  | 0.5240|±  |0.0316|
+0: | - bbh_cot_fewshot_geometric_shapes                           |      4|get-answer      |     3|exact_match                          |↑  | 0.6080|±  |0.0309|
+0: | - bbh_cot_fewshot_hyperbaton                                 |      4|get-answer      |     3|exact_match                          |↑  | 0.5600|±  |0.0315|
+0: | - bbh_cot_fewshot_logical_deduction_five_objects             |      4|get-answer      |     3|exact_match                          |↑  | 0.5040|±  |0.0317|
+0: | - bbh_cot_fewshot_logical_deduction_seven_objects            |      4|get-answer      |     3|exact_match                          |↑  | 0.4280|±  |0.0314|
+0: | - bbh_cot_fewshot_logical_deduction_three_objects            |      4|get-answer      |     3|exact_match                          |
+0: ↑  | 0.8200|±  |0.0243|
+0: | - bbh_cot_fewshot_movie_recommendation                       |      4|get-answer      |     3|exact_match                          |↑  | 0.6920|±  |0.0293|
+0: | - bbh_cot_fewshot_multistep_arithmetic_two                   |      4|get-answer      |     3|exact_match                          |↑  | 0.5560|±  |0.0315|
+0: | - bbh_cot_fewshot_navigate                                   |      4|get-answer      |     3|exact_match                          |↑  | 0.6920|±  |0.0293|
+0: | - bbh_cot_fewshot_object_counting                            |      4|get-answer      |     3|exact_match                          |↑  | 0.8560|±  |0.0222|
+0: | - bbh_cot_fewshot_penguins_in_a_table                        |      4|get-answer      |     3|exact_match                          |↑  | 0.6918|±  |0.0383|
+0: | - bbh_cot_fewshot_reasoning_about_colored_objects            |      4|get-answer      |     3|exact_match                          |↑  | 0.7720|±  |0.0266|
+0: | - bbh_cot_fewshot_ruin_names 
+0:                                 |      4|get-answer      |     3|exact_match                          |↑  | 0.7160|±  |0.0286|
+0: | - bbh_cot_fewshot_salient_translation_error_detection        |      4|get-answer      |     3|exact_match                          |↑  | 0.5040|±  |0.0317|
+0: | - bbh_cot_fewshot_snarks                                     |      4|get-answer      |     3|exact_match                          |↑  | 0.7753|±  |0.0314|
+0: | - bbh_cot_fewshot_sports_understanding                       |      4|get-answer      |     3|exact_match                          |↑  | 0.9520|±  |0.0135|
+0: | - bbh_cot_fewshot_temporal_sequences                         |      4|get-answer      |     3|exact_match                          |↑  | 0.8480|±  |0.0228|
+0: | - bbh_cot_fewshot_tracking_shuffled_objects_five_objects     |      4|get-answer      |     3|exact_match                          |↑  | 0.5760|±  |0.0313|
+0: | - bbh_cot_fewshot_tracking_shuffled_objects_seven_objects    |      4|get-answer      |
+0:      3|exact_match                          |↑  | 0.4920|±  |0.0317|
+0: | - bbh_cot_fewshot_tracking_shuffled_objects_three_objects    |      4|get-answer      |     3|exact_match                          |↑  | 0.5520|±  |0.0315|
+0: | - bbh_cot_fewshot_web_of_lies                                |      4|get-answer      |     3|exact_match                          |↑  | 1.0000|±  |     0|
+0: | - bbh_cot_fewshot_word_sorting                               |      4|get-answer      |     3|exact_match                          |↑  | 0.3040|±  |0.0292|
+0: |bbq                                                           |      1|none            |     0|acc                                  |↑  | 0.6398|±  |0.0020|
+0: |                                                              |       |none            |     0|accuracy_amb                         |↑  | 0.4362|±  |   N/A|
+0: |                                                              |       |none            |     0|accuracy_disamb                      |↑  | 0.8435
+0: |±  |   N/A|
+0: |                                                              |       |none            |     0|amb_bias_score                       |↓  | 0.0349|±  |   N/A|
+0: |                                                              |       |none            |     0|amb_bias_score_Age                   |↓  | 0.1870|±  |   N/A|
+0: |                                                              |       |none            |     0|amb_bias_score_Disability_status     |↓  | 0.1202|±  |   N/A|
+0: |                                                              |       |none            |     0|amb_bias_score_Gender_identity       |↓  | 0.0462|±  |   N/A|
+0: |                                                              |       |none            |     0|amb_bias_score_Nationality           |↓  | 0.0458|±  |   N/A|
+0: |                                                              |       |none            |     0|amb_bias_score_Physical_appearance   |↓  | 0.0663|±  |   N/A|
+0: |                                           
+0:                    |       |none            |     0|amb_bias_score_Race_ethnicity        |↓  |-0.0075|±  |   N/A|
+0: |                                                              |       |none            |     0|amb_bias_score_Race_x_SES            |↓  | 0.0008|±  |   N/A|
+0: |                                                              |       |none            |     0|amb_bias_score_Race_x_gender         |↓  |-0.0023|±  |   N/A|
+0: |                                                              |       |none            |     0|amb_bias_score_Religion              |↓  | 0.0340|±  |   N/A|
+0: |                                                              |       |none            |     0|amb_bias_score_SES                   |↓  | 0.0925|±  |   N/A|
+0: |                                                              |       |none            |     0|amb_bias_score_Sexual_orientation    |↓  | 0.0340|±  |   N/A|
+0: |                                                              |       |none            |     0|disamb
+0: _bias_score                    |↓  | 0.0358|±  |   N/A|
+0: |                                                              |       |none            |     0|disamb_bias_score_Age                |↓  | 0.1065|±  |   N/A|
+0: |                                                              |       |none            |     0|disamb_bias_score_Disability_status  |↓  | 0.0492|±  |   N/A|
+0: |                                                              |       |none            |     0|disamb_bias_score_Gender_identity    |↓  | 0.0526|±  |   N/A|
+0: |                                                              |       |none            |     0|disamb_bias_score_Nationality        |↓  | 0.0788|±  |   N/A|
+0: |                                                              |       |none            |     0|disamb_bias_score_Physical_appearance|↓  | 0.1242|±  |   N/A|
+0: |                                                              |       |none            |     0|disamb_bias_score_Race_ethnicity     |↓  | 0.0012|±  |   N/A|
+0: 
+0: |                                                              |       |none            |     0|disamb_bias_score_Race_x_SES         |↓  | 0.0125|±  |   N/A|
+0: |                                                              |       |none            |     0|disamb_bias_score_Race_x_gender      |↓  | 0.0113|±  |   N/A|
+0: |                                                              |       |none            |     0|disamb_bias_score_Religion           |↓  | 0.0973|±  |   N/A|
+0: |                                                              |       |none            |     0|disamb_bias_score_SES                |↓  | 0.0560|±  |   N/A|
+0: |                                                              |       |none            |     0|disamb_bias_score_Sexual_orientation |↓  | 0.0311|±  |   N/A|
+0: |drop                                                          |      3|none            |     3|em                                   |↑  | 0.5201|±  |0.0051|
+0: |                                                       
+0:        |       |none            |     3|f1                                   |↑  | 0.5747|±  |0.0048|
+0: |gsm8k_cot                                                     |Yaml   |numeric-fallback|     8|exact_match                          |↑  | 0.7354|±  |0.0122|
+0: |gsm8k_olmes_cot                                               |Yaml   |numeric-fallback|     8|exact_match                          |↑  | 0.7316|±  |0.0122|
+0: |harmbench                                                     |       |none            |      |reversed_score                       |↑  | 0.6326|±  |0.0124|
+0: |                                                              |       |none            |      |score                                |↓  | 0.2974|±  |0.0102|
+0: | - harmbench_direct_request                                   |      1|none            |     0|reversed_score                       |↑  | 0.8792|±  |0.0210|
+0: |                                                              |       |none            |     0|score             
+0:                    |↓  | 0.0938|±  |0.0163|
+0: | - harmbench_human_jailbreaks                                 |      1|none            |     0|reversed_score                       |↑  | 0.5833|±  |0.0143|
+0: |                                                              |       |none            |     0|score                                |↓  | 0.3381|±  |0.0118|
+0: |hendrycks_math                                                |      1|none            |      |math_verify                          |↑  | 0.2360|±  |0.0057|
+0: | - hendrycks_math_algebra                                     |      2|none            |     6|exact_match                          |↑  | 0.0000|±  |     0|
+0: |                                                              |       |none            |     6|math_verify                          |↑  | 0.3252|±  |0.0136|
+0: | - hendrycks_math_counting_and_prob                           |      2|none            |     6|exact_match                          |↑  | 0.0000|±  |     0|
+0: |          
+0:                                                     |       |none            |     6|math_verify                          |↑  | 0.2215|±  |0.0191|
+0: | - hendrycks_math_geometry                                    |      2|none            |     6|exact_match                          |↑  | 0.0000|±  |     0|
+0: |                                                              |       |none            |     6|math_verify                          |↑  | 0.1816|±  |0.0176|
+0: | - hendrycks_math_intermediate_algebra                        |      2|none            |     6|exact_match                          |↑  | 0.0000|±  |     0|
+0: |                                                              |       |none            |     6|math_verify                          |↑  | 0.0853|±  |0.0093|
+0: | - hendrycks_math_num_theory                                  |      2|none            |     6|exact_match                          |↑  | 0.0000|±  |     0|
+0: |                                                              |     
+0:   |none            |     6|math_verify                          |↑  | 0.1926|±  |0.0170|
+0: | - hendrycks_math_prealgebra                                  |      2|none            |     6|exact_match                          |↑  | 0.0000|±  |     0|
+0: |                                                              |       |none            |     6|math_verify                          |↑  | 0.4317|±  |0.0168|
+0: | - hendrycks_math_precalc                                     |      2|none            |     6|exact_match                          |↑  | 0.0000|±  |     0|
+0: |                                                              |       |none            |     6|math_verify                          |↑  | 0.0824|±  |0.0118|
+0: |humaneval_instruct                                            |      3|create_test     |     0|pass@1                               |   | 0.4241|±  |0.0292|
+0: |                                                              |       |create_test     |     0|pass@10                         
+0:      |   | 0.7418|±  |0.0308|
+0: |ifeval                                                        |      4|none            |     0|inst_level_loose_acc                 |↑  | 0.7818|±  |   N/A|
+0: |                                                              |       |none            |     0|inst_level_strict_acc                |↑  | 0.7566|±  |   N/A|
+0: |                                                              |       |none            |     0|prompt_level_loose_acc               |↑  | 0.7043|±  |0.0196|
+0: |                                                              |       |none            |     0|prompt_level_strict_acc              |↑  | 0.6802|±  |0.0201|
+0: |mathqa                                                        |      1|none            |     0|acc                                  |↑  | 0.3310|±  |0.0086|
+0: |                                                              |       |none            |     0|acc_norm                             |↑  | 0.3370|±  |0.0087|
+0: |mbpp_instruct             
+0:                                     |      1|extract_code    |     3|pass_at_1                            |↑  | 0.4560|±  |0.0223|
+0: |mmlu (flan style, zeroshot cot)                               |      2|flexible-extract|      |exact_match                          |↑  | 0.6773|±  |0.0114|
+0: |                                                              |       |ordered-extract |      |exact_match                          |↑  | 0.6780|±  |0.0114|
+0: |                                                              |       |strict-match    |      |exact_match                          |↑  | 0.6760|±  |0.0114|
+0: | - mmlu_flan_cot_zeroshot_humanities                          |       |flexible-extract|      |exact_match                          |↑  | 0.6042|±  |0.0202|
+0: |                                                              |       |ordered-extract |      |exact_match                          |↑  | 0.6042|±  |0.0202|
+0: |                                                              |       |strict-match 
+0:    |      |exact_match                          |↑  | 0.6042|±  |0.0202|
+0: |  - mmlu_flan_cot_zeroshot_formal_logic                       |      3|flexible-extract|     0|exact_match                          |↑  | 0.2857|±  |0.1253|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.2857|±  |0.1253|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.2857|±  |0.1253|
+0: |  - mmlu_flan_cot_zeroshot_high_school_european_history       |      3|flexible-extract|     0|exact_match                          |↑  | 0.8333|±  |0.0904|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.8333|±  |0.0904|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.
+0: 8333|±  |0.0904|
+0: |  - mmlu_flan_cot_zeroshot_high_school_us_history             |      3|flexible-extract|     0|exact_match                          |↑  | 0.8636|±  |0.0749|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.8636|±  |0.0749|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.8636|±  |0.0749|
+0: |  - mmlu_flan_cot_zeroshot_high_school_world_history          |      3|flexible-extract|     0|exact_match                          |↑  | 0.9615|±  |0.0385|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.9615|±  |0.0385|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.9615|±  |0.0385|
+0: |  - mmlu_flan_cot_zeroshot_internation
+0: al_law                  |      3|flexible-extract|     0|exact_match                          |↑  | 0.9231|±  |0.0769|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.9231|±  |0.0769|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.9231|±  |0.0769|
+0: |  - mmlu_flan_cot_zeroshot_jurisprudence                      |      3|flexible-extract|     0|exact_match                          |↑  | 0.4545|±  |0.1575|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.4545|±  |0.1575|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.4545|±  |0.1575|
+0: |  - mmlu_flan_cot_zeroshot_logical_fallacies                  |      3|flexible-extract|     0|e
+0: xact_match                          |↑  | 0.7778|±  |0.1008|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.7778|±  |0.1008|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.7778|±  |0.1008|
+0: |  - mmlu_flan_cot_zeroshot_moral_disputes                     |      3|flexible-extract|     0|exact_match                          |↑  | 0.6579|±  |0.0780|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.6579|±  |0.0780|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.6579|±  |0.0780|
+0: |  - mmlu_flan_cot_zeroshot_moral_scenarios                    |      3|flexible-extract|     0|exact_match                          |↑  | 0.4200|±  |0.
+0: 0496|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.4200|±  |0.0496|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.4200|±  |0.0496|
+0: |  - mmlu_flan_cot_zeroshot_philosophy                         |      3|flexible-extract|     0|exact_match                          |↑  | 0.7647|±  |0.0738|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.7647|±  |0.0738|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.7647|±  |0.0738|
+0: |  - mmlu_flan_cot_zeroshot_prehistory                         |      3|flexible-extract|     0|exact_match                          |↑  | 0.7143|±  |0.0775|
+0: |                                                   
+0:            |       |ordered-extract |     0|exact_match                          |↑  | 0.7143|±  |0.0775|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.7143|±  |0.0775|
+0: |  - mmlu_flan_cot_zeroshot_professional_law                   |      3|flexible-extract|     0|exact_match                          |↑  | 0.5000|±  |0.0385|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.5000|±  |0.0385|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.5000|±  |0.0385|
+0: |  - mmlu_flan_cot_zeroshot_world_religions                    |      3|flexible-extract|     0|exact_match                          |↑  | 0.8421|±  |0.0859|
+0: |                                                              |       |ordered-extract |     0|exact_match  
+0:                         |↑  | 0.8421|±  |0.0859|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.8421|±  |0.0859|
+0: | - mmlu_flan_cot_zeroshot_other                               |       |flexible-extract|      |exact_match                          |↑  | 0.7625|±  |0.0226|
+0: |                                                              |       |ordered-extract |      |exact_match                          |↑  | 0.7654|±  |0.0225|
+0: |                                                              |       |strict-match    |      |exact_match                          |↑  | 0.7625|±  |0.0226|
+0: |  - mmlu_flan_cot_zeroshot_business_ethics                    |      3|flexible-extract|     0|exact_match                          |↑  | 0.7273|±  |0.1408|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.7273|±  |0.1408|
+0: |     
+0:                                                          |       |strict-match    |     0|exact_match                          |↑  | 0.7273|±  |0.1408|
+0: |  - mmlu_flan_cot_zeroshot_clinical_knowledge                 |      3|flexible-extract|     0|exact_match                          |↑  | 0.7586|±  |0.0809|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.7931|±  |0.0766|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.7586|±  |0.0809|
+0: |  - mmlu_flan_cot_zeroshot_college_medicine                   |      3|flexible-extract|     0|exact_match                          |↑  | 0.8636|±  |0.0749|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.8636|±  |0.0749|
+0: |                                                              |
+0:        |strict-match    |     0|exact_match                          |↑  | 0.8636|±  |0.0749|
+0: |  - mmlu_flan_cot_zeroshot_global_facts                       |      3|flexible-extract|     0|exact_match                          |↑  | 0.6000|±  |0.1633|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.6000|±  |0.1633|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.6000|±  |0.1633|
+0: |  - mmlu_flan_cot_zeroshot_human_aging                        |      3|flexible-extract|     0|exact_match                          |↑  | 0.8261|±  |0.0808|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.8261|±  |0.0808|
+0: |                                                              |       |strict-match    |     0|exact_match               
+0:            |↑  | 0.8261|±  |0.0808|
+0: |  - mmlu_flan_cot_zeroshot_management                         |      3|flexible-extract|     0|exact_match                          |↑  | 0.9091|±  |0.0909|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.9091|±  |0.0909|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.9091|±  |0.0909|
+0: |  - mmlu_flan_cot_zeroshot_marketing                          |      3|flexible-extract|     0|exact_match                          |↑  | 0.8000|±  |0.0816|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.8000|±  |0.0816|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.8000|±  |0.0816|
+0: |  - mmlu_flan_cot
+0: _zeroshot_medical_genetics                   |      3|flexible-extract|     0|exact_match                          |↑  | 0.9091|±  |0.0909|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.9091|±  |0.0909|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.9091|±  |0.0909|
+0: |  - mmlu_flan_cot_zeroshot_miscellaneous                      |      3|flexible-extract|     0|exact_match                          |↑  | 0.8372|±  |0.0400|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.8372|±  |0.0400|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.8372|±  |0.0400|
+0: |  - mmlu_flan_cot_zeroshot_nutrition                          |      3|flex
+0: ible-extract|     0|exact_match                          |↑  | 0.8182|±  |0.0682|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.8182|±  |0.0682|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.8182|±  |0.0682|
+0: |  - mmlu_flan_cot_zeroshot_professional_accounting            |      3|flexible-extract|     0|exact_match                          |↑  | 0.6129|±  |0.0889|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.6129|±  |0.0889|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.6129|±  |0.0889|
+0: |  - mmlu_flan_cot_zeroshot_professional_medicine              |      3|flexible-extract|     0|exact_match                          |
+0: ↑  | 0.6452|±  |0.0874|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.6452|±  |0.0874|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.6452|±  |0.0874|
+0: |  - mmlu_flan_cot_zeroshot_virology                           |      3|flexible-extract|     0|exact_match                          |↑  | 0.4444|±  |0.1205|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.4444|±  |0.1205|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.4444|±  |0.1205|
+0: | - mmlu_flan_cot_zeroshot_social_sciences                     |       |flexible-extract|      |exact_match                          |↑  | 0.7418|±  |0.0233|
+0: |                              
+0:                                 |       |ordered-extract |      |exact_match                          |↑  | 0.7418|±  |0.0233|
+0: |                                                              |       |strict-match    |      |exact_match                          |↑  | 0.7418|±  |0.0233|
+0: |  - mmlu_flan_cot_zeroshot_econometrics                       |      3|flexible-extract|     0|exact_match                          |↑  | 0.7500|±  |0.1306|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.7500|±  |0.1306|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.7500|±  |0.1306|
+0: |  - mmlu_flan_cot_zeroshot_high_school_geography              |      3|flexible-extract|     0|exact_match                          |↑  | 0.8182|±  |0.0842|
+0: |                                                              |       |ordered-extract 
+0: |     0|exact_match                          |↑  | 0.8182|±  |0.0842|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.8182|±  |0.0842|
+0: |  - mmlu_flan_cot_zeroshot_high_school_government_and_politics|      3|flexible-extract|     0|exact_match                          |↑  | 0.8095|±  |0.0878|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.8095|±  |0.0878|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.8095|±  |0.0878|
+0: |  - mmlu_flan_cot_zeroshot_high_school_macroeconomics         |      3|flexible-extract|     0|exact_match                          |↑  | 0.6977|±  |0.0709|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.697
+0: 7|±  |0.0709|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.6977|±  |0.0709|
+0: |  - mmlu_flan_cot_zeroshot_high_school_microeconomics         |      3|flexible-extract|     0|exact_match                          |↑  | 0.7692|±  |0.0843|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.7692|±  |0.0843|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.7692|±  |0.0843|
+0: |  - mmlu_flan_cot_zeroshot_high_school_psychology             |      3|flexible-extract|     0|exact_match                          |↑  | 0.9000|±  |0.0391|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.9000|±  |0.0391|
+0: |                                          
+0:                     |       |strict-match    |     0|exact_match                          |↑  | 0.9000|±  |0.0391|
+0: |  - mmlu_flan_cot_zeroshot_human_sexuality                    |      3|flexible-extract|     0|exact_match                          |↑  | 0.5833|±  |0.1486|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.5833|±  |0.1486|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.5833|±  |0.1486|
+0: |  - mmlu_flan_cot_zeroshot_professional_psychology            |      3|flexible-extract|     0|exact_match                          |↑  | 0.6667|±  |0.0572|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.6667|±  |0.0572|
+0: |                                                              |       |strict-match    |     0|exact
+0: _match                          |↑  | 0.6667|±  |0.0572|
+0: |  - mmlu_flan_cot_zeroshot_public_relations                   |      3|flexible-extract|     0|exact_match                          |↑  | 0.3333|±  |0.1421|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.3333|±  |0.1421|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.3333|±  |0.1421|
+0: |  - mmlu_flan_cot_zeroshot_security_studies                   |      3|flexible-extract|     0|exact_match                          |↑  | 0.6296|±  |0.0947|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.6296|±  |0.0947|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.6296|±  |0.0947
+0: |
+0: |  - mmlu_flan_cot_zeroshot_sociology                          |      3|flexible-extract|     0|exact_match                          |↑  | 0.8182|±  |0.0842|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.8182|±  |0.0842|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.8182|±  |0.0842|
+0: |  - mmlu_flan_cot_zeroshot_us_foreign_policy                  |      3|flexible-extract|     0|exact_match                          |↑  | 0.9091|±  |0.0909|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.9091|±  |0.0909|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.9091|±  |0.0909|
+0: | - mmlu_flan_cot_zeroshot_stem                         
+0:        |       |flexible-extract|      |exact_match                          |↑  | 0.6388|±  |0.0254|
+0: |                                                              |       |ordered-extract |      |exact_match                          |↑  | 0.6388|±  |0.0254|
+0: |                                                              |       |strict-match    |      |exact_match                          |↑  | 0.6328|±  |0.0255|
+0: |  - mmlu_flan_cot_zeroshot_abstract_algebra                   |      3|flexible-extract|     0|exact_match                          |↑  | 0.0909|±  |0.0909|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.0909|±  |0.0909|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.0909|±  |0.0909|
+0: |  - mmlu_flan_cot_zeroshot_anatomy                            |      3|flexible-extract|     0|exact_match       
+0:                    |↑  | 0.8571|±  |0.0971|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.8571|±  |0.0971|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.8571|±  |0.0971|
+0: |  - mmlu_flan_cot_zeroshot_astronomy                          |      3|flexible-extract|     0|exact_match                          |↑  | 0.6875|±  |0.1197|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.6875|±  |0.1197|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.6875|±  |0.1197|
+0: |  - mmlu_flan_cot_zeroshot_college_biology                    |      3|flexible-extract|     0|exact_match                          |↑  | 0.7500|±  |0.1118|
+0: |          
+0:                                                     |       |ordered-extract |     0|exact_match                          |↑  | 0.7500|±  |0.1118|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.7500|±  |0.1118|
+0: |  - mmlu_flan_cot_zeroshot_college_chemistry                  |      3|flexible-extract|     0|exact_match                          |↑  | 0.5000|±  |0.1890|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.5000|±  |0.1890|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.5000|±  |0.1890|
+0: |  - mmlu_flan_cot_zeroshot_college_computer_science           |      3|flexible-extract|     0|exact_match                          |↑  | 0.5455|±  |0.1575|
+0: |                                                              |    
+0:    |ordered-extract |     0|exact_match                          |↑  | 0.5455|±  |0.1575|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.5455|±  |0.1575|
+0: |  - mmlu_flan_cot_zeroshot_college_mathematics                |      3|flexible-extract|     0|exact_match                          |↑  | 0.3636|±  |0.1521|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.3636|±  |0.1521|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.3636|±  |0.1521|
+0: |  - mmlu_flan_cot_zeroshot_college_physics                    |      3|flexible-extract|     0|exact_match                          |↑  | 0.6364|±  |0.1521|
+0: |                                                              |       |ordered-extract |     0|exact_match                   
+0:        |↑  | 0.6364|±  |0.1521|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.6364|±  |0.1521|
+0: |  - mmlu_flan_cot_zeroshot_computer_security                  |      3|flexible-extract|     0|exact_match                          |↑  | 0.7273|±  |0.1408|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.7273|±  |0.1408|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.6364|±  |0.1521|
+0: |  - mmlu_flan_cot_zeroshot_conceptual_physics                 |      3|flexible-extract|     0|exact_match                          |↑  | 0.6923|±  |0.0923|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.6923|±  |0.0923|
+0: |                      
+0:                                         |       |strict-match    |     0|exact_match                          |↑  | 0.6923|±  |0.0923|
+0: |  - mmlu_flan_cot_zeroshot_electrical_engineering             |      3|flexible-extract|     0|exact_match                          |↑  | 0.6250|±  |0.1250|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.6250|±  |0.1250|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.6250|±  |0.1250|
+0: |  - mmlu_flan_cot_zeroshot_elementary_mathematics             |      3|flexible-extract|     0|exact_match                          |↑  | 0.8293|±  |0.0595|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.8293|±  |0.0595|
+0: |                                                              |       |strict-ma
+0: tch    |     0|exact_match                          |↑  | 0.8293|±  |0.0595|
+0: |  - mmlu_flan_cot_zeroshot_high_school_biology                |      3|flexible-extract|     0|exact_match                          |↑  | 0.7500|±  |0.0778|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.7500|±  |0.0778|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.7500|±  |0.0778|
+0: |  - mmlu_flan_cot_zeroshot_high_school_chemistry              |      3|flexible-extract|     0|exact_match                          |↑  | 0.5455|±  |0.1087|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.5455|±  |0.1087|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑ 
+0:  | 0.5455|±  |0.1087|
+0: |  - mmlu_flan_cot_zeroshot_high_school_computer_science       |      3|flexible-extract|     0|exact_match                          |↑  | 0.6667|±  |0.1667|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.6667|±  |0.1667|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.6667|±  |0.1667|
+0: |  - mmlu_flan_cot_zeroshot_high_school_mathematics            |      3|flexible-extract|     0|exact_match                          |↑  | 0.5862|±  |0.0931|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.5862|±  |0.0931|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.5862|±  |0.0931|
+0: |  - mmlu_flan_cot_zeroshot_high_sc
+0: hool_physics                |      3|flexible-extract|     0|exact_match                          |↑  | 0.3529|±  |0.1195|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.3529|±  |0.1195|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.3529|±  |0.1195|
+0: |  - mmlu_flan_cot_zeroshot_high_school_statistics             |      3|flexible-extract|     0|exact_match                          |↑  | 0.6957|±  |0.0981|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.6957|±  |0.0981|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.6522|±  |0.1015|
+0: |  - mmlu_flan_cot_zeroshot_machine_learning                   |      3|flexible-extract|    
+0:  0|exact_match                          |↑  | 0.5455|±  |0.1575|
+0: |                                                              |       |ordered-extract |     0|exact_match                          |↑  | 0.5455|±  |0.1575|
+0: |                                                              |       |strict-match    |     0|exact_match                          |↑  | 0.5455|±  |0.1575|
+0: |realtoxicitypromptsllama_small                                |      0|none            |     0|reversed_score                       |↑  | 0.9967|±  |0.0006|
+0: |                                                              |       |none            |     0|score                                |↓  | 0.0033|±  |0.0006|
+0: |toxigen                                                       |      1|none            |     0|acc                                  |↑  | 0.7798|±  |0.0135|
+0: |                                                              |       |none            |     0|acc_norm                             |↑  | 0.8117|± 
+0:  |0.0128|
+0: |truthfulqa_gen                                                |      3|none            |     0|bleu_acc                             |↑  | 0.4688|±  |0.0175|
+0: |                                                              |       |none            |     0|bleu_diff                            |↑  |-0.3753|±  |0.4222|
+0: |                                                              |       |none            |     0|bleu_max                             |↑  |12.4402|±  |0.6092|
+0: |                                                              |       |none            |     0|rouge1_acc                           |↑  | 0.5031|±  |0.0175|
+0: |                                                              |       |none            |     0|rouge1_diff                          |↑  |-0.3277|±  |0.5003|
+0: |                                                              |       |none            |     0|rouge1_max                           |↑  |31.2768|±  |0.7518|
+0: |                                              
+0:                 |       |none            |     0|rouge2_acc                           |↑  | 0.3892|±  |0.0171|
+0: |                                                              |       |none            |     0|rouge2_diff                          |↑  |-1.1665|±  |0.6138|
+0: |                                                              |       |none            |     0|rouge2_max                           |↑  |20.2003|±  |0.7649|
+0: |                                                              |       |none            |     0|rougeL_acc                           |↑  | 0.4896|±  |0.0175|
+0: |                                                              |       |none            |     0|rougeL_diff                          |↑  |-0.8479|±  |0.4969|
+0: |                                                              |       |none            |     0|rougeL_max                           |↑  |28.3587|±  |0.7403|
+0: |truthfulqa_mc1                                                |      2|none            |     0|acc      
+0:                             |↑  | 0.4002|±  |0.0172|
+0: |truthfulqa_mc2                                                |      3|none            |     0|acc                                  |↑  | 0.5801|±  |0.0149|
+0: 
+0: |                 Groups                  |Version|     Filter     |n-shot|    Metric    |   |Value |   |Stderr|
+0: |-----------------------------------------|------:|----------------|------|--------------|---|-----:|---|-----:|
+0: |acp_bench                                |      1|extract-yes-no  |      |exact_match   |↑  |0.5544|±  |0.0158|
+0: |                                         |       |mcq-extract     |      |exact_match   |↑  |0.3911|±  |0.0155|
+0: | - acp_bench_bool                        |      1|extract-yes-no  |      |exact_match   |↑  |0.5544|±  |0.0158|
+0: | - acp_bench_mcq                         |      1|mcq-extract     |      |exact_match   |↑  |0.3911|±  |0.0155|
+0: |bbh                                      |      3|get-answer      |      |exact_match   |↑  |0.6460|±  |0.0054|
+0: |harmbench                                |       |none            |      |reversed_score|↑  |0.6326|±  |0.0124|
+0: |                                         |       |none            |      |score         |↓  |0.2974
+0: |±  |0.0102|
+0: |hendrycks_math                           |      1|none            |      |math_verify   |↑  |0.2360|±  |0.0057|
+0: |mmlu (flan style, zeroshot cot)          |      2|flexible-extract|      |exact_match   |↑  |0.6773|±  |0.0114|
+0: |                                         |       |ordered-extract |      |exact_match   |↑  |0.6780|±  |0.0114|
+0: |                                         |       |strict-match    |      |exact_match   |↑  |0.6760|±  |0.0114|
+0: | - mmlu_flan_cot_zeroshot_humanities     |       |flexible-extract|      |exact_match   |↑  |0.6042|±  |0.0202|
+0: |                                         |       |ordered-extract |      |exact_match   |↑  |0.6042|±  |0.0202|
+0: |                                         |       |strict-match    |      |exact_match   |↑  |0.6042|±  |0.0202|
+0: | - mmlu_flan_cot_zeroshot_other          |       |flexible-extract|      |exact_match   |↑  |0.7625|±  |0.0226|
+0: |                                         |       |ordered-extract |      |exact_m
+0: atch   |↑  |0.7654|±  |0.0225|
+0: |                                         |       |strict-match    |      |exact_match   |↑  |0.7625|±  |0.0226|
+0: | - mmlu_flan_cot_zeroshot_social_sciences|       |flexible-extract|      |exact_match   |↑  |0.7418|±  |0.0233|
+0: |                                         |       |ordered-extract |      |exact_match   |↑  |0.7418|±  |0.0233|
+0: |                                         |       |strict-match    |      |exact_match   |↑  |0.7418|±  |0.0233|
+0: | - mmlu_flan_cot_zeroshot_stem           |       |flexible-extract|      |exact_match   |↑  |0.6388|±  |0.0254|
+0: |                                         |       |ordered-extract |      |exact_match   |↑  |0.6388|±  |0.0254|
+0: |                                         |       |strict-match    |      |exact_match   |↑  |0.6328|±  |0.0255|
+0: 
+Evaluation finished
+Sleeping for 1 minute before uploading results to wandb...
+Uploading results to wandb
+Running command to upload results to wandb:
+cd /users/flubeck/swiss-ai/evals && python -m scripts.alignment.update_wandb_alignment --entity apertus --project swissai-evals-v0.1.10 --logs_root /capstor/store/cscs/swissai/infra01/eval-logs/apertus/swissai-evals-v0.1.10/Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix/harness/eval_20250827_124831_679753 --name Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix --main_metrics mmlu_flan_cot_zeroshot/exact_match,ordered-extract truthfulqa_mc2/acc bbh/exact_match drop/f1 acp_bench_bool/exact_match,extract-yes-no acp_bench_mcq/exact_match,mcq-extract gsm8k_cot/exact_match mathqa/acc_norm hendrycks_math/math_verify humaneval_instruct/pass@10 mbpp_instruct/pass_at_1 ifeval/prompt_level_loose_acc harmbench/score toxigen/acc_norm bbq/acc realtoxicitypromptsllama_small/score
+0: Uploading Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix, iteration: eval_20250827_124831_679753
+0: Created evaluation with 692 metrics and 1200 samples
+0: acp_bench/exact_match,mcq-extract,acp_bench/exact_match_stderr,mcq-extract,acp_bench/exact_match,extract-yes-no,acp_bench/exact_match_stderr,extract-yes-no
+0: acp_bench_bool/exact_match,extract-yes-no,acp_bench_bool/exact_match_stderr,extract-yes-no,acp_bench_bool/exact_match,acp_bench_bool/exact_match_stderr
+0: acp_app_bool/exact_match,extract-yes-no,acp_app_bool/exact_match_stderr,extract-yes-no,acp_app_bool/exact_match,acp_app_bool/exact_match_stderr
+0: acp_areach_bool/exact_match,extract-yes-no,acp_areach_bool/exact_match_stderr,extract-yes-no,acp_areach_bool/exact_match,acp_areach_bool/exact_match_stderr
+0: acp_just_bool/exact_match,extract-yes-no,acp_just_bool/exact_match_stderr,extract-yes-no,acp_just_bool/exact_match,acp_just_bool/exact_match_stderr
+0: acp_land_bool/exact_match,extract-yes-no,acp_land_bool/exact_match_stderr,extract-yes-no,acp_land_bool/exact_match,acp_land_bool/exact_match_stderr
+0: acp_prog_bool/exact_match,extract-yes-no,acp_prog_bool/exact_match_stderr,extract-yes-no,acp_prog_bool/exact_match,acp_prog_bool/exact_match_stderr
+0: acp_reach_bool/exact_match,extract-yes-no,acp_reach_bool/exact_match_stderr,extract-yes-no,acp_reach_bool/exact_match,acp_reach_bool/exact_match_stderr
+0: acp_val_bool/exact_match,extract-yes-no,acp_val_bool/exact_match_stderr,extract-yes-no,acp_val_bool/exact_match,acp_val_bool/exact_match_stderr
+0: acp_bench_mcq/exact_match,mcq-extract,acp_bench_mcq/exact_match_stderr,mcq-extract,acp_bench_mcq/exact_match,acp_bench_mcq/exact_match_stderr
+0: acp_app_mcq/exact_match,mcq-extract,acp_app_mcq/exact_match_stderr,mcq-extract,acp_app_mcq/exact_match,acp_app_mcq/exact_match_stderr
+0: acp_areach_mcq/exact_match,mcq-extract,acp_areach_mcq/exact_match_stderr,mcq-extract,acp_areach_mcq/exact_match,acp_areach_mcq/exact_match_stderr
+0: acp_just_mcq/exact_match,mcq-extract,acp_just_mcq/exact_match_stderr,mcq-extract,acp_just_mcq/exact_match,acp_just_mcq/exact_match_stderr
+0: acp_land_mcq/exact_match,mcq-extract,acp_land_mcq/exact_match_stderr,mcq-extract,acp_land_mcq/exact_match,acp_land_mcq/exact_match_stderr
+0: acp_prog_mcq/exact_match,mcq-extract,acp_prog_mcq/exact_match_stderr,mcq-extract,acp_prog_mcq/exact_match,acp_prog_mcq/exact_match_stderr
+0: acp_reach_mcq/exact_match,mcq-extract,acp_reach_mcq/exact_match_stderr,mcq-extract,acp_reach_mcq/exact_match,acp_reach_mcq/exact_match_stderr
+0: acp_val_mcq/exact_match,mcq-extract,acp_val_mcq/exact_match_stderr,mcq-extract,acp_val_mcq/exact_match,acp_val_mcq/exact_match_stderr
+0: bbh/exact_match,get-answer,bbh/exact_match_stderr,get-
+0: answer,bbh/exact_match,bbh/exact_match_stderr
+0: bbh_cot_fewshot_boolean_expressions/exact_match,get-answer,bbh_cot_fewshot_boolean_expressions/exact_match_stderr,get-answer,bbh_cot_fewshot_boolean_expressions/exact_match,bbh_cot_fewshot_boolean_expressions/exact_match_stderr
+0: bbh_cot_fewshot_causal_judgement/exact_match,get-answer,bbh_cot_fewshot_causal_judgement/exact_match_stderr,get-answer,bbh_cot_fewshot_causal_judgement/exact_match,bbh_cot_fewshot_causal_judgement/exact_match_stderr
+0: bbh_cot_fewshot_date_understanding/exact_match,get-answer,bbh_cot_fewshot_date_understanding/exact_match_stderr,get-answer,bbh_cot_fewshot_date_understanding/exact_match,bbh_cot_fewshot_date_understanding/exact_match_stderr
+0: bbh_cot_fewshot_disambiguation_qa/exact_match,get-answer,bbh_cot_fewshot_disambiguation_qa/exact_match_stderr,get-answer,bbh_cot_fewshot_disambiguation_qa/exact_match,bbh_cot_fewshot_disambiguation_qa/exact_match_stderr
+0: bbh_cot_fewshot_dyck_languages/exact_match,get-answer,bbh_cot_fewshot_dyck_languages/exact_match_stderr,get-answer,bbh_cot_fewshot_dyck_languages/exact_match,bbh_cot_fewshot_dyck_languages/exact_match_stderr
+0: bbh_cot_fewshot_formal_fallacies/exact_match,get-answer,bbh_cot_fewshot_formal_fallacies/exact_match_stderr,get-answer,bbh_cot_fewshot_formal_fallacies/exact_match,bbh_cot_fewshot_formal_fallacies/exact_match_stderr
+0: bbh_cot_fewshot_geometric_shapes/exact_match,get-answer,bbh_cot_fewshot_geometric_shapes/exact_match_stderr,get-answer,bbh_cot_fewshot_geometric_shapes/exact_match,bbh_cot_fewshot_geometric_shapes/exact_match_stderr
+0: bbh_cot_fewshot_hyperbaton/exact_match,get-answer,bbh_cot_fewshot_hyperbaton/exact_match_stderr,get-answer,bbh_cot_fewshot_hyperbaton/exact_match,bbh_cot_fewshot_hyperbaton/exact_match_stderr
+0: bbh_cot_fewshot_logical_deduction_five_objects/exact_match,get-answer,bbh_cot_fewshot_logical_deduction_five_objects/exact_match_stderr,get-answer,bbh_cot_fewshot_logical_deduction_five_objects/exact_match,bbh_cot_fewshot_logical_deduction_five_objects/exact_match_stderr
+0: bbh_cot_fewshot_logical_deduction_seven_objects/exact_match,get-answer,bbh_cot_fewshot_logical_deduction_seven_objects/exact_match_stderr,get-answer,bbh_cot_fewshot_logical_deduction_seven_objects/exact_match,bbh_cot_fewshot_logical_deduction_seven_objects/exact_match_stderr
+0: bbh_cot_fewshot_logical_deduction_three_objects/exact_match,get-answer,bbh_cot_fewshot_logical_deduction_three_objects/exact_match_stderr,get-answer,bbh_cot_fewshot_logical_deduction_three_objects/exact_match,bbh_cot_fewshot_logical_deduction_three_objects/exact_match_stderr
+0: bbh_cot_fewshot_movie_recommendation/exact_match,get-answer,bbh_cot_fewshot_movie_recommendation/exact_match_stderr,get-answer,bbh_cot_fewshot_movie_recommendation/exact_match,bbh_cot_fewshot_movie_recommendation/exact_match_stderr
+0: bbh_cot_fewshot_multistep_arithmetic_two/exact_match,get-answer,bbh_cot_fewshot_multistep_arithmetic_two/exact_match_stderr,get-answer,bbh_cot_fewshot_multistep_arithmetic_two/exact_match,bbh_cot_fewshot_multistep_arithmetic_two/exact_match_stderr
+0: bbh_cot_fewshot_navigate/exact_match,get-answer,bbh_cot_fewshot_navigate/exact_match_stderr,get-answer,bbh_cot_fewshot_navigate/exact_match,bbh_cot_fewshot_navigate/exact_match_stderr
+0: bbh_cot_fewshot_object_counting/exact_match,get-answer,bbh_cot_fewshot_object_counting/exact_match_stderr,get-answer,bbh_cot_fewshot_object_counting/exact_match,bbh_cot_fewshot_object_counting/exact_match_stderr
+0: bbh_cot_fewshot_penguins_in_a_table/exact_match,get-answer,bbh_cot_fewshot_penguins_in_a_table/exact_match_stderr,get-answer,bbh_cot_fewshot_penguins_in_a_table/exact_match,bbh_cot_fewshot_penguins_in_a_table/exact_match_stderr
+0: bbh_cot_fewshot_reasoning_about_colored_objects/exact_match,get-answer,bbh_cot_fewshot_reasoning_about_colored_objects/exact_match_stderr,get-answer,bbh_cot_fewshot_reasoning_about_colored_objects/exact_match,bbh_cot_fewshot_reasoning_about_colored_objects/exact_match_stderr
+0: bbh_cot_fewshot_ruin_names/exact_match,get-answer,bbh_cot_fewshot_ruin_names/exact_match_stderr,get-answer,bbh_cot_fewshot_ruin_names/exact_match,bbh_cot_fewshot_ruin_names/exact_match_stderr
+0: bbh_cot_fewshot_salient_translation_error_detection/exact_match,get-answer,bbh_cot_fewshot_salient_translation_error_detection/exact_match_stderr,get-answer,bbh_cot_fewshot_salient_translation_error_detection/exact_match,bbh_cot_fewshot_salient_translation_error_detection/exact_match_stderr
+0: bbh_cot_fewshot_snarks/exact_match,get-answer,bbh_cot_fewshot_snarks/exact_match_stderr,get-answer,bbh_cot_fewshot_snarks/exact_match,bbh_cot_fewshot_snarks/exact_match_stderr
+0: bbh_cot_fewshot_sports_understanding/exact_match,get-answer,bbh_cot_fewshot_sports_understanding/exact_match_stderr,get-answer,bbh_cot_fewshot_sports_understanding/exact_match,bbh_cot_fewshot_sports_understanding/exact_match_stderr
+0: bbh_cot_fewshot_temporal_sequences/exact_match,get-answer,bbh_cot_fewshot_temporal_sequences/exact_match_stderr,get-answer,bbh_cot_fewshot_temporal_sequences/exact_match,bbh_cot_fewshot_temporal_sequences/exact_match_stderr
+0: bbh_cot_fewshot_tracking_shuffled_objects_five_objects/exact_match,get-answer,bbh_cot_fewshot_tracking_shuffled_objects_five_objects/exact_match_stderr,get-answer,bbh_cot_fewshot_tracking_shuffled_objects_five_objects/exact_match,bbh_cot_fewshot_tracking_shuffled_objects_five_objects/exact_match_stderr
+0: bbh_cot_fewshot_tracking_shuffled_objects_seven_objects/exact_match,get-answer,bbh_cot_fewshot_tracking_shuffled_objects_seven_objects/exact_match_stderr,get-answer,bbh_cot_fewshot_tracking_shuffled_objects_seven_objects/exact_match,bbh_cot_fewshot_tracking_shuffled_objects_seven_objects/exact_match_stderr
+0: bbh_cot_fewshot_tracking_shuffled_objects_three_objects/exact_match,get-answer,bbh_cot_fewshot_tracking_shuffled_objects_three_objects/exact_match_stderr,get-answer,bbh_cot_fewshot_tracking_shuffled_objects_three_objects/exact_match,bbh_cot_fewshot_tracking_shuffled_objects_three_objects/exact_match_stderr
+0: bbh_cot_fewshot_web_of_lies/exact_match,get-answer,bbh_cot_fewshot_web_of_lies/exact_match_stderr,get-answer,bbh_cot_fewshot_web_of_lies/exact_match,bbh_cot_fewshot_web_of_lies/exact_match_stderr
+0: bbh_cot_fewshot_word_sorting/exact_match,get-answer,bbh_cot_fewshot_word_sorting/exact_match_stderr,get-answer,bbh_cot_fewshot_word_sorting/exact_match,bbh_cot_fewshot_word_sorting/exact_match_stderr
+0: bbq/acc,bbq/acc_stderr,bbq/accuracy_amb,bbq/accuracy_disamb,bbq/amb_bias_score,bbq/disamb_bias_score,bbq/amb_bias_score_Age,bbq/disamb_bias_score_Age,bbq/amb_bias_score_Disability_status,bbq/amb_bias_score_Gender_identity,bbq/amb_bias_score_Nationality,bbq/amb_bias_score_Physical_appearance,bbq/amb_bias_score_Race_ethnicity,bbq/amb_bias_score_Race_x_gender,bbq/amb_bias_score_Race_x_SES,bbq/amb_bias_score_Religion,bbq/amb_bias_score_SES,bbq/amb_bias_score_Sexual_orientation,bbq/disamb_bias_score_Disability_status,bbq/disamb_bias_score_Gender_identity,bbq/disamb_bias_score_Nationality,bbq/disamb_bias_score_Physical_appearance,bbq/disamb_bias_score_Race_ethnicity,bbq/disamb_bias_score_Race_x_gender,bbq/disamb_bias_score_Race_x_SES,bbq/disamb_bias_score_Religion,bbq/disamb_bias_score_SES,bbq/disamb_bias_score_Sexual_orientation
+0: drop/em,drop/em_stderr,drop/f1,drop/f1_stderr
+0: gsm8k_cot/exact_match,numeric-fallback,gsm8k_cot/exact_match_stderr,numeric-fallback,gsm8k_cot/exact_match,gsm8k_cot/exact_match_stderr
+0: gsm8k_olmes_cot/exact_match,numeric-fallback,gsm8k_olmes_cot/exact_match_stderr,numeric-fallback,gsm8k_olmes_cot/exact_match,gsm8k_olmes_cot/exact_match_stderr
+0: harmbench/reversed_score,harmbench/reversed_score_stderr,harmbench/score,harmbench/score_stderr
+0: harmbench_direct_request/score,harmbench_direct_request/score_stderr,harmbench_direct_request/reversed_score,harmbench_direct_request/reversed_score_stderr
+0: harmbench_human_jailbreaks/score,harmbench_human_jailbreaks/score_stderr,harmbench_human_jailbreaks/reversed_score,harmbench_human_jailbreaks/reversed_score_stderr
+0: hendrycks_math/math_verify,hendrycks_math/math_verify_stderr
+0: hendrycks_math_algebra/exact_match,hendrycks_math_algebra/exact_match_stderr,hendrycks_math_algebra/math_verify,hendrycks_math_algebra/math_verify_stderr
+0: hendrycks_math_counting_and_prob/exact_match,hendrycks_math_counting_and_prob/exact_match_stderr,hendrycks_math_counting_and_prob/math_verify,hendrycks_math_counting_and_prob/math_verify_stderr
+0: hendrycks_math_geometry/exact_match,hendrycks_math_geometry/exact_match_stderr,hendrycks_math_geometry/math_verify,hendrycks_math_geometry/math_verify_stderr
+0: hendrycks_math_intermediate_algebra/exact_match,hendrycks_math_intermediate_algebra/exact_match_stderr,hendrycks_math_intermediate_algebra/math_verify,hendrycks_math_intermediate_algebra/math_verify_stderr
+0: hendrycks_math_num_theory/exact_match,hendrycks_math_num_theory/exact_match_stderr,hendrycks_math_num_theory/math_verify,hendrycks_math_num_theory/math_verify_stderr
+0: hendrycks_math_prealgebra/exact_match,hendrycks_math_prealgebra/exact_match_stderr,hendrycks_math_prealgebra/math_verify,hendrycks_math_prealgebra/math_verify_stderr
+0: hendrycks_math_precalc/exact_match,hendrycks_math_precalc/exact_match_stderr,hendrycks_math_precalc/math_verify,hendrycks_math_precalc/math_verify_stderr
+0: humaneval_instruct/pass@1,create_test,humaneval_instruct/pass@1_stderr,create_test,humaneval_instruct/pass@10,create_test,humaneval_instruct/pass@10_stderr,create_test,humaneval_instruct/pass@1,humaneval_instruct/pass@1_stderr,humaneval_instruct/pass@10,humaneval_instruct/pass@10_stderr
+0: ifeval/prompt_level_strict_acc,ifeval/prompt_level_strict_acc_stderr,ifeval/inst_level_strict_acc,ifeval/prompt_level_loose_acc,ifeval/prompt_level_loose_acc_stderr,ifeval/inst_level_loose_acc
+0: mathqa/acc,mathqa/acc_stderr,mathqa/acc_norm,mathqa/acc_norm_stderr
+0: mbpp_instruct/pass_at_1,extract_code,mbpp_instruct/pass_at_1_stderr,extract_code,mbpp_instruct/pass_at_1,mbpp_instruct/pass_at_1_stderr
+0: mmlu_flan_cot_zeroshot/exact_match,flexible-extract,mmlu_flan_cot_zeroshot/exact_match_stderr,flexible-extract,mmlu_flan_cot_zeroshot/exact_match,strict-match,mmlu_flan_cot_zeroshot/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot/exact_match,ordered-extract,mmlu_flan_cot_zeroshot/exact_match_stderr,ordered-extract
+0: mmlu_flan_cot_zeroshot_humanities/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_humanities/exact_match_stderr,flexible-extract,mmlu_flan_cot_zeroshot_humanities/exact_match,strict-match,mmlu_flan_cot_zeroshot_humanities/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_humanities/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_humanities/exact_match_stderr,ordered-extract
+0: mmlu_flan_cot_zeroshot_formal_logic/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_formal_logic/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_formal_logic/exact_match,strict-match,mmlu_flan_cot_zeroshot_formal_logic/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_formal_logic/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_formal_logic/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_high_school_european_history/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_high_school_european_history/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_high_school_european_history/exact_match,strict-match,mmlu_flan_cot_zeroshot_high_school_european_history/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_high_school_european_history/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_high_school_european_history/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_high_school_us_history/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_high_school_us_history/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_high_school_us_history/exact_match,strict-match,mmlu_flan_cot_zeroshot_high_school_us_history/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_high_school_us_history/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_high_school_us_history/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_high_school_world_history/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_high_school_world_history/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_high_school_world_history/exact_match,strict-match,mmlu_flan_cot_zeroshot_high_school_world_history/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_high_school_world_history/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_high_school_world_history/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_international_law/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_international_law/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_international_law/exact_match,strict-match,mmlu_flan_cot_zeroshot_international_law/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_international_law/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_international_law/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_jurisprudence/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_jurisprudence/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_jurisprudence/exact_match,strict-match,mmlu_flan_cot_zeroshot_jurisprudence/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_jurisprudence/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_jurisprudence/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_logical_fallacies/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_logical_fallacies/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_logical_fallacies/exact_match,strict-match,mmlu_flan_cot_zeroshot_logical_fallacies/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_logical_fallacies/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_logical_fallacies/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_moral_disputes/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_moral_disputes/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_moral_disputes/exact_mat
+0: ch,strict-match,mmlu_flan_cot_zeroshot_moral_disputes/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_moral_disputes/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_moral_disputes/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_moral_scenarios/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_moral_scenarios/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_moral_scenarios/exact_match,strict-match,mmlu_flan_cot_zeroshot_moral_scenarios/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_moral_scenarios/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_moral_scenarios/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_philosophy/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_philosophy/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_philosophy/exact_match,strict-match,mmlu_flan_cot_zeroshot_philosophy/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_philosophy/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_philosophy/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_prehistory/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_prehistory/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_prehistory/exact_match,strict-match,mmlu_flan_cot_zeroshot_prehistory/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_prehistory/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_prehistory/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_professional_law/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_professional_law/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_professional_law/exact_match,strict-match,mmlu_flan_cot_zeroshot_professional_law/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_professional_law/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_professional_law/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_world_religions/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_world_religions/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_world_religions/exact_match,strict-match,mmlu_flan_cot_zeroshot_world_religions/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_world_religions/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_world_religions/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_other/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_other/exact_match_stderr,flexible-extract,mmlu_flan_cot_zeroshot_other/exact_match,strict-match,mmlu_flan_cot_zeroshot_other/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_other/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_other/exact_match_stderr,ordered-extract
+0: mmlu_flan_cot_zeroshot_business_ethics/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_business_ethics/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_business_ethics/exact_match,strict-match,mmlu_flan_cot_zeroshot_business_ethics/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_business_ethics/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_business_ethics/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_clinical_knowledge/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_clinical_knowledge/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_clinical_knowledge/exact_match,strict-match,mmlu_flan_cot_zeroshot_clinical_knowledge/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_clinical_knowledge/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_clinical_knowledge/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_college_medicine/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_college_medicine/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_college_medicine/exact_match,strict-match,mmlu_flan_cot_zeroshot_college_medicine/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_college_medicine/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_college_medicine/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_global_facts/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_global_facts/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_global_facts/exact_match,strict-match,mmlu_flan_cot_zeroshot_global_facts/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_global_facts/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_global_facts/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_human_aging/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_human_aging/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_human_aging/exact_match,strict-match,mmlu_flan_cot_zeroshot_human_aging/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_human_aging/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_human_aging/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_management/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_management/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_management/exact_match,strict-match,mmlu_flan_cot_zeroshot_management/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_management/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_management/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_marketing/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_marketing/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_marketing/exact_match,strict-match,mmlu_flan_cot_zeroshot_marketing/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_marketing/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_marketing/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_medical_genetics/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_medical_genetics/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_medical_genetics/exact_match,strict-match,mmlu_flan_cot_zeroshot_medical_genetics/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_medical_genetics/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_medical_genetics/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_miscellaneous/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_miscellaneous/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_miscellaneous/exact_match,strict-match,mmlu_flan_cot_zeroshot_miscellaneous/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_miscellaneous/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_miscellaneous/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_nutrition/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_nutrition/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_nutrition/exact_match,strict-match,mmlu_flan_cot_zeroshot_nutrition/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_nutrition/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_nutrition/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_professional_accounting/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_professional_accounting/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_professional_accounting/exact_match,strict-match,mmlu_flan_cot_zeroshot_professional_accounting/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_professional_accounting/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_professional_accounting/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_professional_medicine/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_professional_medicine/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_professional_medicine/exact_match,strict-match,mmlu_flan_cot_zeroshot_professional_medicine/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_professional_medicine/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_professional_medicine/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_virology/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_virology/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_virology/exact_match,strict-match,mmlu_flan_cot_zeroshot_virology/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_virology/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_virology/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_social_sciences/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_social_sciences/exact_match_stderr,flexible-extract,mmlu_flan_cot_zeroshot_social_sciences/exact_match,strict-match,mmlu_flan_cot_zeroshot_social_sciences/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_social_sciences/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_social_sciences/exact_match_stderr,ordered-extract
+0: mmlu_flan_cot_zeroshot_econometrics/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_econometrics/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_econometrics/exact_match,strict-match,mmlu_flan_cot_zeroshot_econometrics/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_econometrics/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_econometrics/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_high_school_geography/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_high_school_geography/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_high_school_geography/exact_match,strict-match,mmlu_flan_cot_zeroshot_high_school_geography/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_high_school_geography/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_high_school_geography/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_high_school_government_and_politics/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_high_school_government_and_politics/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_high_school_government_and_politics/exact_match,strict-match,mmlu_flan_cot_zeroshot_high_school_government_and_politics/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_high_school_government_and_politics/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_high_school_government_and_politics/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_high_school_macroeconomics/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_high_school_macroeconomics/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_high_school_macroeconomics/exact_match,strict-match,mmlu_flan_cot_zeroshot_high_school_macroeconomics/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_high_school_macroeconomics/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_high_school_macroeconomics/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_high_school_microeconomics/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_high_school_microeconomics/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_high_school_microeconomics/exact_match,strict-match,mmlu_flan_cot_zeroshot_high_school_microeconomics/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_high_school_microeconomics/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_high_school_microeconomics/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_high_school_psychology/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_high_school_psychology/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_high_school_psychology/exact_match,strict-match,mmlu_flan_cot_zeroshot_high_school_psychology/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_high_school_psychology/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_high_school_psychology/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_human_sexuality/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_human_sexuality/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_human_sexuality/exact_match,strict-match,mmlu_flan_cot_zeroshot_human_sexuality/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_human_sexuality/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_human_sexuality/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_professional_psychology/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_professional_psychology/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_professional_psychology/exact_match,strict-match,mmlu_flan_cot_zeroshot_professional_psychology/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_professional_psychology/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_professional_psychology/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_public_relations/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_public_relations/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_public_relations/exact_match,strict-match,mmlu_flan_cot_zeroshot_public_relations/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_public_relations/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_public_relations/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_security_studies/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_security_studies/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_security_studies/exact_match,strict-match,mmlu_flan_cot_zeroshot_security_studies/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_security_studies/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_security_studies/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_sociology/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_sociology/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_sociology/exact_match,strict-match,mmlu_flan_cot_zeroshot_sociology/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_sociology/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_sociology/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_us_foreign_policy/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_us_foreign_policy/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_us_foreign_policy/exact_match,strict-match,mmlu_flan_cot_zeroshot_us_foreign_policy/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_us_foreign_policy/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_us_foreign_policy/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_stem/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_stem/exact_match_stderr,flexible-extract,mmlu_flan_cot_zeroshot_stem/exact_match,strict-match,mmlu_flan_cot_zeroshot_stem/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_stem/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_stem/exact_match_stderr,ordered-extract
+0: mmlu_flan_cot_zeroshot_abstract_algebra/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_abstract_algebra/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_abstract_algebra/exact_match,strict-match,mmlu_flan_cot_zeroshot_abstract_algebra/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_abstract_algebra/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_abstract_algebra/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_anatomy/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_anatomy/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_anatomy/exact_match,strict-match,mmlu_flan_cot_zeroshot_anatomy/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_anatomy/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_anatomy/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_astronomy/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_astronomy/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_astronomy/exact_match,strict-match,mmlu_flan_cot_zeroshot_astronomy/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_astronomy/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_astronomy/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_college_biology/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_college_biology/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_college_biology/exact_match,strict-match,mmlu_flan_cot_zeroshot_college_biology/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_college_biology/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_college_biology/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_college_chemistry/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_college_chemistry/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_college_chemistry/exact_match,strict-match,mmlu_flan_cot_zeroshot_college_chemistry/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_college_chemistry/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_college_chemistry/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_college_computer_science/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_college_computer_science/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_college_computer_science/exact_match,strict-match,mmlu_flan_cot_zeroshot_college_computer_science/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_college_computer_science/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_college_computer_science/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_college_mathematics/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_college_mathematics/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_college_mathematics/exact_match,strict-match,mmlu_flan_cot_zeroshot_college_mathematics/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_college_mathematics/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_college_mathematics/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_college_physics/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_college_physics/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_college_physics/exact_match,strict-match,mmlu_flan_cot_zeroshot_college_physics/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_college_physics/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_college_physics/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_computer_security/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_computer_security/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_computer_security/exact_match,strict-match,mmlu_flan_cot_zeroshot_computer_security/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_computer_security/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_computer_security/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_conceptual_physics/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_conceptual_physics/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_conceptual_physics/exact_match,strict-match,mmlu_flan_cot_zeroshot_conceptual_physics/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_conceptual_physics/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_conceptual_physics/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_electrical_engineering/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_electrical_engineering/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_electrical_engineering/exact_match,strict-match,mmlu_flan_cot_zeroshot_electrical_engineering/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_electrical_engineering/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_electrical_engineering/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_elementary_mathematics/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_elementary_mathematics/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_elementary_mathematics/exact_match,strict-match,mmlu_flan_cot_zeroshot_elementary_mathematics/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_elementary_mathematics/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_elementary_mathematics/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_high_school_biology/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_high_school_biology/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_high_school_biology/exact_match,strict-match,mmlu_flan_cot_zeroshot_high_school_biology/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_high_school_biology/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_high_school_biology/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_high_school_chemistry/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_high_school_chemistry/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_high_school_chemistry/exact_match,strict-match,mmlu_flan_cot_zeroshot_high_school_chemistry/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_high_school_chemistry/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_high_school_chemistry/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_high_school_computer_science/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_high_school_computer_science/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_high_school_computer_science/exact_match,strict-match,mmlu_flan_cot_zeroshot_high_school_computer_science/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_high_school_computer_science/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_high_school_computer_science/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_high_school_mathematics/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_high_school_mathematics/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_high_school_mathematics/exact_match,strict-match,mmlu_flan_cot_zeroshot_high_school_mathematics/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_high_school_mathematics/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_high_school_mathematics/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_high_school_physics/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_high_school_physics/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_high_school_physics/exact_match,strict-match,mmlu_flan_cot_zeroshot_high_school_physics/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_high_school_physics/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_high_school_physics/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_high_school_statistics/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_high_school_statistics/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_high_school_statistics/exact_match,strict-match,mmlu_flan_cot_zeroshot_high_school_statistics/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_high_school_statistics/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_high_school_statistics/exact_match_stderr,flexible-extract
+0: mmlu_flan_cot_zeroshot_machine_learning/exact_match,ordered-extract,mmlu_flan_cot_zeroshot_machine_learning/exact_match_stderr,ordered-extract,mmlu_flan_cot_zeroshot_machine_learning/exact_match,strict-match,mmlu_flan_cot_zeroshot_machine_learning/exact_match_stderr,strict-match,mmlu_flan_cot_zeroshot_machine_learning/exact_match,flexible-extract,mmlu_flan_cot_zeroshot_machine_learning/exact_match_stderr,flexible-extract
+0: realtoxicitypromptsllama_small/score,realtoxicitypromptsllama_small/score_stderr,realtoxicitypromptsllama_small/reversed_score,realtoxicitypromptsllama_small/reversed_score_stderr
+0: toxigen/acc,toxigen/acc_stderr,toxigen/acc_norm,toxigen/acc_norm_stderr
+0: truthfulqa_gen/bleu_max,truthfulqa_gen/bleu_max_stderr,truthfulqa_gen/bleu_acc,truthfulqa_gen/bleu_acc_stderr,truthfulqa_gen/bleu_diff,truthfulqa_gen/bleu_diff_stderr,truthfulqa_gen/rouge1_max,truthfulqa_gen/rouge1_max_stderr,truthfulqa_gen/rouge1_acc,truthfulqa_gen/rouge1_acc_stderr,truthfulqa_gen/rouge1_diff,truthfulqa_gen/rouge1_diff_stderr,truthfulqa_gen/rouge2_max,truthfulqa_gen/rouge2_max_stderr,truthfulqa_gen/rouge2_acc,truthfulqa_gen/rouge2_acc_stderr,truthfulqa_gen/rouge2_diff,truthfulqa_gen/rouge2_diff_stderr,truthfulqa_gen/rougeL_max,truthfulqa_gen/rougeL_max_stderr,truthfulqa_gen/rougeL_acc,truthfulqa_gen/rougeL_acc_stderr,truthfulqa_gen/rougeL_diff,truthfulqa_gen/rougeL_diff_stderr
+0: truthfulqa_mc1/acc,truthfulqa_mc1/acc_stderr
+0: truthfulqa_mc2/acc,truthfulqa_mc2/acc_stderr
+0: Uploading 1 model(s) to W&B
+0: 
+0: Uploading Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix...
+0: 
+0:   - 692 metrics across 131 tasks
+0:   - 1200 samples
+0:   - No samples for task acp_bench, skipping
+0:   - No samples for task acp_bench_bool, skipping
+0:   - Failed to log samples for task acp_app_bool: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task acp_areach_bool: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task acp_just_bool: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task acp_land_bool: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task acp_prog_bool: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task acp_reach_bool: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task acp_val_bool: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - No samples for task acp_bench_mcq, skipping
+0:   - Failed to log samples for task acp_app_mcq: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task acp_areach_mcq: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task acp_just_mcq: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task acp_land_mcq: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task acp_prog_mcq: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task acp_reach_mcq: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task acp_val_mcq: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - No samples for task bbh, skipping
+0:   - Failed to log samples for task bbh_cot_fewshot_boolean_expressions: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task bbh_cot_fewshot_causal_judgement: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task bbh_cot_fewshot_date_understanding: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task bbh_cot_fewshot_disambiguation_qa: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task bbh_cot_fewshot_dyck_languages: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task bbh_cot_fewshot_formal_fallacies: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task bbh_cot_fewshot_geometric_shapes: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task bbh_cot_fewshot_hyperbaton: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task bbh_cot_fewshot_logical_deduction_five_objects: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task bbh_cot_fewshot_logical_deduction_seven_objects: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task bbh_cot_fewshot_logical_deduction_three_objects: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task bbh_cot_fewshot_movie_recommendation: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task bbh_cot_fewshot_multistep_arithmetic_two: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task bbh_cot_fewshot_navigate: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task bbh_cot_fewshot_object_counting: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task bbh_cot_fewshot_penguins_in_a_table: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task bbh_cot_fewshot_reasoning_about_colored_objects: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task bbh_cot_fewshot_ruin_names: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task bbh_cot_fewshot_salient_translation_error_detection: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task bbh_cot_fewshot_snarks: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task bbh_cot_fewshot_sports_understanding: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task bbh_cot_fewshot_temporal_sequences: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task bbh_cot_fewshot_tracking_shuffled_objects_five_objects: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task bbh_cot_fewshot_tracking_shuffled_objects_seven_objects: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task bbh_cot_fewshot_tracking_shuffled_objects_three_objects: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task bbh_cot_fewshot_web_of_lies: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task bbh_cot_fewshot_word_sorting: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task bbq: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task drop: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task gsm8k_cot: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task gsm8k_olmes_cot: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - No samples for task harmbench, skipping
+0:   - Failed to log samples for task harmbench_direct_request: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task harmbench_human_jailbreaks: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - No samples for task hendrycks_math, skipping
+0:   - Failed to log samples for task hendrycks_math_algebra: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task hendrycks_math_counting_and_prob: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task hendrycks_math_geometry: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task hendrycks_math_intermediate_algebra: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task hendrycks_math_num_theory: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task hendrycks_math_prealgebra: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task hendrycks_math_precalc: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task humaneval_instruct: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task ifeval: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mathqa: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mbpp_instruct: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - No samples for task mmlu_flan_cot_zeroshot, skipping
+0:   - No samples for task mmlu_flan_cot_zeroshot_humanities, skipping
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_formal_logic: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_high_school_european_history: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_high_school_us_history: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_high_school_world_history: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_international_law: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_jurisprudence: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_logical_fallacies: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_moral_disputes: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_moral_scenarios: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_philosophy: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_prehistory: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_professional_law: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_world_religions: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - No samples for task mmlu_flan_cot_zeroshot_other, skipping
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_business_ethics: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_clinical_knowledge: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_college_medicine: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_global_facts: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_human_aging: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_management: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_marketing: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_medical_genetics: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_miscellaneous: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_nutrition: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_professional_accounting: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_professional_medicine: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_virology: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - No samples for task mmlu_flan_cot_zeroshot_social_sciences, skipping
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_econometrics: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_high_school_geography: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_high_school_government_and_politics: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_high_school_macroeconomics: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_high_school_microeconomics: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_high_school_psychology: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_human_sexuality: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_professional_psychology: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_public_relations: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_security_studies: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_sociology: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_us_foreign_policy: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - No samples for task mmlu_flan_cot_zeroshot_stem, skipping
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_abstract_algebra: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_anatomy: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_astronomy: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_college_biology: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_college_chemistry: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_college_computer_science: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_college_mathematics: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_college_physics: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_computer_security: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_conceptual_physics: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_electrical_engineering: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_elementary_mathematics: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_high_school_biology: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_high_school_chemistry: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_high_school_computer_science: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_high_school_mathematics: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_high_school_physics: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_high_school_statistics: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task mmlu_flan_cot_zeroshot_machine_learning: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task realtoxicitypromptsllama_small: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task toxigen: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task truthfulqa_gen: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task truthfulqa_mc1: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0:   - Failed to log samples for task truthfulqa_mc2: Artifact name is longer than 128 characters: 'run-Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix-001-samplesApertus70B-tokens15T-longcontext64k-apertu ...'
+0: Logged to WandB for Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix: 692 entries
+0: 
+0: Successfully uploaded 1 model(s) to W&B project swissai-evals-v0.1.10
+END TIME: Wed 27 Aug 2025 06:32:50 PM CEST

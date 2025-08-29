@@ -14,3 +14,4 @@ harmbench
 realtoxicitypromptsllama_small
 toxigen
 bbq
+hellaswag

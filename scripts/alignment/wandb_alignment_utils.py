@@ -89,7 +89,7 @@ def find_all_eval_dirs(logs_root: Path, model_name: str) -> List[Path]:
     return sorted(harness_dirs, key=lambda x: x.name)
 
 
-def upload_multi_model_results(entity: str, project: str, model_evaluations: List[ModelEvaluation], main_metrics: List[str]):
+def upload_multi_model_results(entity: str, project: str, model_evaluations: List[ModelEvaluation], main_metrics: List[str], eval_duration: int):
     """Upload results from ModelEvaluation data structures to W&B, each as a separate run."""
     model_count = len(model_evaluations)
     print(f"Uploading {model_count} model(s) to W&B")
@@ -100,12 +100,12 @@ def upload_multi_model_results(entity: str, project: str, model_evaluations: Lis
         print(f"  - {model_eval.total_samples_count} samples")
         
         # Upload to W&B with structured samples
-        _upload_to_wandb_with_model_eval(entity, project, model_eval, main_metrics)
+        _upload_to_wandb_with_model_eval(entity, project, model_eval, main_metrics, eval_duration)
     
     print(f"\nSuccessfully uploaded {model_count} model(s) to W&B project {project}")
 
 
-def _upload_to_wandb_with_model_eval(entity: str, project: str, model_eval: ModelEvaluation, main_metrics: List[str]):
+def _upload_to_wandb_with_model_eval(entity: str, project: str, model_eval: ModelEvaluation, main_metrics: List[str], eval_duration: int):
     """Upload ModelEvaluation data to W&B with structured samples."""
     wandb.login()
     
@@ -126,9 +126,11 @@ def _upload_to_wandb_with_model_eval(entity: str, project: str, model_eval: Mode
         entity=entity,
         project=project,
         name=model_eval.model_name,
+        notes=f"Evaluation duration: {eval_duration} seconds"
     ) as run:
         run.log({"main_results": create_wandb_table(model_eval.model_name, main_log_data)})
         run.log(log_data)
+        run.log({"eval_duration": eval_duration})
         
         # Upload samples as a table directly from the structured data
         for task in model_eval.tasks:

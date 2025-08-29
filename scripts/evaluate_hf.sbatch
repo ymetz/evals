@@ -6,18 +6,21 @@
 #SBATCH --mem=460000
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
-#SBATCH --output=logs/%x_%j.out
-#SBATCH --error=logs/%x_%j.err
+#SBATCH --output=logs_include_v0111/%x_%j.out
+#SBATCH --error=logs_include_v0111/%x_%j.err
 #SBATCH --exclusive
 #SBATCH --partition=normal
 #SBATCH --time=11:59:00
-#SBATCH --exclude=nid005377
-#SBATCH --exclude=nid006513
-#SBATCH --exclude=nid006518
-#SBATCH --exclude=nid006512
-#SBATCH --exclude=nid006514
-#SBATCH --exclude=nid006517
-#SBATCH --exclude=nid006518
+#SBATCH --exclude=nid006784
+#SBATCH --exclude=nid007014
+#SBATCH --exclude=nid007127
+#SBATCH --exclude=nid007348
+#SBATCH --exclude=nid007449
+#SBATCH --exclude=nid007548
+#SBATCH --exclude=nid007587
+#SBATCH --exclude=nid006679
+#SBATCH --exclude=nid006975
+#SBATCH --exclude=nid007620
 
 # Aux functions.
 usage() {
@@ -171,23 +174,35 @@ INSTALL_CMD="pip install -v --no-cache-dir --no-build-isolation --no-deps --forc
 	math_verify \
 	\"antlr4-python3-runtime==4.11\" \
 	latex2sympy2_extended \
-    \"lm-eval[vllm] @ git+https://github.com/swiss-ai/lm-evaluation-harness.git@main\""
+    \"lm-eval[vllm] @ git+https://github.com/swiss-ai/lm-evaluation-harness.git@main\" "
+# \
+# && pip uninstall xielu -y"
 
 CMD="lm_eval --model_args=$COMMON_MODEL_ARGS ${COMMON_EVAL_ARGS[@]}"
 
 echo "Installation command: $INSTALL_CMD"
 echo "Final command: $CMD"
+
+# Start timing for lines 182-189
+echo "Starting timing for installation and evaluation..."
+START_TIME=$(date +%s)
+
 srun -ul --environment=./containers/env.toml bash -c " \
 	$INSTALL_CMD
     $CMD
 "
+
+# End timing and calculate duration
+END_TIME=$(date +%s)
+DURATION=$((END_TIME - START_TIME))
+echo "Time taken for installation and evaluation: ${DURATION} seconds ($(($DURATION / 60)) minutes and $(($DURATION % 60)) seconds)"
 
 # Goodbye.
 echo "Evaluation finished"
 echo "Sleeping for 1 minute before uploading results to wandb..."
 sleep 60
 echo "Uploading results to wandb"
-WANDB_CMD="cd $PWD && python -m scripts.alignment.update_wandb_alignment --entity $WANDB_ENTITY --project $WANDB_PROJECT --logs_root $HARNESS_EVAL_DIR --name $NAME --main_metrics $TABLE_METRICS"
+WANDB_CMD="cd $PWD && python -m scripts.alignment.update_wandb_alignment --entity $WANDB_ENTITY --project $WANDB_PROJECT --logs_root $HARNESS_EVAL_DIR --name $NAME --main_metrics $TABLE_METRICS --eval_duration $DURATION"
 echo "Running command to upload results to wandb:"
 echo "$WANDB_CMD"
 srun -ul --environment=./containers/env.toml bash -c " \
