@@ -4,7 +4,7 @@
 # Usage: bash examples/alignment/launch_all_evaluations.sh [english|multilingual|test]
 
 # Set default mode to english
-EVAL_MODE=${1:-multilingual}
+EVAL_MODE=${1:-test}
 
 # Validate mode
 VALID_MODES=("english" "multilingual" "test" "pretrain")
@@ -57,8 +57,8 @@ esac
 # Array of evaluation scripts to run
 EVALUATION_SCRIPTS=(
     # "examples/alignment/hf_eval_multiple_apertus_base_models.sh"
-    # "examples/alignment/hf_eval_multiple_apertus_models.sh"
-    "examples/alignment/hf_eval_multiple_other_base_models.sh"
+    "examples/alignment/hf_eval_multiple_apertus_models.sh"
+    # "examples/alignment/hf_eval_multiple_other_base_models.sh"
     # "examples/alignment/hf_eval_multiple_other_models.sh"
 )
 
