@@ -65,11 +65,11 @@ declare -A MODEL_CHECKPOINTS=(
     # ["Apertus-8B-aligned-branded"]="/capstor/store/cscs/swissai/infra01/swiss-alignment/checkpoints/Apertus-8B-aligned-branded"
 
     # aligned
-    # ["Apertus-8B-sft-mixture-8e-aligned"]="/capstor/store/cscs/swissai/infra01/swiss-alignment/checkpoints/Apertus-8B-sft-mixture-8e-aligned"
-    # ["Apertus-70B-sft-mixture-8e-aligned"]="/capstor/store/cscs/swissai/infra01/swiss-alignment/checkpoints/Apertus-70B-sft-mixture-8e-aligned"
+    ["Apertus-8B-sft-mixture-8e-aligned"]="/capstor/store/cscs/swissai/infra01/swiss-alignment/checkpoints/Apertus-8B-sft-mixture-8e-aligned"
+    ["Apertus-70B-sft-mixture-8e-aligned"]="/capstor/store/cscs/swissai/infra01/swiss-alignment/checkpoints/Apertus-70B-sft-mixture-8e-aligned"
 
-    ["Apertus-8B-sft-mixture-8e-pwl-aligned"]="/capstor/store/cscs/swissai/infra01/swiss-alignment/checkpoints/Apertus-8B-sft-mixture-8e-pwl-aligned"
-    ["Apertus-70B-sft-mixture-8e-pwl-aligned"]="/capstor/store/cscs/swissai/infra01/swiss-alignment/checkpoints/Apertus-70B-sft-mixture-8e-pwl-aligned"
+    # ["Apertus-8B-sft-mixture-8e-pwl-aligned"]="/capstor/store/cscs/swissai/infra01/swiss-alignment/checkpoints/Apertus-8B-sft-mixture-8e-pwl-aligned"
+    # ["Apertus-70B-sft-mixture-8e-pwl-aligned"]="/capstor/store/cscs/swissai/infra01/swiss-alignment/checkpoints/Apertus-70B-sft-mixture-8e-pwl-aligned"
 )
 
 export WANDB_ENTITY=${WANDB_ENTITY:-apertus}

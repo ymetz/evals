@@ -13,7 +13,11 @@ declare -A MODEL_CHECKPOINTS=(
     ["Apertus8B-tokens15T-it2627139"]="/capstor/store/cscs/swissai/infra01/pretrain-checkpoints/apertus/Apertus8B-tokens15T-it2627139"
     
     # ["Apertus70B-tokens15T-it1155828"]=["/capstor/store/cscs/swissai/infra01/pretrain-checkpoints/apertus/Apertus70B-tokens15T-it1155828"]
-    # ["Apertus70B-tokens15T-long-context-64k"]="/capstor/store/cscs/swissai/infra01/pretrain-checkpoints/apertus/Apertus70B-tokens15T-longcontext64k"
+    # ["Apertus70B-tokens15T-long-context-64k"]="/capstor/store/cscs/swissai/infra01/pretrain-checkpoints/apertus/Apertus70B-tokens15T-longcontext64k
+
+    # aligned (only for uler)
+    ["Apertus-8B-sft-mixture-8e-aligned"]="/capstor/store/cscs/swissai/infra01/swiss-alignment/checkpoints/Apertus-8B-sft-mixture-8e-aligned"
+    ["Apertus-70B-sft-mixture-8e-aligned"]="/capstor/store/cscs/swissai/infra01/swiss-alignment/checkpoints/Apertus-70B-sft-mixture-8e-aligned"
 
 
 
