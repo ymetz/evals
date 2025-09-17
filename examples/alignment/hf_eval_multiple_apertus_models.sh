@@ -44,7 +44,7 @@ declare -A MODEL_CHECKPOINTS=(
     # ["Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8b-ln-ademamix"]="/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/final-run/Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8b-ln-ademamix/checkpoints/269b44fdd21ec150/checkpoint-3899"
     # ["Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix"]="/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/final-run/Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8d-ln-ademamix/checkpoints/1f20ee760c1e2161/checkpoint-3899"
     # ["Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8e-ln-ademamix"]="/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/final-run/Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8e-ln-ademamix/checkpoints/6b9bf7de3db26256/checkpoint-3840"
-    ["Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8e-ln-plw0.05-ademamix"]="/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/plw-ablations/Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8e-ln-plw0.05-ademamix/checkpoints/77cda2547d7c1ec5/checkpoint-3840"
+    # ["Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8e-ln-plw0.05-ademamix"]="/iopsstor/scratch/cscs/smoalla/projects/swiss-alignment/artifacts/shared/outputs/train_sft/plw-ablations/Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8e-ln-plw0.05-ademamix/checkpoints/77cda2547d7c1ec5/checkpoint-3840"
 
     # # Bettina 
     # ["Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8b-honesty"]="/iopsstor/scratch/cscs/bmessmer/projects/swiss-alignment/artifacts/private/outputs/train_sft/sft4honesty/Apertus70B-tokens15T-longcontext64k-apertus-sft-mixture-8b-ln-ademamix-apertus_70b_3899_0.2_0.75_majority_correct_sft-bs1024-lr2e-06-epochs1-adam-apertus/checkpoints/9bbf90fc740aff86/checkpoint-7"
@@ -69,7 +69,7 @@ declare -A MODEL_CHECKPOINTS=(
     # ["Apertus-70B-sft-mixture-8e-aligned"]="/capstor/store/cscs/swissai/infra01/swiss-alignment/checkpoints/Apertus-70B-sft-mixture-8e-aligned"
 
     ["Apertus-8B-sft-mixture-8e-pwl-aligned"]="/capstor/store/cscs/swissai/infra01/swiss-alignment/checkpoints/Apertus-8B-sft-mixture-8e-pwl-aligned"
-    
+    ["Apertus-70B-sft-mixture-8e-pwl-aligned"]="/capstor/store/cscs/swissai/infra01/swiss-alignment/checkpoints/Apertus-70B-sft-mixture-8e-pwl-aligned"
 )
 
 export WANDB_ENTITY=${WANDB_ENTITY:-apertus}
