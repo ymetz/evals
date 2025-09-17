@@ -6,8 +6,8 @@
 #SBATCH --mem=460000
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
-#SBATCH --output=logs_include_v0111/%x_%j.out
-#SBATCH --error=logs_include_v0111/%x_%j.err
+#SBATCH --output=logs/%x_%j.out
+#SBATCH --error=logs/%x_%j.err
 #SBATCH --exclusive
 #SBATCH --partition=normal
 #SBATCH --time=11:59:00
@@ -89,12 +89,13 @@ GPUS_PER_NODE=4
 
 # Print configuration.
 echo "Configuration set:"
-printf "MODEL=$MODEL\nNAME=$NAME\nTOKENIZER=$TOKENIZER\nBS=$BS\nREVISION=$REVISION\nSIZE=$SIZE\nLIMIT=$LIMIT\nBOS=$BOS\nTASKS=$TASKS\nWANDB_ENTITY=$WANDB_ENTITY\nWANDB_PROJECT=$WANDB_PROJECT\nHF_HOME=$HF_HOME\n\n"
+printf "MODEL=$MODEL\nNAME=$NAME\nTOKENIZER=$TOKENIZER\nBS=$BS\nREVISION=$REVISION\nSIZE=$SIZE\nLIMIT=$LIMIT\nBOS=$BOS\nTASKS=$TASKS\nMAX_LENGTH=$MAX_LENGTH\nWANDB_ENTITY=$WANDB_ENTITY\nWANDB_PROJECT=$WANDB_PROJECT\nHF_HOME=$HF_HOME\n\n"
 
 # Generic envs.
 export MASTER_ADDR=$(hostname)
 export MASTER_PORT=25678
 export CUDA_DEVICE_MAX_CONNECTIONS=1
+
 export WORLD_SIZE=1
 
 # export HF_ALLOW_CODE_EVAL=1
@@ -138,12 +139,20 @@ fi
 export OMP_NUM_THREADS=$(( 8 * $GPUS_PER_NODE ))
 export VLLM_WORKER_MULTIPROC_METHOD=spawn
 export VLLM_DISABLE_COMPILE_CACHE=1
+
+#export VLLM_TORCH_COMPILE=0
+#export NCCL_P2P_DISABLE=1
+
 # export NCCL_IB_DISABLE=1
 # export NCCL_NET="Socket"
 # export NCCL_DEBUG=WARN
 # Reduce memory fraction to avoid OOM during initialization
 VLLM_MEMORY_FRACTION=0.65
+# export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+# export VLLM_DISABLE_CUSTOM_ALL_REDUCE=1
+
 COMMON_MODEL_ARGS="$COMMON_MODEL_ARGS,data_parallel_size=$DP,tensor_parallel_size=$MP,gpu_memory_utilization=$VLLM_MEMORY_FRACTION,max_gen_toks=$MAX_NEW_TOKENS,enable_thinking=False"
+#,tokenizer_mode=slow"
 
 HARNESS_EVAL_DIR=$HARNESS_DIR/eval_$(date +%Y%m%d_%H%M%S)_$SLURM_JOBID
 
@@ -168,13 +177,44 @@ if [[ -n ${LIMIT} ]]; then
 	COMMON_EVAL_ARGS+=(--limit $LIMIT)
 fi
 
+# Detect long context length only when 'ruler' is among tasks.
+CONTEXT_LEN=""
+if echo "$TASKS" | grep -q "ruler"; then
+    if echo "$TASKS" | grep -qE "/[0-9]+"; then
+        CONTEXT_LEN=$(echo "$TASKS" | grep -oE '/[0-9]+' | head -n1 | tr -d '/')
+    fi
+    # Fallback: support underscore or dash pattern like ruler_8192 or ruler-8192
+    if [[ -z "$CONTEXT_LEN" ]]; then
+        if echo "$TASKS" | grep -qE "ruler[_-][0-9]+"; then
+            CONTEXT_LEN=$(echo "$TASKS" | grep -oE 'ruler[_-][0-9]+' | head -n1 | grep -oE '[0-9]+')
+        fi
+    fi
+    if [[ -n "$CONTEXT_LEN" ]]; then
+        export MAX_LENGTH="$CONTEXT_LEN"
+        # Only add metadata and model arg if CONTEXT_LEN is numeric
+        if [[ "$CONTEXT_LEN" =~ ^[0-9]+$ ]]; then
+			COMMON_EVAL_ARGS+=( --metadata \'{\"max_seq_lengths\":[${CONTEXT_LEN}]}\' )
+
+            MAX_MODEL_LEN_WITH_MARGIN=$(( CONTEXT_LEN + 600 ))
+            export VLLM_ALLOW_LONG_MAX_MODEL_LEN=1
+            COMMON_MODEL_ARGS="$COMMON_MODEL_ARGS,max_model_len=$MAX_MODEL_LEN_WITH_MARGIN"
+            echo "Detected ruler context length: $CONTEXT_LEN (set MAX_LENGTH, max_model_len=$MAX_MODEL_LEN_WITH_MARGIN and lm-eval metadata)"
+        else
+            echo "Warning: Ruler detected but no numeric context length found; skipping metadata and max_model_len."
+        fi
+    fi
+fi
+
 INSTALL_CMD="pip install -v --no-cache-dir --no-build-isolation --no-deps --force-reinstall -U \
 	datasketch \
 	sympy \
 	math_verify \
 	\"antlr4-python3-runtime==4.11\" \
 	latex2sympy2_extended \
-    \"lm-eval[vllm] @ git+https://github.com/swiss-ai/lm-evaluation-harness.git@main\" "
+	wonderwords \
+	nltk \
+    \"lm-eval[vllm] @ git+https://github.com/swiss-ai/lm-evaluation-harness.git@ruler\" "
+	
 # \
 # && pip uninstall xielu -y"
 

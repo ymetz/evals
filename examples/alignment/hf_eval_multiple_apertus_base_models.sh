@@ -8,14 +8,14 @@ declare -A MODEL_CHECKPOINTS=(
    
     # # from slack canvas
     # #["Apertus8B-tokens10.2T-it2059810-newcooldown"]="/capstor/store/cscs/swissai/infra01/pretrain-checkpoints/apertus/Apertus8B-tokens10.2T-it2059810-newcooldown"
+
     # ["Apertus8B-tokens15T-longcontext64k"]="/capstor/store/cscs/swissai/infra01/pretrain-checkpoints/apertus/Apertus8B-tokens15T-longcontext64k"
     ["Apertus8B-tokens15T-it2627139"]="/capstor/store/cscs/swissai/infra01/pretrain-checkpoints/apertus/Apertus8B-tokens15T-it2627139"
-    # #["Apertus70B-tokens15T-it1155828"]=["/capstor/store/cscs/swissai/infra01/pretrain-checkpoints/apertus/Apertus70B-tokens15T-it1155828"]
+    
+    # ["Apertus70B-tokens15T-it1155828"]=["/capstor/store/cscs/swissai/infra01/pretrain-checkpoints/apertus/Apertus70B-tokens15T-it1155828"]
     # ["Apertus70B-tokens15T-long-context-64k"]="/capstor/store/cscs/swissai/infra01/pretrain-checkpoints/apertus/Apertus70B-tokens15T-longcontext64k"
 
-    # hugginface
-    ["Apertus-70B"]="swiss-ai/Apertus-70B"
-)
+
 
 export WANDB_ENTITY=${WANDB_ENTITY:-apertus}
 export WANDB_PROJECT=${WANDB_PROJECT:-swissai-evals}
