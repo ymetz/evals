@@ -5,12 +5,10 @@ drop
 acp_bench
 gsm8k_cot
 hendrycks_math
-mathqa
 humaneval_instruct
-mbpp_instruct
+mbpp
 ifeval
-harmbench
-realtoxicitypromptsllama_small
+realtoxicityprompts
 toxigen
 bbq
 hellaswag
