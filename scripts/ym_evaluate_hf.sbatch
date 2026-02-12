@@ -225,7 +225,7 @@ INSTALL_CMD="pip install --no-cache-dir --upgrade "git+https://github.com/ymetz/
 pip install --no-cache-dir --upgrade --no-deps \
     \"huggingface-hub>=1.3.0,<2.0\" \
     \"transformers==5.1.0\" \
-    "accelerate>=1.1.0" \
+    \"accelerate>=1.1.0\" \
     \"antlr4-python3-runtime==4.13.2\" \
     datasketch \
     mistral-common \
