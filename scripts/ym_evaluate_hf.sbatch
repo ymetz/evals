@@ -221,14 +221,8 @@ fi
 
 # git+https://github.com/ymetz/lm-evaluation-harness.git
 
-SITE=/opt/venv/lib/python3.12/site-packages
-
-INSTALL_CMD="rm -rf $SITE/antlr4 $SITE/antlr4_python3_runtime* && \
-rm -rf $SITE/lm_eval $SITE/lm_eval* && \
-pip install --no-cache-dir --upgrade --target=$SITE "git+https://github.com/ymetz/lm-evaluation-harness.git" && \
-rm -rf $SITE/huggingface_hub $SITE/huggingface_hub* && \
-rm -rf $SITE/transformers $SITE/transformers* && \
-pip install --no-cache-dir --target=$SITE --upgrade --no-deps \
+INSTALL_CMD="pip install --no-cache-dir --upgrade "git+https://github.com/ymetz/lm-evaluation-harness.git" && \
+pip install --no-cache-dir --upgrade --no-deps \
     \"huggingface-hub>=1.3.0,<2.0\" \
     \"transformers==5.1.0\" \
     "accelerate>=1.1.0" \
@@ -240,12 +234,13 @@ pip install --no-cache-dir --target=$SITE --upgrade --no-deps \
     latex2sympy2_extended \
     wonderwords \
     nltk \
+    langdetect \
     hf-transfer \
     \"peft>=0.2.0\" "
 
 if [[ $LM_EVAL_BACKEND == "vllm" ]]; then
     INSTALL_CMD="$INSTALL_CMD && \
-pip install --no-cache-dir --target=$SITE --upgrade --no-deps \
+pip install --no-cache-dir --upgrade \
     \"https://github.com/vllm-project/vllm/releases/download/v0.15.1/vllm-0.15.1+cu130-cp38-abi3-manylinux_2_35_aarch64.whl\" "
 fi
 
@@ -262,7 +257,7 @@ echo "Final command: $CMD"
 echo "Starting timing for installation and evaluation..."
 START_TIME=$(date +%s)
 
-srun -ul --environment=./containers/env_nemo.toml bash -c " \
+srun --mpi=pmix -ul --environment=./containers/env_nemo.toml bash -c " \
     unset SSL_CERT_FILE && \    
     $INSTALL_CMD && \
     $CMD
