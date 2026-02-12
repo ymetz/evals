@@ -234,6 +234,7 @@ pip install --no-cache-dir --upgrade --no-deps \
     latex2sympy2_extended \
     wonderwords \
     nltk \
+    immutabledict \
     langdetect \
     hf-transfer \
     \"peft>=0.2.0\" "
