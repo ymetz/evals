@@ -69,7 +69,7 @@ TABLE_METRICS=${TABLE_METRICS:-./configs/alignment/tasks_constrained_main_table.
 WANDB_ENTITY=${WANDB_ENTITY:-apertus}
 WANDB_PROJECT=${WANDB_PROJECT:-swissai-evals-test}
 LM_EVAL_BACKEND=${LM_EVAL_BACKEND:-hf}
-APPLY_CHAT_TEMPLATE=${APPLY_CHAT_TEMPLATE:-true}
+APPLY_CHAT_TEMPLATE=${APPLY_CHAT_TEMPLATE:-false}
 
 export WANDB_API_KEY=${WANDB_API_KEY:-$(cat ./scripts/wandb_api_key.txt)}
 
@@ -225,20 +225,22 @@ SITE=/opt/venv/lib/python3.12/site-packages
 
 INSTALL_CMD="rm -rf $SITE/antlr4 $SITE/antlr4_python3_runtime* && \
 rm -rf $SITE/lm_eval $SITE/lm_eval* && \
-pip install --no-cache-dir --upgrade --target=$SITE "git+https://github.com/EleutherAI/lm-evaluation-harness.git" && \
+pip install --no-cache-dir --upgrade --target=$SITE "git+https://github.com/ymetz/lm-evaluation-harness.git" && \
+rm -rf $SITE/huggingface_hub $SITE/huggingface_hub* && \
+rm -rf $SITE/transformers $SITE/transformers* && \
 pip install --no-cache-dir --target=$SITE --upgrade --no-deps \
+    \"huggingface-hub>=1.3.0,<2.0\" \
+    \"transformers==5.1.0\" \
+    "accelerate>=1.1.0" \
     \"antlr4-python3-runtime==4.13.2\" \
     datasketch \
+    mistral-common \
     sympy \
     math_verify \
     latex2sympy2_extended \
     wonderwords \
     nltk \
-    hf \
     hf-transfer \
-    \"huggingface-hub>=1.3.0,<2.0\" \
-    \"git+https://github.com/huggingface/transformers.git\" \
-    \"accelerate>=1.1.0\" \
     \"peft>=0.2.0\" "
 
 if [[ $LM_EVAL_BACKEND == "vllm" ]]; then

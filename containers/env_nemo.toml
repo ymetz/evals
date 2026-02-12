@@ -1,4 +1,4 @@
-image = "/capstor/store/cscs/swissai/infra01/containers/nvidia+nemo+25.11.sqsh" # "nvcr.io#nvidia/nemo:25.11"
+image = "jfrog.svc.cscs.ch/docker-group-csstaff/alps-images/ngc-pytorch:25.12-py3-alps1"
 
 mounts = [
     "/users/${USER}",
@@ -6,7 +6,8 @@ mounts = [
     "/iopsstor/scratch/cscs/${USER}",
     "/capstor/store/cscs/swissai/infra01",
     "/capstor/store/cscs/swissai/a06",
-    "/capstor/store/cscs/swissai/infra01/containers/nemo_container_extra_files/ofi_plugin/libnccl-net.so.v1.17.2-cuda.so:/opt/hpcx/nccl_rdma_sharp_plugin/lib/libnccl-net.so"
+    "/capstor/store/cscs/swissai/infra01/containers/nemo_container_extra_files/ofi_plugin/libnccl-net.so.v1.17.2-cuda.so:/opt/hpcx/nccl_rdma_sharp_plugin/lib/libnccl-net.so",
+    "/capstor/store/cscs/swissai/infra01/containers/nemo_container_extra_files/libfabric/libfabric.so.1:/lib/libfabric.so.1"
 ]
 
 writable = true
