@@ -40,7 +40,7 @@ usage() {
 	echo " TASKS: Tasks to run with lm eval harness."
 	echo " WANDB_ENTITY: WandB entity name for uploading results (default: apertus)."
 	echo " WANDB_PROJECT: WandB project name for uploading results (default: swissai-evals)."
-    echo " LM_EVAL_BACKEND: Backend to use for lm-eval (default: hf). - options are: hf, vllm, nemo"
+    echo " LM_EVAL_BACKEND: Backend to use for lm-eval (default: hf). - options are: hf, vllm, megatron_lm"
 	echo "For more information see the README: https://github.com/swiss-ai/evals?tab=readme-ov-file."
 }
 die() {
@@ -267,12 +267,16 @@ if [[ $LM_EVAL_BACKEND == "vllm" ]]; then
     INSTALL_CMD="$INSTALL_CMD && \
 pip install --no-cache-dir --upgrade \
     \"https://github.com/vllm-project/vllm/releases/download/v0.15.1/vllm-0.15.1+cu130-cp38-abi3-manylinux_2_35_aarch64.whl\" "
+elif [[ $LM_EVAL_BACKEND == "megatron_lm" ]]; then
+    INSTALL_CMD="$INSTALL_CMD && export MEGATRON_PATH=$(pwd)/Megatron-LM "
 fi
 
 if [[ $LM_EVAL_BACKEND == "vllm" ]]; then
     CMD="lm_eval --model $LM_EVAL_BACKEND --model_args=$COMMON_MODEL_ARGS ${COMMON_EVAL_ARGS[@]}"
 elif [[ $LM_EVAL_BACKEND == "hf" ]]; then
     CMD="accelerate launch --num_processes=1  -m lm_eval --model $LM_EVAL_BACKEND --model_args=$COMMON_MODEL_ARGS ${COMMON_EVAL_ARGS[@]}"
+elif [[ $LM_EVAL_BACKEND == "megatron_lm" ]]; then
+    CMD="lm_eval --model megatron_lm --model_args=$COMMON_MODEL_ARGS ${COMMON_EVAL_ARGS[@]}"
 fi
 
 echo "Installation command: $INSTALL_CMD"
