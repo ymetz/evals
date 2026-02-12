@@ -5,7 +5,7 @@ Evaluation infrastructure for benchmarking Large Language Models on SLURM cluste
 ## Quick Start
 
 ```bash
-# Evaluate a single model on the OLMo3 benchmark suite
+# Evaluate a single model on the benchmark suite
 bash scripts/launch_evaluations.sh complete --model meta-llama/Llama-3.1-8B-Instruct
 
 # Same, but split tasks across 4 parallel nodes for faster evaluation
