@@ -19,15 +19,15 @@ mmlu
 commonsense_qa
 hellaswag
 winogrande
-siqa
+# siqa
 piqa
 coqa
 drop
 nq_open
 squadv2
 sciq
-qasper
+# qasper - still relies on remote code execution, maybe look for replacement
 lambada_openai
 # Medical
 medmcqa
-medqa
+# medqa

@@ -19,7 +19,7 @@ export APPLY_CHAT_TEMPLATE=${APPLY_CHAT_TEMPLATE:-false}
 NUM_SPLITS=${NUM_SPLITS:-1}
 
 # Allow overriding the sbatch script (e.g. ym_evaluate_hf.sbatch)
-SBATCH_SCRIPT=${SBATCH_SCRIPT:-scripts/evaluate_hf.sbatch}
+SBATCH_SCRIPT=${SBATCH_SCRIPT:-scripts/ym_evaluate_hf.sbatch}
 
 # Launch evaluation jobs for each model
 echo "Launching evaluation jobs for ${#MODEL_CHECKPOINTS[@]} ${MODEL_TYPE_DESC}..."
