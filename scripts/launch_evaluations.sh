@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# launch_olmo3_evaluations.sh - Launch OLMo3 benchmark suite evaluations
+# launch_evaluations.sh - Launch Apertus benchmark suite evaluations
 #
 # Usage:
-#   bash launch_olmo3_evaluations.sh <mode> [options]
+#   bash launch_evaluations.sh <mode> [options]
 #
 # Modes:
 #   easy        - Base Easy Suite (minerva_math, mmlu, hellaswag, ...)
@@ -32,19 +32,19 @@
 #
 # Examples:
 #   # Single HF model, auto-detect everything
-#   bash launch_olmo3_evaluations.sh complete --model meta-llama/Llama-3.1-8B-Instruct
+#   bash launch_evaluations.sh complete --model meta-llama/Llama-3.1-8B-Instruct
 #
 #   # Single model with splits
-#   bash launch_olmo3_evaluations.sh main --model allenai/OLMo-2-1124-7B --splits 4
+#   bash launch_evaluations.sh main --model allenai/OLMo-2-1124-7B --splits 4
 #
 #   # Base model, explicit no chat template
-#   bash launch_olmo3_evaluations.sh easy --model Qwen/Qwen2.5-7B --no-chat-template
+#   bash launch_evaluations.sh easy --model Qwen/Qwen2.5-7B --no-chat-template
 #
 #   # Run a multi-model script
-#   bash launch_olmo3_evaluations.sh complete --script examples/alignment/hf_eval_multiple_other_models.sh
+#   bash launch_evaluations.sh complete --script examples/alignment/hf_eval_multiple_other_models.sh
 #
 #   # Use default EVALUATION_SCRIPTS (edit the array below)
-#   bash launch_olmo3_evaluations.sh complete --splits 4
+#   bash launch_evaluations.sh complete --splits 4
 
 set -euo pipefail
 
@@ -188,7 +188,7 @@ auto_derive_name() {
 
 # --- Print configuration ---
 echo "======================================"
-echo "OLMo3 Evaluation Launcher"
+echo "OLMo Evaluation Launcher"
 echo "  Mode:   $EVAL_MODE"
 echo "  Splits: $NUM_SPLITS"
 

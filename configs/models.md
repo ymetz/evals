@@ -1,10 +1,10 @@
 # Model Registry
 
-Reference of models for evaluation with `launch_olmo3_evaluations.sh`.
+Reference of models for evaluation with `launch_evaluations.sh`.
 
 ```bash
 # Usage
-bash examples/alignment/launch_olmo3_evaluations.sh <mode> --model <path> [options]
+bash examples/alignment/launch_evaluations.sh <mode> --model <path> [options]
 ```
 
 ## Apertus
