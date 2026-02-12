@@ -56,7 +56,7 @@ evals/
 
 ---
 
-## The OLMo3 Launcher
+## The Launch Script
 
 `scripts/launch_evaluations.sh` is the primary entry point for running evaluations. It supports three model selection modes and multiple benchmark suites.
 
