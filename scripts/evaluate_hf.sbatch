@@ -74,14 +74,35 @@ MAX_LENGTH=${MAX_LENGTH:-4096}
 MAX_NEW_TOKENS=${MAX_NEW_TOKENS:-2048}
 LIMIT=${LIMIT:-""}
 
+# Task splitting support: set NUM_SPLITS and SPLIT_INDEX to distribute tasks across jobs
+NUM_SPLITS=${NUM_SPLITS:-1}
+SPLIT_INDEX=${SPLIT_INDEX:-0}
+
 if [ -f "$TASKS" ]; then
     echo "Reading task list from file: $TASKS"
-    TASKS=$(paste -sd, "$TASKS")
+    # Filter out comments and blank lines, then join with commas
+    TASKS=$(grep -v '^\s*#' "$TASKS" | grep -v '^\s*$' | paste -sd, -)
+
+    # Split tasks across jobs if NUM_SPLITS > 1
+    if (( NUM_SPLITS > 1 )); then
+        IFS=',' read -ra TASK_ARRAY <<< "$TASKS"
+        TOTAL_TASKS=${#TASK_ARRAY[@]}
+        CHUNK_SIZE=$(( (TOTAL_TASKS + NUM_SPLITS - 1) / NUM_SPLITS ))
+        START=$(( SPLIT_INDEX * CHUNK_SIZE ))
+        END=$(( START + CHUNK_SIZE ))
+        if (( END > TOTAL_TASKS )); then END=$TOTAL_TASKS; fi
+        SPLIT_TASKS=()
+        for (( i=START; i<END; i++ )); do
+            SPLIT_TASKS+=("${TASK_ARRAY[$i]}")
+        done
+        TASKS=$(IFS=','; echo "${SPLIT_TASKS[*]}")
+        echo "Split $((SPLIT_INDEX+1))/$NUM_SPLITS: running ${#SPLIT_TASKS[@]}/$TOTAL_TASKS tasks (indices $START-$((END-1)))"
+    fi
 fi
 
 if [ -f "$TABLE_METRICS" ]; then
 	echo "Reading table metrics from file: $TABLE_METRICS"
-	TABLE_METRICS=$(paste -sd' ' "$TABLE_METRICS")
+	TABLE_METRICS=$(grep -v '^\s*#' "$TABLE_METRICS" | grep -v '^\s*$' | paste -sd' ' -)
 fi
 
 export HF_HOME=${HF_HOME:-/capstor/store/cscs/swissai/infra01/hf_home/}
@@ -239,13 +260,24 @@ echo "Time taken for installation and evaluation: ${DURATION} seconds ($(($DURAT
 
 # Goodbye.
 echo "Evaluation finished"
-echo "Sleeping for 1 minute before uploading results to wandb..."
-sleep 60
-echo "Uploading results to wandb"
-WANDB_CMD="cd $PWD && python -m scripts.alignment.update_wandb_alignment --entity $WANDB_ENTITY --project $WANDB_PROJECT --logs_root $HARNESS_EVAL_DIR --name $NAME --main_metrics $TABLE_METRICS --eval_duration $DURATION"
-echo "Running command to upload results to wandb:"
-echo "$WANDB_CMD"
-srun -ul --environment=./containers/env.toml bash -c " \
-    $WANDB_CMD
-"
+
+if (( NUM_SPLITS > 1 )); then
+    # When running as a split job, write a marker file with the eval dir path
+    # so the aggregation job can find all split results
+    SPLIT_MARKER_DIR=$HARNESS_DIR/split_markers
+    mkdir -p $SPLIT_MARKER_DIR
+    echo "$HARNESS_EVAL_DIR" > "$SPLIT_MARKER_DIR/split_${SPLIT_INDEX}.txt"
+    echo "Split job $((SPLIT_INDEX+1))/$NUM_SPLITS done. Skipping W&B upload (aggregation job will handle it)."
+    echo "Results in: $HARNESS_EVAL_DIR"
+else
+    echo "Sleeping for 1 minute before uploading results to wandb..."
+    sleep 60
+    echo "Uploading results to wandb"
+    WANDB_CMD="cd $PWD && python -m scripts.alignment.update_wandb_alignment --entity $WANDB_ENTITY --project $WANDB_PROJECT --logs_root $HARNESS_EVAL_DIR --name $NAME --main_metrics $TABLE_METRICS --eval_duration $DURATION"
+    echo "Running command to upload results to wandb:"
+    echo "$WANDB_CMD"
+    srun -ul --environment=./containers/env.toml bash -c " \
+        $WANDB_CMD
+    "
+fi
 echo "END TIME: $(date)"
