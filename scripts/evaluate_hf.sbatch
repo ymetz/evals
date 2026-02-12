@@ -73,6 +73,7 @@ APPLY_CHAT_TEMPLATE=${APPLY_CHAT_TEMPLATE:-true}
 MAX_LENGTH=${MAX_LENGTH:-4096}
 MAX_NEW_TOKENS=${MAX_NEW_TOKENS:-2048}
 LIMIT=${LIMIT:-""}
+NUM_FEWSHOT=${NUM_FEWSHOT:-""}
 
 # Task splitting support: set NUM_SPLITS and SPLIT_INDEX to distribute tasks across jobs
 NUM_SPLITS=${NUM_SPLITS:-1}
@@ -196,6 +197,10 @@ fi
 
 if [[ -n ${LIMIT} ]]; then
 	COMMON_EVAL_ARGS+=(--limit $LIMIT)
+fi
+
+if [[ -n "${NUM_FEWSHOT}" ]]; then
+	COMMON_EVAL_ARGS+=(--num_fewshot $NUM_FEWSHOT)
 fi
 
 # Detect long context length only when 'ruler' is among tasks.

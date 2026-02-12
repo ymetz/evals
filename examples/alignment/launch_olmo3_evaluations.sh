@@ -24,6 +24,9 @@
 #   --no-chat-template   - Force disable chat template
 #   --tokenizer <tok>    - Custom tokenizer (default: same as model)
 #   --bos                - Prepend BOS token
+#   --num-fewshot N      - Override num_fewshot for all tasks (default: use task YAML defaults)
+#                          Note: tasks with num_fewshot=0 in YAML are never overridden.
+#                          OLMo3 uses 5-shot for most MC tasks; pass --num-fewshot 5 to match.
 #   --backend <backend>  - lm-eval backend: hf, vllm (default: from sbatch script)
 #   --splits K           - Split tasks across K parallel nodes per model
 #
@@ -57,6 +60,7 @@ CHAT_TEMPLATE_OVERRIDE=""  # "", "true", "false"
 CUSTOM_TOKENIZER=""
 BOS_FLAG=""
 BACKEND_FLAG=""
+FEWSHOT_FLAG=""
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
@@ -64,6 +68,7 @@ while [[ $# -gt 0 ]]; do
         --name)         MODEL_NAME="$2";              shift 2 ;;
         --script)       SCRIPT_PATH="$2";             shift 2 ;;
         --splits)       NUM_SPLITS="$2";              shift 2 ;;
+        --num-fewshot)  FEWSHOT_FLAG="$2";            shift 2 ;;
         --chat-template)    CHAT_TEMPLATE_OVERRIDE="true";  shift ;;
         --no-chat-template) CHAT_TEMPLATE_OVERRIDE="false"; shift ;;
         --tokenizer)    CUSTOM_TOKENIZER="$2";        shift 2 ;;
@@ -187,6 +192,9 @@ echo "OLMo3 Evaluation Launcher"
 echo "  Mode:   $EVAL_MODE"
 echo "  Splits: $NUM_SPLITS"
 
+# --- Few-shot override ---
+[[ -n "$FEWSHOT_FLAG" ]] && export NUM_FEWSHOT="$FEWSHOT_FLAG"
+
 # --- Dispatch based on model selection mode ---
 
 if [[ -n "$MODEL_PATH" ]]; then
@@ -210,6 +218,7 @@ if [[ -n "$MODEL_PATH" ]]; then
     echo "  Chat:   $APPLY_CHAT_TEMPLATE"
     [[ -n "$CUSTOM_TOKENIZER" ]] && echo "  Tok:    $CUSTOM_TOKENIZER"
     [[ -n "$BOS_FLAG" ]] && echo "  BOS:    $BOS_FLAG"
+    [[ -n "$FEWSHOT_FLAG" ]] && echo "  Fewshot: $FEWSHOT_FLAG"
     echo "  W&B:    $WANDB_ENTITY/$WANDB_PROJECT"
     echo "======================================"
 

@@ -77,6 +77,7 @@ export WANDB_API_KEY=${WANDB_API_KEY:-$(cat ./scripts/wandb_api_key.txt)}
 MAX_LENGTH=${MAX_LENGTH:-4096}
 MAX_NEW_TOKENS=${MAX_NEW_TOKENS:-512}
 LIMIT=${LIMIT:-""}
+NUM_FEWSHOT=${NUM_FEWSHOT:-""}
 
 # Task splitting support: set NUM_SPLITS and SPLIT_INDEX to distribute tasks across jobs
 NUM_SPLITS=${NUM_SPLITS:-1}
@@ -202,6 +203,10 @@ COMMON_EVAL_ARGS=(
     # --cache_requests true
     --gen_kwargs max_gen_toks=$MAX_NEW_TOKENS
 )
+
+if [[ -n "${NUM_FEWSHOT}" ]]; then
+	COMMON_EVAL_ARGS+=(--num_fewshot $NUM_FEWSHOT)
+fi
 
 if [[ $APPLY_CHAT_TEMPLATE = true ]]; then
 	COMMON_EVAL_ARGS+=(--apply_chat_template)
