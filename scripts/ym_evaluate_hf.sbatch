@@ -245,8 +245,6 @@ if echo "$TASKS" | grep -q "ruler"; then
     fi
 fi
 
-# git+https://github.com/ymetz/lm-evaluation-harness.git
-
 INSTALL_CMD="pip install --no-cache-dir --upgrade "git+https://github.com/ymetz/lm-evaluation-harness.git" && \
 pip install --no-cache-dir --upgrade --no-deps \
     \"huggingface-hub>=1.3.0,<2.0\" \
@@ -274,7 +272,7 @@ fi
 if [[ $LM_EVAL_BACKEND == "vllm" ]]; then
     CMD="lm_eval --model $LM_EVAL_BACKEND --model_args=$COMMON_MODEL_ARGS ${COMMON_EVAL_ARGS[@]}"
 elif [[ $LM_EVAL_BACKEND == "hf" ]]; then
-    CMD="accelerate launch -m lm_eval --model $LM_EVAL_BACKEND --model_args=$COMMON_MODEL_ARGS ${COMMON_EVAL_ARGS[@]}"
+    CMD="accelerate launch --num_processes=1  -m lm_eval --model $LM_EVAL_BACKEND --model_args=$COMMON_MODEL_ARGS ${COMMON_EVAL_ARGS[@]}"
 fi
 
 echo "Installation command: $INSTALL_CMD"

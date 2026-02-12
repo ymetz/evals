@@ -28,7 +28,7 @@ drop
 nq_open
 squadv2
 coqa
-qasper
+# qasper
 # Reasoning
 hellaswag
 winogrande
