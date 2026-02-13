@@ -181,7 +181,7 @@ VLLM_MEMORY_FRACTION=0.65
 if [[ $LM_EVAL_BACKEND == "vllm" ]]; then
     COMMON_MODEL_ARGS="$COMMON_MODEL_ARGS,pretrained=$HF_CHECKPOINT_PATH,tokenizer=$TOKENIZER$MAYBE_REVISION,data_parallel_size=$DP,tensor_parallel_size=$MP,gpu_memory_utilization=$VLLM_MEMORY_FRACTION,enable_thinking=False"
 elif [[ $LM_EVAL_BACKEND == "megatron_lm" ]]; then
-    COMMON_MODEL_ARGS="$COMMON_MODEL_ARGS,load=$MODEL,tokenizer_type=HuggingFaceTokenizer,tokenizer_model=$TOKENIZER$MAYBE_REVISION,TP=$MP"
+    COMMON_MODEL_ARGS="$COMMON_MODEL_ARGS,load=$MODEL,tokenizer_type=HuggingFaceTokenizer,tokenizer_model=$TOKENIZER$MAYBE_REVISION,tensor_model_parallel_size=$MP,devices=$MP"
 elif [[ $LM_EVAL_BACKEND == "hf" ]]; then
     COMMON_MODEL_ARGS="$COMMON_MODEL_ARGS,pretrained=$HF_CHECKPOINT_PATH,tokenizer=$TOKENIZER$MAYBE_REVISION"
 else
@@ -276,7 +276,9 @@ if [[ $LM_EVAL_BACKEND == "vllm" ]]; then
 elif [[ $LM_EVAL_BACKEND == "hf" ]]; then
     CMD="accelerate launch --num_processes=1  -m lm_eval --model $LM_EVAL_BACKEND --model_args=$COMMON_MODEL_ARGS ${COMMON_EVAL_ARGS[@]}"
 elif [[ $LM_EVAL_BACKEND == "megatron_lm" ]]; then
-    CMD="lm_eval --model megatron_lm --model_args=$COMMON_MODEL_ARGS ${COMMON_EVAL_ARGS[@]}"
+    # Megatron TP/EP requires one process per GPU; torchrun handles NCCL rendezvous
+    # (avoids PMIx directory issues inside containers)
+    CMD="torchrun --nproc_per_node=$MP -m lm_eval --model megatron_lm --model_args=$COMMON_MODEL_ARGS ${COMMON_EVAL_ARGS[@]}"
 fi
 
 echo "Installation command: $INSTALL_CMD"
@@ -286,8 +288,14 @@ echo "Final command: $CMD"
 echo "Starting timing for installation and evaluation..."
 START_TIME=$(date +%s)
 
-srun --mpi=pmix -ul --environment=./containers/env_nemo.toml bash -c " \
-    unset SSL_CERT_FILE && \    
+# For megatron_lm, torchrun handles distributed setup; skip --mpi=pmix to avoid PMIx mount conflicts
+SRUN_MPI_FLAG="--mpi=pmix"
+if [[ $LM_EVAL_BACKEND == "megatron_lm" ]]; then
+    SRUN_MPI_FLAG=""
+fi
+
+srun $SRUN_MPI_FLAG -ul --environment=./containers/env_nemo.toml bash -c " \
+    unset SSL_CERT_FILE && \
     $INSTALL_CMD && \
     $CMD
 "
