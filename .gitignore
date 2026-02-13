@@ -8,3 +8,15 @@ __pycache__
 # vim
 **.un~
 **.swp
+
+# PyCharm
+.idea
+
+logs_archive/
+logs*
+core*
+
+lm_eval_reference
+
+
+.DS_Store

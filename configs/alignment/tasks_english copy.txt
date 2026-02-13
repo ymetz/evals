@@ -4,11 +4,14 @@ bbh
 drop
 acp_bench
 gsm8k_cot
+gsm8k_olmes_cot
 hendrycks_math
+mathqa
 humaneval_instruct
-mbpp
+mbpp_instruct
 ifeval
-realtoxicityprompts
+harmbench
+realtoxicitypromptsllama_small
 toxigen
 bbq
-hellaswag
+hellaswag_n_shot

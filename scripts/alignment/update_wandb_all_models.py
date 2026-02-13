@@ -45,7 +45,7 @@ def scan_all_models(logs_root: Path) -> List[ModelEvaluation]:
             print(f"    + Processing {eval_dir.name}")
             
             # Create evaluation for this directory
-            temp_eval = create_model_evaluation_from_results(model_name, eval_dir, max_samples=5)
+            temp_eval = create_model_evaluation_from_results(model_name, eval_dir)
             
             # Merge tasks into combined dictionary
             for task in temp_eval.tasks:
