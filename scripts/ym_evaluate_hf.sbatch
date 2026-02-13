@@ -183,7 +183,7 @@ if [[ $LM_EVAL_BACKEND == "vllm" ]]; then
 elif [[ $LM_EVAL_BACKEND == "megatron_lm" ]]; then
     COMMON_MODEL_ARGS="$COMMON_MODEL_ARGS,load=$MODEL,tokenizer_type=HuggingFaceTokenizer,tokenizer_model=$TOKENIZER$MAYBE_REVISION,TP=$MP"
 elif [[ $LM_EVAL_BACKEND == "hf" ]]; then
-    COMMON_MODEL_ARGS="$COMMON_MODEL_ARGS,pretrained=$HF_CHECKPOINT_PATH,tokenizer=$TOKENIZER$MAYBE_REVISION"
+    COMMON_MODEL_ARGS="$COMMON_MODEL_ARGS,pretrained=$HF_CHECKPOINT_PATH,tokenizer=$TOKENIZER$MAYBE_REVISION,devices=4"
 else
     die "Unsupported LM_EVAL_BACKEND: $LM_EVAL_BACKEND"
 fi
@@ -268,7 +268,7 @@ if [[ $LM_EVAL_BACKEND == "vllm" ]]; then
 pip install --no-cache-dir --upgrade \
     \"https://github.com/vllm-project/vllm/releases/download/v0.15.1/vllm-0.15.1+cu130-cp38-abi3-manylinux_2_35_aarch64.whl\" "
 elif [[ $LM_EVAL_BACKEND == "megatron_lm" ]]; then
-    INSTALL_CMD="$INSTALL_CMD && export MEGATRON_PATH=$(pwd)/Megatron-LM "
+    INSTALL_CMD="$INSTALL_CMD && pip install megatron-core[mlm,dev] && export MEGATRON_PATH=$(pwd)/Megatron-LM "
 fi
 
 if [[ $LM_EVAL_BACKEND == "vllm" ]]; then
@@ -286,8 +286,7 @@ echo "Final command: $CMD"
 echo "Starting timing for installation and evaluation..."
 START_TIME=$(date +%s)
 
-srun --mpi=pmix -ul --environment=./containers/env_nemo.toml bash -c " \
-    unset SSL_CERT_FILE && \    
+srun --mpi=pmix -ul --environment=./containers/env_nemo.toml bash -c " \   
     $INSTALL_CMD && \
     $CMD
 "

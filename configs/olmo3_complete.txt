@@ -16,7 +16,6 @@ humaneval_infilling
 # QA - Multiple Choice
 arc_challenge
 mmlu
-mmlu_pro
 commonsense_qa
 piqa
 siqa
@@ -33,8 +32,6 @@ coqa
 hellaswag
 winogrande
 lambada_openai
-# Held-out
-bbh
 # Safety
 harmbench
 toxigen
