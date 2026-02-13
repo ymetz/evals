@@ -32,11 +32,16 @@ fi
 echo ""
 
 job_count=0
+HAS_MODEL_ITERATIONS=0
+if declare -p MODEL_ITERATIONS >/dev/null 2>&1; then
+    HAS_MODEL_ITERATIONS=1
+fi
+
 for MODEL in "${!MODEL_CHECKPOINTS[@]}"; do
     CKPT_PATH="${MODEL_CHECKPOINTS[$MODEL]}"
     # Priority: model-specific override > global override > latest
     CKPT_ITER="${CKPT_ITERATION:-latest}"
-    if [[ -n "${MODEL_ITERATIONS["${MODEL}-iter"]+x}" ]]; then
+    if (( HAS_MODEL_ITERATIONS )) && [[ -n "${MODEL_ITERATIONS["${MODEL}-iter"]+x}" ]]; then
         CKPT_ITER="${MODEL_ITERATIONS["${MODEL}-iter"]}"
     fi
     job_count=$((job_count + 1))
