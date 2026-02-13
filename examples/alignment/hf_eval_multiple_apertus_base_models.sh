@@ -28,4 +28,4 @@ export WANDB_PROJECT=${WANDB_PROJECT:-swissai-evals}
 export APPLY_CHAT_TEMPLATE=${APPLY_CHAT_TEMPLATE:-false}
 
 # Call the common runner script
-source examples/alignment/hf_base_runner.sh "Apertus base models"
+source runners/hf_base_runner.sh "Apertus base models"

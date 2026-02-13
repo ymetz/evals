@@ -5,7 +5,7 @@ Evaluation infrastructure for benchmarking Large Language Models on SLURM cluste
 ## Quick Start
 
 ```bash
-# Evaluate a single model on the OLMo3 benchmark suite
+# Evaluate a single model on the benchmark suite
 bash scripts/launch_evaluations.sh complete --model meta-llama/Llama-3.1-8B-Instruct
 
 # Same, but split tasks across 4 parallel nodes for faster evaluation
@@ -28,10 +28,8 @@ evals/
 │   └── automation.json              # Automated evaluation scheduling config
 ├── scripts/
 │   ├── launch_evaluations.sh  # Main launcher (recommended entry point)
-│   ├── ym_evaluate_hf.sbatch        # SLURM job script for HF/vLLM model evaluation
-│   ├── evaluate_hf.sbatch           # Alternative SLURM job script (stable HF evals)
-│   ├── evaluate.sbatch              # Legacy script (Megatron + HF, iteration-based logging)
-│   ├── ym_aggregate_splits.sbatch   # Aggregation job for split evaluations
+│   ├── evaluate.sbatch        # SLURM job script for HF/vLLM model evaluation
+│   ├── aggregate_splits.sbatch   # Aggregation job for split evaluations
 │   ├── update_wandb.py              # Legacy W&B uploader (iteration-based)
 │   ├── automate.py                  # Continuous automation daemon
 │   └── alignment/                   # Python package for W&B upload and data handling
@@ -40,7 +38,7 @@ evals/
 │       ├── update_wandb_all_models.py      # Batch upload for all models
 │       ├── merge_split_results.py          # Merges results from split evaluation jobs
 │       └── data_structures.py              # Sample, Metric, Task, ModelEvaluation classes
-├── examples/alignment/              # Multi-model evaluation scripts
+├── runners/              # Multi-model evaluation scripts
 │   ├── hf_base_runner.sh            # Generic runner (handles split-aware job submission)
 │   ├── hf_eval_multiple_other_models.sh
 │   ├── hf_eval_multiple_other_base_models.sh
@@ -56,7 +54,7 @@ evals/
 
 ---
 
-## The OLMo3 Launcher
+## The Launch Script
 
 `scripts/launch_evaluations.sh` is the primary entry point for running evaluations. It supports three model selection modes and multiple benchmark suites.
 
@@ -83,7 +81,7 @@ Automatically derives the run name and detects whether to apply a chat template 
 
 **Mode 2: Model-list script** (for batch evaluation of predefined model sets)
 ```bash
-bash scripts/launch_evaluations.sh <mode> --script examples/alignment/hf_eval_multiple_other_models.sh
+bash scripts/launch_evaluations.sh <mode> --script runners/hf_eval_multiple_other_models.sh
 ```
 Runs a script that defines a `MODEL_CHECKPOINTS` associative array and sources `hf_base_runner.sh`.
 
@@ -122,7 +120,7 @@ bash scripts/launch_evaluations.sh complete \
 
 # Run all models from a batch script on the safety suite
 bash scripts/launch_evaluations.sh safety \
-  --script examples/alignment/hf_eval_multiple_other_models.sh --splits 4
+  --script runners/hf_eval_multiple_other_models.sh --splits 4
 ```
 
 ---
@@ -136,7 +134,7 @@ For evaluations that would exceed the 12h SLURM time limit (or just to get resul
 1. The launcher submits K `sbatch` jobs, each with `NUM_SPLITS=K` and `SPLIT_INDEX=0..K-1`
 2. Each job reads the task list, splits it into K chunks, and runs only its chunk
 3. Each split job writes a marker file to `$HARNESS_DIR/split_markers/split_<i>.txt`
-4. An aggregation job (`ym_aggregate_splits.sbatch`) is submitted with `--dependency=afterok:<all_split_job_ids>` -- it only runs once all splits succeed
+4. An aggregation job (`aggregate_splits.sbatch`) is submitted with `--dependency=afterok:<all_split_job_ids>` -- it only runs once all splits succeed
 5. The aggregation job calls `merge_split_results.py` to combine `results_*.json` files and copy sample JSONL files, then uploads merged results to W&B
 
 ```
@@ -272,7 +270,7 @@ python -m scripts.alignment.update_wandb_all_models \
 
 ## SBATCH Scripts
 
-### `scripts/ym_evaluate_hf.sbatch`
+### `scripts/evaluate.sbatch`
 
 Primary SLURM job script for HuggingFace-compatible model evaluation.
 
@@ -303,7 +301,7 @@ Primary SLURM job script for HuggingFace-compatible model evaluation.
 
 The script auto-detects RULER long-context tasks and adjusts `MAX_LENGTH` and `max_model_len` accordingly.
 
-### `scripts/evaluate_hf.sbatch`
+### `scripts/evaluate.sbatch`
 
 Alternative SLURM job script with the same interface. Uses `containers/env.toml` instead of `env_nemo.toml`. Use this for stable HF evals if the NeMo container has issues.
 
@@ -311,17 +309,17 @@ Alternative SLURM job script with the same interface. Uses `containers/env.toml`
 
 ## Multi-Model Scripts
 
-Scripts in `examples/alignment/` define `MODEL_CHECKPOINTS` associative arrays and source `hf_base_runner.sh`:
+Scripts in `runners/` define `MODEL_CHECKPOINTS` associative arrays and source `hf_base_runner.sh`:
 
 ```bash
-# examples/alignment/hf_eval_multiple_other_models.sh
+# runners/hf_eval_multiple_other_models.sh
 declare -A MODEL_CHECKPOINTS=(
     ["Llama-3.1-8B-Instruct"]="meta-llama/Llama-3.1-8B-Instruct"
     ["OLMo-2-1124-7B-Instruct"]="allenai/OLMo-2-1124-7B-Instruct"
     # Uncomment models as needed...
 )
 export APPLY_CHAT_TEMPLATE=true
-source examples/alignment/hf_base_runner.sh "SFT models"
+source runners/hf_base_runner.sh "SFT models"
 ```
 
 `hf_base_runner.sh` handles the submission loop and split-aware job orchestration. It respects `NUM_SPLITS`, `SBATCH_SCRIPT`, and `WANDB_*` environment variables from the launcher.
@@ -345,7 +343,7 @@ The pipeline runs inside containers managed by enroot/pyxis on SLURM. Three cont
 | Config | Base Image | Use Case |
 |--------|-----------|----------|
 | `env.toml` | Pre-built `evals-vllm-cuda.sqsh` | Standard HF evals |
-| `env_nemo.toml` | NGC PyTorch | NeMo-based evaluations, default for `ym_evaluate_hf.sbatch` |
+| `env_nemo.toml` | NGC PyTorch | NeMo-based evaluations, default for `evaluate.sbatch` |
 | `ngc-25.12.toml` | NGC PyTorch 25.12 | Advanced NCCL/GDR optimization |
 
 Dependencies (lm-eval-harness, vLLM, etc.) are installed at runtime inside the container via `pip install`. This ensures the latest versions but adds ~2-3 minutes of startup overhead per job.
@@ -358,7 +356,7 @@ Dependencies (lm-eval-harness, vLLM, etc.) are installed at runtime inside the c
 
 The sbatch scripts support `hf`, `vllm`, and `megatron_lm` backends. To add a new one:
 
-1. Add a new `elif` block in `ym_evaluate_hf.sbatch` at the `LM_EVAL_BACKEND` dispatch section (~line 181)
+1. Add a new `elif` block in `evaluate.sbatch` at the `LM_EVAL_BACKEND` dispatch section (~line 181)
 2. Set appropriate `COMMON_MODEL_ARGS` for the new backend
 3. Add any required pip install commands to `INSTALL_CMD`
 

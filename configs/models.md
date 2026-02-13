@@ -4,7 +4,7 @@ Reference of models for evaluation with `launch_evaluations.sh`.
 
 ```bash
 # Usage
-bash examples/alignment/launch_evaluations.sh <mode> --model <path> [options]
+bash scripts/launch_evaluations.sh <mode> --model <path> [options]
 ```
 
 ## Apertus

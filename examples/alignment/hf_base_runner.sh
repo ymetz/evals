@@ -18,8 +18,8 @@ export WANDB_PROJECT=${WANDB_PROJECT:-swissai-evals}
 export APPLY_CHAT_TEMPLATE=${APPLY_CHAT_TEMPLATE:-false}
 NUM_SPLITS=${NUM_SPLITS:-1}
 
-# Allow overriding the sbatch script (e.g. ym_evaluate_hf.sbatch)
-SBATCH_SCRIPT=${SBATCH_SCRIPT:-scripts/ym_evaluate_hf.sbatch}
+# Allow overriding the sbatch script (e.g. evaluate.sbatch)
+SBATCH_SCRIPT=${SBATCH_SCRIPT:-scripts/evaluate.sbatch}
 
 # Launch evaluation jobs for each model
 echo "Launching evaluation jobs for ${#MODEL_CHECKPOINTS[@]} ${MODEL_TYPE_DESC}..."
@@ -34,10 +34,12 @@ echo ""
 job_count=0
 for MODEL in "${!MODEL_CHECKPOINTS[@]}"; do
     CKPT_PATH="${MODEL_CHECKPOINTS[$MODEL]}"
+    CKPT_ITER="${MODEL_ITERATIONS[$MODEL-iter]:-latest}"
     job_count=$((job_count + 1))
 
     echo "Launching job $job_count/${#MODEL_CHECKPOINTS[@]}: $MODEL"
     echo "  Checkpoint path: $CKPT_PATH"
+    echo "  Checkpoint iter: $CKPT_ITER"
 
     if (( NUM_SPLITS <= 1 )); then
         # Single-node execution (original behavior)
@@ -51,7 +53,7 @@ for MODEL in "${!MODEL_CHECKPOINTS[@]}"; do
             JOB_ID=$(sbatch --parsable \
                 --job-name "eval-${MODEL}-split${i}" \
                 --export=ALL,NUM_SPLITS=$NUM_SPLITS,SPLIT_INDEX=$i \
-                "$SBATCH_SCRIPT" "$CKPT_PATH" "$MODEL")
+                "$SBATCH_SCRIPT" "$CKPT_PATH" "$MODEL" "CKPT_ITER=$CKPT_ITER")
             SPLIT_JOB_IDS+=("$JOB_ID")
             echo "  Split $((i+1))/$NUM_SPLITS submitted: job $JOB_ID"
             sleep 1
@@ -65,7 +67,7 @@ for MODEL in "${!MODEL_CHECKPOINTS[@]}"; do
             --job-name "eval-${MODEL}-aggregate" \
             --dependency="afterok:${DEP_STRING}" \
             --export=ALL,NUM_SPLITS=$NUM_SPLITS \
-            scripts/ym_aggregate_splits.sbatch "$CKPT_PATH" "$MODEL")
+            scripts/aggregate_splits.sbatch "$CKPT_PATH" "$MODEL")
         echo "  Aggregation job submitted: job $AGG_JOB_ID (depends on splits)"
     fi
 

@@ -10,8 +10,8 @@
 #SBATCH --partition=normal
 #SBATCH --time=00:30:00
 
-# ym_aggregate_splits.sbatch - Merge results from split evaluation jobs and upload to W&B
-# Usage: sbatch --dependency=afterok:JOB1:JOB2:... ym_aggregate_splits.sbatch <model> <name>
+# aggregate_splits.sbatch - Merge results from split evaluation jobs and upload to W&B
+# Usage: sbatch --dependency=afterok:JOB1:JOB2:... aggregate_splits.sbatch <model> <name>
 #
 # Required env vars: HARNESS_DIR, NUM_SPLITS, WANDB_ENTITY, WANDB_PROJECT, TABLE_METRICS
 
@@ -19,7 +19,7 @@ set -e
 echo "START TIME: $(date)"
 
 if (( $# != 2 )); then
-    echo "Usage: sbatch ym_aggregate_splits.sbatch <model> <name>"
+    echo "Usage: sbatch aggregate_splits.sbatch <model> <name>"
     exit 1
 fi
 MODEL=$1

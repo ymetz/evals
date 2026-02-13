@@ -14,9 +14,11 @@
 #   complete    - All suites combined (default, excludes long-context)
 #
 # Model selection (pick one):
-#   --model <path>       - Single HF model or local checkpoint path
-#   --script <path>      - Run a model-list script (e.g. hf_eval_multiple_other_models.sh)
-#   (neither)            - Uses the EVALUATION_SCRIPTS array defined below
+#   --model <path>            - Single HF model or local checkpoint path
+#   --script <path>           - Run a model-list script (e.g. hf_eval_multiple_other_models.sh)
+#   (neither)                 - Uses the EVALUATION_SCRIPTS array defined below
+#   --megatron-iter <iter>    - For Megatron models, specify the iteration number to evaluate 
+#                               (e.g. 8926), defaults to "latest"
 #
 # Options:
 #   --name <name>        - Override the eval run name (default: auto-derived from model path)
@@ -41,7 +43,7 @@
 #   bash launch_evaluations.sh easy --model Qwen/Qwen2.5-7B --no-chat-template
 #
 #   # Run a multi-model script
-#   bash launch_evaluations.sh complete --script examples/alignment/hf_eval_multiple_other_models.sh
+#   bash launch_evaluations.sh complete --script runners/hf_eval_multiple_other_models.sh
 #
 #   # Use default EVALUATION_SCRIPTS (edit the array below)
 #   bash launch_evaluations.sh complete --splits 4
@@ -61,6 +63,7 @@ CUSTOM_TOKENIZER=""
 BOS_FLAG=""
 BACKEND_FLAG=""
 FEWSHOT_FLAG=""
+MEGATRON_ITER=""
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
@@ -74,6 +77,7 @@ while [[ $# -gt 0 ]]; do
         --tokenizer)    CUSTOM_TOKENIZER="$2";        shift 2 ;;
         --bos)          BOS_FLAG="true";              shift ;;
         --backend)      BACKEND_FLAG="$2";            shift 2 ;;
+        --megatron-iter) MEGATRON_ITER="$2";            shift 2 ;;
         *)
             echo "Error: Unknown option '$1'"
             echo "Run with no arguments for usage."
@@ -105,38 +109,42 @@ fi
 export WANDB_ENTITY=${WANDB_ENTITY:-apertus}
 export WANDB_PROJECT=${WANDB_PROJECT:-swissai-evals-olmo3}
 export NUM_SPLITS
-export SBATCH_SCRIPT=${SBATCH_SCRIPT:-scripts/ym_evaluate_hf.sbatch}
+export SBATCH_SCRIPT=${SBATCH_SCRIPT:-scripts/evaluate.sbatch}
 
 # --- Configure task suite ---
 case "$EVAL_MODE" in
-    "easy")
-        export TASKS=./configs/olmo3_easy.txt
-        export TABLE_METRICS=./configs/olmo3_easy_main_table.txt
+    "default")
+        export TASKS=./configs/alignment/task_multilingual.txt
+        export TABLE_METRICS=./configs/alignment/task_multilingual_main_table.txt
+        ;;
+    "olmo-easy")
+        export TASKS=./configs/olmo/olmo3_easy.txt
+        export TABLE_METRICS=./configs/olmo/olmo3_easy_main_table.txt
         export WANDB_PROJECT="${WANDB_PROJECT}-easy"
         ;;
-    "main")
-        export TASKS=./configs/olmo3_main.txt
-        export TABLE_METRICS=./configs/olmo3_main_main_table.txt
+    "olmo-main")
+        export TASKS=./configs/olmo/olmo3_main.txt
+        export TABLE_METRICS=./configs/olmo/olmo3_main_main_table.txt
         export WANDB_PROJECT="${WANDB_PROJECT}-main"
         ;;
-    "heldout")
-        export TASKS=./configs/olmo3_heldout.txt
-        export TABLE_METRICS=./configs/olmo3_heldout_main_table.txt
+    "olmo-heldout")
+        export TASKS=./configs/olmo/olmo3_heldout.txt
+        export TABLE_METRICS=./configs/olmo/olmo3_heldout_main_table.txt
         export WANDB_PROJECT="${WANDB_PROJECT}-heldout"
         ;;
-    "safety")
-        export TASKS=./configs/olmo3_safety.txt
-        export TABLE_METRICS=./configs/olmo3_safety_main_table.txt
+    "olmo-safety")
+        export TASKS=./configs/olmo/olmo3_safety.txt
+        export TABLE_METRICS=./configs/olmo/olmo3_safety_main_table.txt
         export WANDB_PROJECT="${WANDB_PROJECT}-safety"
         ;;
-    "longcontext")
-        export TASKS=./configs/olmo3_longcontext.txt
-        export TABLE_METRICS=./configs/olmo3_longcontext_main_table.txt
+    "olmo-longcontext")
+        export TASKS=./configs/olmo/olmo3_longcontext.txt
+        export TABLE_METRICS=./configs/olmo/olmo3_longcontext_main_table.txt
         export WANDB_PROJECT="${WANDB_PROJECT}-longcontext"
         ;;
-    "complete")
-        export TASKS=./configs/olmo3_complete.txt
-        export TABLE_METRICS=./configs/olmo3_complete_main_table.txt
+    "olmo-complete")
+        export TASKS=./configs/olmo/olmo3_complete.txt
+        export TABLE_METRICS=./configs/olmo/olmo3_complete_main_table.txt
         ;;
 esac
 
@@ -188,7 +196,7 @@ auto_derive_name() {
 
 # --- Print configuration ---
 echo "======================================"
-echo "OLMo Evaluation Launcher"
+echo "Apertus Evaluation Launcher"
 echo "  Mode:   $EVAL_MODE"
 echo "  Splits: $NUM_SPLITS"
 
@@ -215,6 +223,7 @@ if [[ -n "$MODEL_PATH" ]]; then
 
     echo "  Model:  $MODEL_PATH"
     echo "  Name:   $MODEL_NAME"
+    echo "  Checkpoint Iter: ${MEGATRON_ITER:-N/A}"
     echo "  Chat:   $APPLY_CHAT_TEMPLATE"
     [[ -n "$CUSTOM_TOKENIZER" ]] && echo "  Tok:    $CUSTOM_TOKENIZER"
     [[ -n "$BOS_FLAG" ]] && echo "  BOS:    $BOS_FLAG"
@@ -226,7 +235,7 @@ if [[ -n "$MODEL_PATH" ]]; then
     declare -A MODEL_CHECKPOINTS=(
         ["$MODEL_NAME"]="$MODEL_PATH"
     )
-    source examples/alignment/hf_base_runner.sh "model"
+    source runners/hf_base_runner.sh "model"
 
 elif [[ -n "$SCRIPT_PATH" ]]; then
     # ===== MODE 2: Run a model-list script =====
@@ -255,10 +264,10 @@ else
 
     # Edit this array to select which model-list scripts to run
     EVALUATION_SCRIPTS=(
-        "examples/alignment/hf_eval_multiple_apertus_base_models.sh"
-        # "examples/alignment/hf_eval_multiple_apertus_models.sh"
-        # "examples/alignment/hf_eval_multiple_other_base_models.sh"
-        # "examples/alignment/hf_eval_multiple_other_models.sh"
+        "runners/hf_eval_multiple_apertus_base_models.sh"
+        # "runners/hf_eval_multiple_apertus_models.sh"
+        # "runners/hf_eval_multiple_other_base_models.sh"
+        # "runners/hf_eval_multiple_other_models.sh"
     )
 
     echo "  Scripts:"

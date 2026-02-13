@@ -15,7 +15,7 @@
 echo "START TIME: $(date)"
 echo "Evaluation jobs finished, uploading results to wandb..."
 
-# Set default values (same as evaluate_hf.sbatch)
+# Set default values (same as evaluate.sbatch)
 WANDB_ENTITY=${WANDB_ENTITY:-apertus}
 WANDB_PROJECT=${WANDB_PROJECT:-swissai-evals-v0.0.1}
 LOGS_ROOT=${LOGS_ROOT:-/iopsstor/scratch/cscs/ihakimi/eval-logs/$WANDB_ENTITY/$WANDB_PROJECT}

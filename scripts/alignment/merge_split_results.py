@@ -1,6 +1,6 @@
 """
 Merge results from multiple split evaluation directories into a single results file.
-Used by ym_aggregate_splits.sbatch to combine parallelized evaluation outputs.
+Used by aggregate_splits.sbatch to combine parallelized evaluation outputs.
 """
 import json
 import shutil
