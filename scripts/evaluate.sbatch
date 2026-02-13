@@ -41,6 +41,7 @@ usage() {
 	echo " WANDB_ENTITY: WandB entity name for uploading results (default: apertus)."
 	echo " WANDB_PROJECT: WandB project name for uploading results (default: swissai-evals)."
     echo " LM_EVAL_BACKEND: Backend to use for lm-eval (default: hf). - options are: hf, vllm, megatron_lm"
+    echo " CKPT_ITER: Megatron checkpoint iteration (integer). Required when LM_EVAL_BACKEND=megatron_lm."
 	echo "For more information see the README: https://github.com/swiss-ai/evals?tab=readme-ov-file."
 }
 die() {
@@ -73,6 +74,21 @@ LM_EVAL_BACKEND=${LM_EVAL_BACKEND:-hf}
 APPLY_CHAT_TEMPLATE=${APPLY_CHAT_TEMPLATE:-false}
 
 export WANDB_API_KEY=${WANDB_API_KEY:-$(cat ./scripts/wandb_api_key.txt)}
+
+# Some environments export cert bundle paths that do not exist inside the job container.
+# Unset invalid paths so Python/httpx can fall back to system defaults.
+if [[ -n "${SSL_CERT_FILE:-}" ]] && [[ ! -f "${SSL_CERT_FILE}" ]]; then
+    echo "Warning: SSL_CERT_FILE points to a missing file (${SSL_CERT_FILE}); unsetting it."
+    unset SSL_CERT_FILE
+fi
+if [[ -n "${REQUESTS_CA_BUNDLE:-}" ]] && [[ ! -f "${REQUESTS_CA_BUNDLE}" ]]; then
+    echo "Warning: REQUESTS_CA_BUNDLE points to a missing file (${REQUESTS_CA_BUNDLE}); unsetting it."
+    unset REQUESTS_CA_BUNDLE
+fi
+if [[ -n "${CURL_CA_BUNDLE:-}" ]] && [[ ! -f "${CURL_CA_BUNDLE}" ]]; then
+    echo "Warning: CURL_CA_BUNDLE points to a missing file (${CURL_CA_BUNDLE}); unsetting it."
+    unset CURL_CA_BUNDLE
+fi
 
 # optional eval arguments
 MAX_LENGTH=${MAX_LENGTH:-4096}
@@ -182,7 +198,14 @@ VLLM_MEMORY_FRACTION=0.65
 if [[ $LM_EVAL_BACKEND == "vllm" ]]; then
     COMMON_MODEL_ARGS="$COMMON_MODEL_ARGS,pretrained=$HF_CHECKPOINT_PATH,tokenizer=$TOKENIZER$MAYBE_REVISION,data_parallel_size=$DP,tensor_parallel_size=$MP,gpu_memory_utilization=$VLLM_MEMORY_FRACTION,enable_thinking=False"
 elif [[ $LM_EVAL_BACKEND == "megatron_lm" ]]; then
-    COMMON_MODEL_ARGS="$COMMON_MODEL_ARGS,load=$MODEL,tokenizer_type=HuggingFaceTokenizer,tokenizer_model=$TOKENIZER$MAYBE_REVISION,tensor_model_parallel_size=$MP,devices=$MP,ckpt_step=$CKPT_ITER"
+    COMMON_MODEL_ARGS="$COMMON_MODEL_ARGS,load=$MODEL,tokenizer_type=HuggingFaceTokenizer,tokenizer_model=$TOKENIZER$MAYBE_REVISION,tensor_model_parallel_size=$MP,devices=$MP"
+    if [[ "$CKPT_ITER" =~ ^[0-9]+$ ]]; then
+        COMMON_MODEL_ARGS="$COMMON_MODEL_ARGS,ckpt_step=$CKPT_ITER"
+    elif [[ "$CKPT_ITER" == "latest" ]]; then
+        echo "CKPT_ITER=latest: omitting ckpt_step from Megatron model args."
+    else
+        die "CKPT_ITER must be an integer or 'latest' when LM_EVAL_BACKEND=megatron_lm (got '$CKPT_ITER')."
+    fi
 elif [[ $LM_EVAL_BACKEND == "hf" ]]; then
     COMMON_MODEL_ARGS="$COMMON_MODEL_ARGS,pretrained=$HF_CHECKPOINT_PATH,tokenizer=$TOKENIZER$MAYBE_REVISION,devices=4"
 else

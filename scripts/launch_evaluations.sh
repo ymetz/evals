@@ -99,6 +99,11 @@ if (( NUM_SPLITS < 1 )); then
     exit 1
 fi
 
+if [[ -n "$MEGATRON_ITER" ]] && [[ "$MEGATRON_ITER" != "latest" ]] && [[ ! "$MEGATRON_ITER" =~ ^[0-9]+$ ]]; then
+    echo "Error: --megatron-iter must be an integer or 'latest' (got '$MEGATRON_ITER')"
+    exit 1
+fi
+
 # Can't specify both --model and --script
 if [[ -n "$MODEL_PATH" && -n "$SCRIPT_PATH" ]]; then
     echo "Error: --model and --script are mutually exclusive"
