@@ -34,7 +34,11 @@ echo ""
 job_count=0
 for MODEL in "${!MODEL_CHECKPOINTS[@]}"; do
     CKPT_PATH="${MODEL_CHECKPOINTS[$MODEL]}"
-    CKPT_ITER="${MODEL_ITERATIONS[$MODEL-iter]:-latest}"
+    # Priority: model-specific override > global override > latest
+    CKPT_ITER="${CKPT_ITERATION:-latest}"
+    if [[ -n "${MODEL_ITERATIONS["${MODEL}-iter"]+x}" ]]; then
+        CKPT_ITER="${MODEL_ITERATIONS["${MODEL}-iter"]}"
+    fi
     job_count=$((job_count + 1))
 
     echo "Launching job $job_count/${#MODEL_CHECKPOINTS[@]}: $MODEL"
@@ -44,7 +48,7 @@ for MODEL in "${!MODEL_CHECKPOINTS[@]}"; do
     if (( NUM_SPLITS <= 1 )); then
         # Single-node execution (original behavior)
         sbatch --job-name eval-$MODEL \
-            --export=ALL \
+            --export=ALL,CKPT_ITER=$CKPT_ITER \
             "$SBATCH_SCRIPT" "$CKPT_PATH" "$MODEL"
     else
         # Submit K split jobs, then one aggregation job with dependency
@@ -52,8 +56,8 @@ for MODEL in "${!MODEL_CHECKPOINTS[@]}"; do
         for (( i=0; i<NUM_SPLITS; i++ )); do
             JOB_ID=$(sbatch --parsable \
                 --job-name "eval-${MODEL}-split${i}" \
-                --export=ALL,NUM_SPLITS=$NUM_SPLITS,SPLIT_INDEX=$i \
-                "$SBATCH_SCRIPT" "$CKPT_PATH" "$MODEL" "CKPT_ITER=$CKPT_ITER")
+                --export=ALL,NUM_SPLITS=$NUM_SPLITS,SPLIT_INDEX=$i,CKPT_ITER=$CKPT_ITER \
+                "$SBATCH_SCRIPT" "$CKPT_PATH" "$MODEL")
             SPLIT_JOB_IDS+=("$JOB_ID")
             echo "  Split $((i+1))/$NUM_SPLITS submitted: job $JOB_ID"
             sleep 1

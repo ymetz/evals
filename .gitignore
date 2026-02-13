@@ -16,5 +16,7 @@ logs_archive/
 logs*
 core*
 
+lm_eval_reference
+
 
 .DS_Store

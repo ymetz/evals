@@ -110,6 +110,9 @@ export WANDB_ENTITY=${WANDB_ENTITY:-apertus}
 export WANDB_PROJECT=${WANDB_PROJECT:-swissai-evals-olmo3}
 export NUM_SPLITS
 export SBATCH_SCRIPT=${SBATCH_SCRIPT:-scripts/evaluate.sbatch}
+# Global checkpoint iteration override for Megatron checkpoints.
+# Consumed by the runner and forwarded to evaluate.sbatch as CKPT_ITER.
+[[ -n "$MEGATRON_ITER" ]] && export CKPT_ITERATION="$MEGATRON_ITER"
 
 # --- Configure task suite ---
 case "$EVAL_MODE" in
